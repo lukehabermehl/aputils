@@ -1,5 +1,6 @@
 *.DS_Store
 */xcuserdata/*
+libaputils.xcodeproj/project.xcworkspace/xcuserdata/*
 docs/doxy/*
 bin
 bin/*

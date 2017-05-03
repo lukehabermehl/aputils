@@ -35,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A35849A71EBA86040007475F /* aputils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = aputils.h; path = include/aputils.h; sourceTree = "<group>"; };
 		A3AFD63C1EB16A9000238AEA /* liblibaputils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibaputils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_audioprocessingunit_private.hpp; path = src/autil_audioprocessingunit_private.hpp; sourceTree = "<group>"; };
 		A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_audioprocessingunit.cpp; path = src/autil_audioprocessingunit.cpp; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 				A3E2BA881EB8B3DF00FE0280 /* autil_stringlist.hpp */,
 				A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */,
 				A3E2BA981EB8B69B00FE0280 /* autil_uiattrs.h */,
+				A35849A71EBA86040007475F /* aputils.h */,
 			);
 			name = include;
 			sourceTree = "<group>";

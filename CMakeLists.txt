@@ -19,7 +19,8 @@ set(PUBLIC_HEADERS "include/autil_audioprocessingunit.hpp"
 	"include/autil_parametermap.hpp"
 	"include/autil_stringlist.hpp"
 	"include/autil_thread_manager.hpp"
-	"include/autil_uiattrs.h")
+	"include/autil_uiattrs.h"
+	"include/aputils.h")
 
 add_library(aputils STATIC ${SOURCES})
 
