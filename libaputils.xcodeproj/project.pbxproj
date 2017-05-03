@@ -1,0 +1,383 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A3AFD65E1EB16AAF00238AEA /* autil_audioprocessingunit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */; };
+		A3AFD6601EB16AAF00238AEA /* autil_dspkernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* autil_dspkernel.cpp */; };
+		A3AFD6631EB16AAF00238AEA /* autil_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD64A1EB16AAF00238AEA /* autil_file.cpp */; };
+		A3AFD6661EB16AAF00238AEA /* autil_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD64D1EB16AAF00238AEA /* autil_manager.cpp */; };
+		A3AFD6681EB16AAF00238AEA /* autil_number.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD64F1EB16AAF00238AEA /* autil_number.cpp */; };
+		A3AFD66A1EB16AAF00238AEA /* autil_parameter_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6511EB16AAF00238AEA /* autil_parameter_private.hpp */; };
+		A3AFD66B1EB16AAF00238AEA /* autil_parameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6521EB16AAF00238AEA /* autil_parameter.cpp */; };
+		A3AFD66D1EB16AAF00238AEA /* autil_parametermap_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6541EB16AAF00238AEA /* autil_parametermap_private.hpp */; };
+		A3AFD66E1EB16AAF00238AEA /* autil_parametermap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6551EB16AAF00238AEA /* autil_parametermap.cpp */; };
+		A3AFD6701EB16AAF00238AEA /* autil_stringlist_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6571EB16AAF00238AEA /* autil_stringlist_private.hpp */; };
+		A3AFD6711EB16AAF00238AEA /* autil_stringlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6581EB16AAF00238AEA /* autil_stringlist.cpp */; };
+		A3AFD6731EB16AAF00238AEA /* autil_thread_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */; };
+		A3E2BA8A1EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA8B1EB8B3DF00FE0280 /* autil_dspkernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA821EB8B3DF00FE0280 /* autil_dspkernel.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA8C1EB8B3DF00FE0280 /* autil_file.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA8D1EB8B3DF00FE0280 /* autil_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA841EB8B3DF00FE0280 /* autil_manager.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA8E1EB8B3DF00FE0280 /* autil_number.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA851EB8B3DF00FE0280 /* autil_number.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA8F1EB8B3DF00FE0280 /* autil_parameter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA901EB8B3DF00FE0280 /* autil_parametermap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA911EB8B3DF00FE0280 /* autil_stringlist.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA881EB8B3DF00FE0280 /* autil_stringlist.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA921EB8B3DF00FE0280 /* autil_thread_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3E2BA931EB8B3F900FE0280 /* autil_audioprocessingunit_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */; };
+		A3E2BA941EB8B3FB00FE0280 /* autil_file_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */; };
+		A3E2BA951EB8B3FD00FE0280 /* autil_manager_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD64C1EB16AAF00238AEA /* autil_manager_private.hpp */; };
+		A3E2BA991EB8B69B00FE0280 /* autil_uiattrs.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA981EB8B69B00FE0280 /* autil_uiattrs.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A3AFD63C1EB16A9000238AEA /* liblibaputils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibaputils.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_audioprocessingunit_private.hpp; path = src/autil_audioprocessingunit_private.hpp; sourceTree = "<group>"; };
+		A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_audioprocessingunit.cpp; path = src/autil_audioprocessingunit.cpp; sourceTree = "<group>"; };
+		A3AFD6471EB16AAF00238AEA /* autil_dspkernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_dspkernel.cpp; path = src/autil_dspkernel.cpp; sourceTree = "<group>"; };
+		A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_file_private.hpp; path = src/autil_file_private.hpp; sourceTree = "<group>"; };
+		A3AFD64A1EB16AAF00238AEA /* autil_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_file.cpp; path = src/autil_file.cpp; sourceTree = "<group>"; };
+		A3AFD64C1EB16AAF00238AEA /* autil_manager_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_manager_private.hpp; path = src/autil_manager_private.hpp; sourceTree = "<group>"; };
+		A3AFD64D1EB16AAF00238AEA /* autil_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_manager.cpp; path = src/autil_manager.cpp; sourceTree = "<group>"; };
+		A3AFD64F1EB16AAF00238AEA /* autil_number.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_number.cpp; path = src/autil_number.cpp; sourceTree = "<group>"; };
+		A3AFD6511EB16AAF00238AEA /* autil_parameter_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parameter_private.hpp; path = src/autil_parameter_private.hpp; sourceTree = "<group>"; };
+		A3AFD6521EB16AAF00238AEA /* autil_parameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_parameter.cpp; path = src/autil_parameter.cpp; sourceTree = "<group>"; };
+		A3AFD6541EB16AAF00238AEA /* autil_parametermap_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parametermap_private.hpp; path = src/autil_parametermap_private.hpp; sourceTree = "<group>"; };
+		A3AFD6551EB16AAF00238AEA /* autil_parametermap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_parametermap.cpp; path = src/autil_parametermap.cpp; sourceTree = "<group>"; };
+		A3AFD6571EB16AAF00238AEA /* autil_stringlist_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_stringlist_private.hpp; path = src/autil_stringlist_private.hpp; sourceTree = "<group>"; };
+		A3AFD6581EB16AAF00238AEA /* autil_stringlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_stringlist.cpp; path = src/autil_stringlist.cpp; sourceTree = "<group>"; };
+		A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_thread_manager.cpp; path = src/autil_thread_manager.cpp; sourceTree = "<group>"; };
+		A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_audioprocessingunit.hpp; path = include/autil_audioprocessingunit.hpp; sourceTree = "<group>"; };
+		A3E2BA821EB8B3DF00FE0280 /* autil_dspkernel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_dspkernel.hpp; path = include/autil_dspkernel.hpp; sourceTree = "<group>"; };
+		A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_file.hpp; path = include/autil_file.hpp; sourceTree = "<group>"; };
+		A3E2BA841EB8B3DF00FE0280 /* autil_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_manager.hpp; path = include/autil_manager.hpp; sourceTree = "<group>"; };
+		A3E2BA851EB8B3DF00FE0280 /* autil_number.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_number.hpp; path = include/autil_number.hpp; sourceTree = "<group>"; };
+		A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parameter.hpp; path = include/autil_parameter.hpp; sourceTree = "<group>"; };
+		A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parametermap.hpp; path = include/autil_parametermap.hpp; sourceTree = "<group>"; };
+		A3E2BA881EB8B3DF00FE0280 /* autil_stringlist.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_stringlist.hpp; path = include/autil_stringlist.hpp; sourceTree = "<group>"; };
+		A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_thread_manager.hpp; path = include/autil_thread_manager.hpp; sourceTree = "<group>"; };
+		A3E2BA981EB8B69B00FE0280 /* autil_uiattrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autil_uiattrs.h; path = include/autil_uiattrs.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A3AFD6391EB16A9000238AEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A3AFD6331EB16A9000238AEA = {
+			isa = PBXGroup;
+			children = (
+				A3C839031EB8275A00C50FC4 /* include */,
+				A3C839041EB8277900C50FC4 /* private-headers */,
+				A3AFD6431EB16AA400238AEA /* src */,
+				A3AFD63D1EB16A9000238AEA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A3AFD63D1EB16A9000238AEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3AFD63C1EB16A9000238AEA /* liblibaputils.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3AFD6431EB16AA400238AEA /* src */ = {
+			isa = PBXGroup;
+			children = (
+				A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */,
+				A3AFD6471EB16AAF00238AEA /* autil_dspkernel.cpp */,
+				A3AFD64A1EB16AAF00238AEA /* autil_file.cpp */,
+				A3AFD64D1EB16AAF00238AEA /* autil_manager.cpp */,
+				A3AFD64F1EB16AAF00238AEA /* autil_number.cpp */,
+				A3AFD6521EB16AAF00238AEA /* autil_parameter.cpp */,
+				A3AFD6551EB16AAF00238AEA /* autil_parametermap.cpp */,
+				A3AFD6581EB16AAF00238AEA /* autil_stringlist.cpp */,
+				A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		A3C839031EB8275A00C50FC4 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */,
+				A3E2BA821EB8B3DF00FE0280 /* autil_dspkernel.hpp */,
+				A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */,
+				A3E2BA841EB8B3DF00FE0280 /* autil_manager.hpp */,
+				A3E2BA851EB8B3DF00FE0280 /* autil_number.hpp */,
+				A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */,
+				A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */,
+				A3E2BA881EB8B3DF00FE0280 /* autil_stringlist.hpp */,
+				A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */,
+				A3E2BA981EB8B69B00FE0280 /* autil_uiattrs.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		A3C839041EB8277900C50FC4 /* private-headers */ = {
+			isa = PBXGroup;
+			children = (
+				A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */,
+				A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */,
+				A3AFD64C1EB16AAF00238AEA /* autil_manager_private.hpp */,
+				A3AFD6511EB16AAF00238AEA /* autil_parameter_private.hpp */,
+				A3AFD6541EB16AAF00238AEA /* autil_parametermap_private.hpp */,
+				A3AFD6571EB16AAF00238AEA /* autil_stringlist_private.hpp */,
+			);
+			name = "private-headers";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A3AFD63A1EB16A9000238AEA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3E2BA8D1EB8B3DF00FE0280 /* autil_manager.hpp in Headers */,
+				A3E2BA921EB8B3DF00FE0280 /* autil_thread_manager.hpp in Headers */,
+				A3AFD6701EB16AAF00238AEA /* autil_stringlist_private.hpp in Headers */,
+				A3E2BA8A1EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp in Headers */,
+				A3E2BA941EB8B3FB00FE0280 /* autil_file_private.hpp in Headers */,
+				A3E2BA8E1EB8B3DF00FE0280 /* autil_number.hpp in Headers */,
+				A3AFD66D1EB16AAF00238AEA /* autil_parametermap_private.hpp in Headers */,
+				A3E2BA901EB8B3DF00FE0280 /* autil_parametermap.hpp in Headers */,
+				A3E2BA8F1EB8B3DF00FE0280 /* autil_parameter.hpp in Headers */,
+				A3AFD66A1EB16AAF00238AEA /* autil_parameter_private.hpp in Headers */,
+				A3E2BA8C1EB8B3DF00FE0280 /* autil_file.hpp in Headers */,
+				A3E2BA911EB8B3DF00FE0280 /* autil_stringlist.hpp in Headers */,
+				A3E2BA951EB8B3FD00FE0280 /* autil_manager_private.hpp in Headers */,
+				A3E2BA931EB8B3F900FE0280 /* autil_audioprocessingunit_private.hpp in Headers */,
+				A3E2BA8B1EB8B3DF00FE0280 /* autil_dspkernel.hpp in Headers */,
+				A3E2BA991EB8B69B00FE0280 /* autil_uiattrs.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A3AFD63B1EB16A9000238AEA /* libaputils */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3AFD6401EB16A9000238AEA /* Build configuration list for PBXNativeTarget "libaputils" */;
+			buildPhases = (
+				A3AFD6381EB16A9000238AEA /* Sources */,
+				A3AFD6391EB16A9000238AEA /* Frameworks */,
+				A3AFD63A1EB16A9000238AEA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libaputils;
+			productName = libaputils;
+			productReference = A3AFD63C1EB16A9000238AEA /* liblibaputils.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3AFD6341EB16A9000238AEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Luke Habermehl";
+				TargetAttributes = {
+					A3AFD63B1EB16A9000238AEA = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = E9AX325F7B;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A3AFD6371EB16A9000238AEA /* Build configuration list for PBXProject "libaputils" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A3AFD6331EB16A9000238AEA;
+			productRefGroup = A3AFD63D1EB16A9000238AEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3AFD63B1EB16A9000238AEA /* libaputils */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A3AFD6381EB16A9000238AEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3AFD6601EB16AAF00238AEA /* autil_dspkernel.cpp in Sources */,
+				A3AFD6681EB16AAF00238AEA /* autil_number.cpp in Sources */,
+				A3AFD6631EB16AAF00238AEA /* autil_file.cpp in Sources */,
+				A3AFD66B1EB16AAF00238AEA /* autil_parameter.cpp in Sources */,
+				A3AFD6731EB16AAF00238AEA /* autil_thread_manager.cpp in Sources */,
+				A3AFD66E1EB16AAF00238AEA /* autil_parametermap.cpp in Sources */,
+				A3AFD65E1EB16AAF00238AEA /* autil_audioprocessingunit.cpp in Sources */,
+				A3AFD6711EB16AAF00238AEA /* autil_stringlist.cpp in Sources */,
+				A3AFD6661EB16AAF00238AEA /* autil_manager.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A3AFD63E1EB16A9000238AEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lportaudio",
+					"-lsndfile",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A3AFD63F1EB16A9000238AEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lportaudio",
+					"-lsndfile",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A3AFD6411EB16A9000238AEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = E9AX325F7B;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A3AFD6421EB16A9000238AEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = E9AX325F7B;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A3AFD6371EB16A9000238AEA /* Build configuration list for PBXProject "libaputils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3AFD63E1EB16A9000238AEA /* Debug */,
+				A3AFD63F1EB16A9000238AEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3AFD6401EB16A9000238AEA /* Build configuration list for PBXNativeTarget "libaputils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3AFD6411EB16A9000238AEA /* Debug */,
+				A3AFD6421EB16A9000238AEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A3AFD6341EB16A9000238AEA /* Project object */;
+}

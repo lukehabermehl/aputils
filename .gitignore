@@ -1,0 +1,12 @@
+*.DS_Store
+*/xcuserdata/*
+docs/doxy/*
+bin
+bin/*
+test/include/*
+test/lib/*
+lib/*
+include/*
+build/*
+test/gunit/build*
+test/googletest/*
