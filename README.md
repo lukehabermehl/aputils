@@ -2,4 +2,4 @@
 
 A C++ library for easy audio processing.
 
-README currently in progress
+This repository is currently unstable and undergoing migration from another project. Please come back soon!
