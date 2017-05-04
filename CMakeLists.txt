@@ -27,6 +27,8 @@ add_library(aputils STATIC ${SOURCES})
 install(TARGETS aputils DESTINATION /usr/local/lib/)
 install(FILES ${PUBLIC_HEADERS} DESTINATION /usr/local/include/aputils)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test/gunit)
+
 add_custom_command(TARGET aputils
 					PRE_BUILD
 					COMMAND mkdir ARGS -p lib
