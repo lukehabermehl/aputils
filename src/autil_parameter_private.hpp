@@ -85,7 +85,7 @@ public:
 class APUEnumParameter::EnumParamPimpl
 {
 public:
-    APUStringList strings;
+    APUPtr<APUStringList> strings;
 };
 
 

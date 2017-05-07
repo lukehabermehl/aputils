@@ -11,26 +11,15 @@
 
 APUStringList::APUStringList()
 {
-    _pimpl = std::make_shared<Pimpl>();
+    pimpl_ = new Pimpl();
 }
 
-APUStringList::APUStringList(APUStringList& rhs)
+APUPtr<APUStringList> APUStringList::copy()
 {
-    _pimpl = rhs._pimpl;
-}
-
-APUStringList& APUStringList::operator=(APUStringList const &rhs)
-{
-    _pimpl = rhs._pimpl;
-    return (*this);
-}
-
-APUStringList APUStringList::copy()
-{
-    APUStringList cp;
-    for (auto it = _pimpl->vStrings.begin(); it != _pimpl->vStrings.end(); it++)
+    APUPtr<APUStringList> cp(new APUStringList());
+    for (auto it = pimpl_->vStrings.begin(); it != pimpl_->vStrings.end(); it++)
     {
-        cp._pimpl->vStrings.push_back(*it);
+        cp->pimpl_->vStrings.push_back(*it);
     }
 
     return cp;
@@ -38,14 +27,14 @@ APUStringList APUStringList::copy()
 
 size_t APUStringList::size()
 {
-    return _pimpl->vStrings.size();
+    return pimpl_->vStrings.size();
 }
 
 const char * APUStringList::getString(size_t index)
 {
     if (index < size())
     {
-        return _pimpl->vStrings[index].c_str();
+        return pimpl_->vStrings[index].c_str();
     }
 
     return NULL;
@@ -55,11 +44,11 @@ void APUStringList::setString(size_t index, const char *str)
 {
     if (index < size())
     {
-        _pimpl->vStrings[index] = std::string(str);
+        pimpl_->vStrings[index] = std::string(str);
     }
 }
 
 void APUStringList::append(const char *str)
 {
-    _pimpl->vStrings.push_back(std::string(str));
+    pimpl_->vStrings.push_back(std::string(str));
 }

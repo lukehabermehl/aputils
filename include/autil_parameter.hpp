@@ -107,7 +107,7 @@ public:
       * @param strings list of strings for the enum values
       * @param cb optional callback object
       */
-    APUEnumParameter(const char *name, APUStringList strings, APUParameterCallback *cb=NULL);
+    APUEnumParameter(const char *name, APUStringList * strings, APUParameterCallback *cb=NULL);
     virtual ~APUEnumParameter();
 
     /** NO-OP: Cannot set min value for enums. Minimum is always 0 */

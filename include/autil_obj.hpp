@@ -60,7 +60,7 @@ public:
 
     }
 
-    APUPtr(APUPtr<T> &orig)
+    APUPtr(const APUPtr<T> &orig)
     {
         obj_ = orig.obj_;
         if (obj_) {
@@ -73,12 +73,12 @@ public:
         return obj_;
     }
 
-    bool operator==(APUPtr<T> &rhs)
+    bool operator==(const APUPtr<T> &rhs)
     {
         return obj_ == rhs.obj_;
     }
 
-    APUPtr<T>& operator=(APUPtr<T> &rhs)
+    APUPtr<T>& operator=(const APUPtr<T> &rhs)
     {
         if (this == &rhs) {
             return *this;

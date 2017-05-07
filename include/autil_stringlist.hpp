@@ -10,25 +10,26 @@
 #define autil_stringlist_hpp
 
 #include <memory>
+#include "autil_obj.hpp"
 
 class APUStringList
+: public APUObject
 {
 public:
+    APUOBJ_FWDDECL
+
     APUStringList();
-    APUStringList(APUStringList& rhs);
 
     void append(const char *str);
     size_t size();
     const char *getString(size_t index);
     void setString(size_t index, const char *str);
 
-    APUStringList copy();
-
-    APUStringList& operator=(APUStringList const &rhs);
+    APUPtr<APUStringList> copy();
 
 private:
     class Pimpl;
-    std::shared_ptr<Pimpl> _pimpl;
+    Pimpl *pimpl_;
 };
 
 #endif /* autil_stringlist_hpp */
