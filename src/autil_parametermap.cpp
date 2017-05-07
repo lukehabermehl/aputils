@@ -10,19 +10,14 @@
 #include "autil_parametermap_private.hpp"
 
 APUParameterMap::APUParameterMap()
+: APUObject()
 {
-    _pimpl = std::make_shared<Pimpl>();
+    pimpl_ = new Pimpl();
 }
 
-APUParameterMap::APUParameterMap(const APUParameterMap& rhs)
+APUParameterMap::~APUParameterMap()
 {
-    _pimpl = rhs._pimpl;
-}
-
-APUParameterMap& APUParameterMap::operator=(const APUParameterMap &rhs)
-{
-    _pimpl = rhs._pimpl;
-    return (*this);
+    delete pimpl_;
 }
 
 void APUParameterMap::addParameter(APUParameter *parameter)
@@ -30,13 +25,13 @@ void APUParameterMap::addParameter(APUParameter *parameter)
     if (parameter == NULL)
         return;
 
-    _pimpl->params[parameter->getName()] = parameter;
+    pimpl_->params[parameter->getName()] = parameter;
 }
 
 APUParameter * APUParameterMap::parameterWithName(const char *name) const
 {
-    auto it = _pimpl->params.find(std::string(name));
-    if (it == _pimpl->params.end())
+    auto it = pimpl_->params.find(std::string(name));
+    if (it == pimpl_->params.end())
     {
         return NULL;
     }
@@ -54,12 +49,12 @@ APUParameterMap::Pimpl::~Pimpl()
 
 APUParameterMap::Iterator APUParameterMap::begin() const
 {
-    std::shared_ptr<Iterator::Pimpl> itPimpl = std::make_shared<Iterator::Pimpl>();
-    itPimpl->mapPtr = &_pimpl->params;
-    itPimpl->mapIterator = _pimpl->params.begin();
+    Iterator::Pimpl *itPimpl = new Iterator::Pimpl();
+    itPimpl->mapPtr = &pimpl_->params;
+    itPimpl->mapIterator = pimpl_->params.begin();
 
     Iterator it;
-    it._pimpl = itPimpl;
+    it.pimpl_ = itPimpl;
 
     return it;
 }
@@ -67,28 +62,28 @@ APUParameterMap::Iterator APUParameterMap::begin() const
 const char * APUParameterMap::Iterator::first()
 {
     if (!valid()) return NULL;
-    return _pimpl->mapIterator->first.c_str();
+    return pimpl_->mapIterator->first.c_str();
 }
 
 APUParameter * APUParameterMap::Iterator::second()
 {
     if (!valid()) return NULL;
-    return _pimpl->mapIterator->second;
+    return pimpl_->mapIterator->second;
 }
 
 size_t APUParameterMap::size() const
 {
-    return _pimpl->params.size();
+    return pimpl_->params.size();
 }
 
 APUParameterMap::Iterator& APUParameterMap::Iterator::operator++()
 {
-    _pimpl->mapIterator++;
+    pimpl_->mapIterator++;
     return (*this);
 }
 
 bool APUParameterMap::Iterator::valid()
 {
-    return _pimpl->mapIterator != _pimpl->mapPtr->end();
+    return pimpl_->mapIterator != pimpl_->mapPtr->end();
 }
 

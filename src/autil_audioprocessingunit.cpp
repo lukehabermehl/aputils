@@ -59,7 +59,7 @@ void AudioProcessingUnit::setSampleRate(unsigned long sampleRate)
 {
     _pimpl->sampleRate = sampleRate;
 
-    for (APUParameterMap::Iterator it = _pimpl->parameterMap.begin(); it.valid(); ++it) {
+    for (APUParameterMap::Iterator it = _pimpl->parameterMap->begin(); it.valid(); ++it) {
         it.second()->setSampleRate(sampleRate);
     }
 
@@ -78,17 +78,17 @@ const char * AudioProcessingUnit::getName()
 
 size_t AudioProcessingUnit::getNumParameters()
 {
-    return _pimpl->parameterMap.size();
+    return _pimpl->parameterMap->size();
 }
 
 APUParameter * AudioProcessingUnit::getParameterWithName(const char *name)
 {
-    return _pimpl->parameterMap.parameterWithName(name);
+    return _pimpl->parameterMap->parameterWithName(name);
 }
 
-const APUParameterMap AudioProcessingUnit::getParameterMap()
+const APUParameterMap * AudioProcessingUnit::getParameterMap()
 {
-    return _pimpl->parameterMap;
+    return _pimpl->parameterMap.ptr();
 }
 
 bool AudioProcessingUnit::addParameter(APUParameter *param)
@@ -97,7 +97,7 @@ bool AudioProcessingUnit::addParameter(APUParameter *param)
         return false;
     }
 
-    _pimpl->parameterMap.addParameter(param);
+    _pimpl->parameterMap->addParameter(param);
     return true;
 }
 

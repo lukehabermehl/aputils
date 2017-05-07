@@ -17,10 +17,13 @@
 class AudioProcessingUnit::Pimpl
 {
 public:
-    Pimpl() :sampleRate(0) {}
+    Pimpl() :sampleRate(0)
+    {
+        parameterMap = new APUParameterMap();
+    }
     size_t sampleRate;
 
-    APUParameterMap parameterMap;
+    APUPtr<APUParameterMap> parameterMap;
 };
 
 

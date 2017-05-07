@@ -9,14 +9,17 @@
 #define autil_parametermap_hpp
 
 #include "autil_parameter.hpp"
+#include "autil_obj.hpp"
 #include <memory>
 
 /** @file autil_parametermap.hpp */
 
-/** HashMap implementation that maps parameters by name. Instances are always passed by reference using internal reference counting */
+/** HashMap implementation that maps parameters by name. */
 class APUParameterMap
+: public APUObject
 {
 public:
+
     /** A simple iterator object that behaves similarly to std::iterator, but is not a pointer */
     class Iterator
     {
@@ -34,12 +37,13 @@ public:
 
     private:
         class Pimpl;
-        std::shared_ptr<Pimpl> _pimpl;
+        Pimpl * pimpl_;
     };
 
+    APUOBJ_FWDDECL
+
     APUParameterMap();
-    APUParameterMap(const APUParameterMap& rhs);
-    APUParameterMap& operator=(const APUParameterMap& rhs);
+    virtual ~APUParameterMap();
 
     void addParameter(APUParameter *parameter);
     APUParameter *parameterWithName(const char *name) const;
@@ -49,7 +53,7 @@ public:
 
 private:
     class Pimpl;
-    std::shared_ptr<Pimpl> _pimpl;
+    Pimpl *pimpl_;
 };
 
 #endif /* autil_parametermap_hpp */

@@ -47,7 +47,7 @@ public:
       */
     APUParameter * getParameterWithName(const char *name);
     /** Get the parameter map */
-    const APUParameterMap getParameterMap();
+    const APUParameterMap * getParameterMap();
     
     static AudioProcessingUnit * createPassthroughUnit();
     

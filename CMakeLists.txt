@@ -13,6 +13,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(PUBLIC_HEADERS "include/autil_audioprocessingunit.hpp"
 	"include/autil_dspkernel.hpp"
 	"include/autil_file.hpp"
+	"include/autil_logger.hpp"
 	"include/autil_manager.hpp"
 	"include/autil_number.hpp"
 	"include/autil_parameter.hpp"
