@@ -59,7 +59,7 @@ public:
     unsigned long sampleRate;
     PaStream *stream;
     bool useFileInput;
-    AudioFile *audioFile;
+    APUPtr<AudioFile> audioFile;
     AudioProcessingUnit *audioProcessingUnit;
     AudioManagerStatus status;
     StreamStatusChangeCallback streamStatusChangeCallback;

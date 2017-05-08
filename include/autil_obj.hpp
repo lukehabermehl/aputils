@@ -57,7 +57,9 @@ public:
     APUPtr(T *obj=NULL)
     : obj_(obj)
     {
-
+        if (obj_) {
+            obj_->addRef();
+        }
     }
 
     APUPtr(const APUPtr<T> &orig)
@@ -129,6 +131,11 @@ public:
             delete obj_;
             obj_ = NULL;
         }
+    }
+
+    operator T* ()
+    {
+        return obj_;
     }
 };
 

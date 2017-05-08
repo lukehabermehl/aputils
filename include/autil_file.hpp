@@ -11,6 +11,7 @@
 #define AudioFile_hpp
 
 #include <stdlib.h>
+#include "autil_obj.hpp"
 
 /** Modes for audio file I/O */
 enum AudioFileMode
@@ -30,8 +31,11 @@ enum AudioFileBufferStatus
 
 /** Allows buffering samples from files and supports a wide variety of audio file formats (Thank you libsndfile) */
 class AudioFile
+: public APUObject
 {
 public:
+    APUOBJ_FWDDECL
+
     /** Constructor
       * @param filepath the path of the audio file
       * @param mode the I/O mode to open the file in
@@ -55,7 +59,7 @@ public:
     AudioFileMode mode();
     
     /** Set frame to point to the next audio frame
-      * @param a double pointer to the first sample in the frame
+      * @param frame a double pointer to the first sample in the frame
       * @returns The status of the buffer after reading the frame
      */
     AudioFileBufferStatus nextFrame(float **frame);
