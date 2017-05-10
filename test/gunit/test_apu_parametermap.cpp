@@ -59,3 +59,16 @@ TEST_F(APUParameterMapTestFixture, test_api)
 	EXPECT_EQ(NULL, paramMap->parameterWithName("notaparam"));
 }
 
+TEST_F(APUParameterMapTestFixture, test_memory)
+{
+	APUParameterMap *memParamMap = new APUParameterMap();
+	APUPtr<APUParameter> param = new APUParameter("memParam", APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
+	memParamMap->addParameter(param);
+	EXPECT_EQ(3, param->addRef());
+	EXPECT_EQ(2, param->decRef());
+
+	delete memParamMap;
+	EXPECT_EQ(2, param->addRef());
+	EXPECT_EQ(1, param->decRef());
+}
+

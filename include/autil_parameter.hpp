@@ -29,10 +29,13 @@ public:
 };
 
 class APUParameter
+: public APUObject
 {
     friend class AudioProcessingUnit;
 
 public:
+    APUOBJ_FWDDECL
+
     APUParameter(const char *name, APUNumberType valueType, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb=NULL);
     virtual ~APUParameter();
     void setName(const char *name);

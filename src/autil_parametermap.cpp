@@ -25,7 +25,14 @@ void APUParameterMap::addParameter(APUParameter *parameter)
     if (parameter == NULL)
         return;
 
+    APUPtr<APUParameter> param = parameterWithName(parameter->getName());
+    if (param.ptr() == parameter) {
+        return;
+    } else if (param) {
+        param->decRef();
+    }
     pimpl_->params[parameter->getName()] = parameter;
+    parameter->addRef();
 }
 
 APUParameter * APUParameterMap::parameterWithName(const char *name) const
@@ -43,7 +50,8 @@ APUParameterMap::Pimpl::~Pimpl()
 {
     for (auto it = params.begin(); it != params.end(); it++)
     {
-        delete it->second;
+        APUPtr<APUParameter> param = it->second;
+        param->decRef();
     }
 }
 
