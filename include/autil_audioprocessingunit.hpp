@@ -15,10 +15,13 @@
 #include <unordered_map>
 #include <string>
 
-/** Abstract class */
+/** Base class for APU process units */
 class AudioProcessingUnit
+: public APUObject
 {
 public:
+    APUOBJ_FWDDECL
+
     AudioProcessingUnit();
     virtual ~AudioProcessingUnit();
 

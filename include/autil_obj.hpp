@@ -110,6 +110,11 @@ public:
         return *this;
     }
 
+    operator T* ()
+    {
+        return obj_;
+    }
+
     operator bool()
     {
         return obj_ != NULL;
@@ -132,12 +137,6 @@ public:
             obj_ = NULL;
         }
     }
-
-    operator T* ()
-    {
-        return obj_;
-    }
 };
-
 
 #endif /* autil_obj_h */

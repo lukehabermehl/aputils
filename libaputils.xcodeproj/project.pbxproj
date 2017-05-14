@@ -25,6 +25,7 @@
 		A3AFD6701EB16AAF00238AEA /* autil_stringlist_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6571EB16AAF00238AEA /* autil_stringlist_private.hpp */; };
 		A3AFD6711EB16AAF00238AEA /* autil_stringlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6581EB16AAF00238AEA /* autil_stringlist.cpp */; };
 		A3AFD6731EB16AAF00238AEA /* autil_thread_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */; };
+		A3D916BC1EC7BE3300E3FDC4 /* autil_objmap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */; };
 		A3E2BA8A1EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3E2BA8B1EB8B3DF00FE0280 /* autil_dspkernel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA821EB8B3DF00FE0280 /* autil_dspkernel.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3E2BA8C1EB8B3DF00FE0280 /* autil_file.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 		A3AFD6571EB16AAF00238AEA /* autil_stringlist_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_stringlist_private.hpp; path = src/autil_stringlist_private.hpp; sourceTree = "<group>"; };
 		A3AFD6581EB16AAF00238AEA /* autil_stringlist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_stringlist.cpp; path = src/autil_stringlist.cpp; sourceTree = "<group>"; };
 		A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_thread_manager.cpp; path = src/autil_thread_manager.cpp; sourceTree = "<group>"; };
+		A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_objmap.hpp; path = include/autil_objmap.hpp; sourceTree = "<group>"; };
 		A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_audioprocessingunit.hpp; path = include/autil_audioprocessingunit.hpp; sourceTree = "<group>"; };
 		A3E2BA821EB8B3DF00FE0280 /* autil_dspkernel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_dspkernel.hpp; path = include/autil_dspkernel.hpp; sourceTree = "<group>"; };
 		A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_file.hpp; path = include/autil_file.hpp; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				A35849A71EBA86040007475F /* aputils.h */,
 				A32DC7501EBE163A0090C6D9 /* autil_logger.hpp */,
 				A330D6F21EBF726500281EFB /* autil_obj.hpp */,
+				A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				A3E2BA8F1EB8B3DF00FE0280 /* autil_parameter.hpp in Headers */,
 				A3AFD66A1EB16AAF00238AEA /* autil_parameter_private.hpp in Headers */,
 				A3E2BA8C1EB8B3DF00FE0280 /* autil_file.hpp in Headers */,
+				A3D916BC1EC7BE3300E3FDC4 /* autil_objmap.hpp in Headers */,
 				A3E2BA911EB8B3DF00FE0280 /* autil_stringlist.hpp in Headers */,
 				A32DC7541EBE18FA0090C6D9 /* autil_logger_private.hpp in Headers */,
 				A3E2BA951EB8B3FD00FE0280 /* autil_manager_private.hpp in Headers */,

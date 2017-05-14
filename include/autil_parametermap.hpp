@@ -14,7 +14,8 @@
 
 /** @file autil_parametermap.hpp */
 
-/** HashMap implementation that maps parameters by name. */
+/** HashMap implementation that maps parameters by name.
+ */
 class APUParameterMap
 : public APUObject
 {

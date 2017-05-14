@@ -13,7 +13,7 @@
 #include "autil_obj.hpp"
 
 /// Interface for logger objects
-/// Implementations must also inherit APUObject
+/// Implementations must also conform to APUObjectInterface
 class APULoggerInterface
 : public APUObjectInterface
 {
