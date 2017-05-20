@@ -130,8 +130,6 @@ void AudioManager::setAudioProcessingUnit(AudioProcessingUnit *unit)
         return;
     }
     unit->setSampleRate(_pimpl->dspKernel->sampleRate);
-    int refCount = unit->addRef();
-    APUGetLogger()->log(1, "unit refCount is %d", refCount);
 }
 
 bool AudioManager::initialize()

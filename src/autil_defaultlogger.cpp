@@ -70,6 +70,7 @@ void logger_worker(LoggerImpl *loggerImpl)
 LoggerImpl::Pimpl()
 {
     workerThread = std::thread(logger_worker, this);
+    outputFile = NULL;
     queue = new Queue();
 }
 
