@@ -11,6 +11,7 @@
 
 #include "autil_manager.hpp"
 #include "autil_dspkernel.hpp"
+#include "autil_objmap.hpp"
 
 #include <string.h>
 
@@ -21,7 +22,7 @@ public:
     AudioDSPKernel *dspKernel;
     AudioDeviceIndex outputDeviceIndex;
     AudioDeviceIndex inputDeviceIndex;
-    AudioManagerStatusChangedCallback *statusChangedCallback;
+    APUPtr<APUObjectMap<int, APUHostEventSink> > eventSinks;
 };
 
 AudioDeviceInfoRef AudioDeviceInfoCreate(AudioDeviceIndex index, const char *name)

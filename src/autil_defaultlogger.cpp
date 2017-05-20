@@ -70,6 +70,7 @@ void logger_worker(LoggerImpl *loggerImpl)
 LoggerImpl::Pimpl()
 {
     workerThread = std::thread(logger_worker, this);
+    queue = new Queue();
 }
 
 LoggerImpl::~Pimpl()
@@ -81,6 +82,36 @@ LoggerImpl::~Pimpl()
     }
     if (queue) {
         delete queue;
+    }
+}
+
+void LoggerImpl::Queue::append(APUDefaultLogger::Pimpl::Queue::Item *item)
+{
+    if (first == NULL)
+    {
+        first = item;
+        last = item;
+    }
+    else
+    {
+        last->next = item;
+        last = last->next;
+    }
+}
+
+void LoggerImpl::Queue::popFront()
+{
+    if (last == first)
+    {
+        delete first;
+        first = NULL;
+        last = NULL;
+    }
+    else
+    {
+        Item *temp = first;
+        first = first->next;
+        delete temp;
     }
 }
 

@@ -48,7 +48,11 @@ public:
     , last(NULL)
     {}
 
-    virtual ~Queue();
+    virtual ~Queue() {
+        while (first) {
+            popFront();
+        }
+    }
 
     void append(Item *item);
     void popFront();

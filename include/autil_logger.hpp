@@ -48,5 +48,4 @@ private:
 void APUSetLogger(APULoggerInterface *logger);
 APULoggerInterface * APUGetLogger();
 
-
 #endif /* autil_logger_h */

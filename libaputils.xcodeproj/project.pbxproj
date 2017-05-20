@@ -12,6 +12,7 @@
 		A32DC7541EBE18FA0090C6D9 /* autil_logger_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A32DC7531EBE18040090C6D9 /* autil_logger_private.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
 		A330D6F31EBF726500281EFB /* autil_obj.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A330D6F21EBF726500281EFB /* autil_obj.hpp */; };
 		A330D6F51EBF74E000281EFB /* autil_obj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A330D6F41EBF74E000281EFB /* autil_obj.cpp */; };
+		A36BC7EF1EC8ED640050C2A0 /* autil_host.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */; };
 		A38750191EBE197C003F82C6 /* autil_defaultlogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A38750181EBE197C003F82C6 /* autil_defaultlogger.cpp */; };
 		A3AFD65E1EB16AAF00238AEA /* autil_audioprocessingunit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */; };
 		A3AFD6601EB16AAF00238AEA /* autil_dspkernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* autil_dspkernel.cpp */; };
@@ -47,6 +48,7 @@
 		A330D6F21EBF726500281EFB /* autil_obj.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_obj.hpp; path = include/autil_obj.hpp; sourceTree = "<group>"; };
 		A330D6F41EBF74E000281EFB /* autil_obj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_obj.cpp; path = src/autil_obj.cpp; sourceTree = "<group>"; };
 		A35849A71EBA86040007475F /* aputils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = aputils.h; path = include/aputils.h; sourceTree = "<group>"; };
+		A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_host.hpp; path = include/autil_host.hpp; sourceTree = "<group>"; };
 		A38750181EBE197C003F82C6 /* autil_defaultlogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_defaultlogger.cpp; path = src/autil_defaultlogger.cpp; sourceTree = "<group>"; };
 		A3AFD63C1EB16A9000238AEA /* liblibaputils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibaputils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_audioprocessingunit_private.hpp; path = src/autil_audioprocessingunit_private.hpp; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				A32DC7501EBE163A0090C6D9 /* autil_logger.hpp */,
 				A330D6F21EBF726500281EFB /* autil_obj.hpp */,
 				A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */,
+				A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				A3E2BA911EB8B3DF00FE0280 /* autil_stringlist.hpp in Headers */,
 				A32DC7541EBE18FA0090C6D9 /* autil_logger_private.hpp in Headers */,
 				A3E2BA951EB8B3FD00FE0280 /* autil_manager_private.hpp in Headers */,
+				A36BC7EF1EC8ED640050C2A0 /* autil_host.hpp in Headers */,
 				A3E2BA931EB8B3F900FE0280 /* autil_audioprocessingunit_private.hpp in Headers */,
 				A3E2BA8B1EB8B3DF00FE0280 /* autil_dspkernel.hpp in Headers */,
 				A3E2BA991EB8B69B00FE0280 /* autil_uiattrs.h in Headers */,

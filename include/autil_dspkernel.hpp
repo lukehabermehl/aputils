@@ -60,14 +60,14 @@ public:
     PaStream *stream;
     bool useFileInput;
     APUPtr<AudioFile> audioFile;
-    AudioProcessingUnit *audioProcessingUnit;
+    APUPtr<AudioProcessingUnit> audioProcessingUnit;
     AudioManagerStatus status;
     StreamStatusChangeCallback streamStatusChangeCallback;
     PaError paError;
     void *streamStatusChangeCallbackCtx;
     
 private:
-    AudioProcessingUnit *passthroughUnit;
+    APUPtr<AudioProcessingUnit> passthroughUnit;
     bool doStop;
 };
 

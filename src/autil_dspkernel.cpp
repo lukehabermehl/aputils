@@ -7,6 +7,7 @@
 //
 
 #include "autil_dspkernel.hpp"
+#include "autil_logger.hpp"
 
 AudioDSPKernel::AudioDSPKernel()
 : audioProcessingUnit(NULL)
@@ -23,10 +24,9 @@ AudioDSPKernel::AudioDSPKernel()
 
 AudioDSPKernel::~AudioDSPKernel()
 {
-    if (stream)
+    if (stream) {
         close();
-
-    delete passthroughUnit;
+    }
 }
 
 bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
@@ -35,7 +35,7 @@ bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
     outputParameters.device = outputDevIndex;
     if (outputParameters.device == paNoDevice)
     {
-        //BDLogError(kAudioDSPKernelLogPrefix, "Failed to find output device!");
+        APUGetLogger()->log(0, "AudioDSPKernel Failed to find output device!");
         return false;
     }
 
@@ -54,7 +54,7 @@ bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
         sampleRate = inputDevInfo->defaultSampleRate;
     }
 
-    //BDLogFormat(kAudioDSPKernelLogPrefix, "Open stream with sample rate: %lu", sampleRate);
+    APUGetLogger()->log(2, "Open stream with sample rate: %lu", sampleRate);
 
     paError = Pa_OpenStream(&stream,
                                 NULL,
@@ -67,7 +67,7 @@ bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
 
     if (paError != paNoError)
     {
-        //BDLogError(kAudioDSPKernelLogPrefix, "Failed to open stream! PAError code: %d", paError);
+        APUGetLogger()->log(0, "AudioDSPKernel Failed to open stream! PAError code: %d", paError);
         return false;
     }
 
@@ -154,7 +154,7 @@ int AudioDSPKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffer
         }
 
         //If no APU, passthrough
-        if (audioProcessingUnit == NULL)
+        if (!audioProcessingUnit)
         {
             passthroughUnit->processAudio(in, out, numInputChannels, numOutputChannels);
         }

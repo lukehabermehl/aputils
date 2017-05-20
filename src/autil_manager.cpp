@@ -9,8 +9,10 @@
 #include "autil_manager.hpp"
 #include "autil_manager_private.hpp"
 #include "autil_file.hpp"
+#include "autil_logger.hpp"
 
 #include <portaudio.h>
+#include <cassert>
 
 static const char *kAudioManagerLogPrefix = "[AudioManager]";
 
@@ -21,7 +23,7 @@ AudioManager::AudioManager()
     _pimpl->dspKernel->streamStatusChangeCallback = AudioManager::streamStatusChangeCallback;
     _pimpl->dspKernel->streamStatusChangeCallbackCtx = this;
     _pimpl->outputDeviceIndex = 1;
-    _pimpl->statusChangedCallback = NULL;
+    _pimpl->eventSinks = new APUObjectMap<int, APUHostEventSink>();
     
     Pa_Initialize();
 }
@@ -35,6 +37,11 @@ AudioManager::~AudioManager()
 void AudioManager::setNumOutputChannels(int numOutputChannels)
 {
     _pimpl->dspKernel->numOutputChannels = numOutputChannels;
+}
+
+int AudioManager::getNumOutputChannels() const
+{
+    return _pimpl->dspKernel->numOutputChannels;
 }
 
 void AudioManager::setInputMode(AudioInputMode mode)
@@ -51,22 +58,22 @@ void AudioManager::setInputMode(AudioInputMode mode)
     }
 }
 
-AudioDeviceIndex AudioManager::getInputDeviceIndex()
+AudioDeviceIndex AudioManager::getInputDevice()
 {
     return _pimpl->inputDeviceIndex;
 }
 
-AudioDeviceIndex AudioManager::getOutputDeviceIndex()
+AudioDeviceIndex AudioManager::getOutputDevice() const
 {
     return _pimpl->outputDeviceIndex;
 }
 
-void AudioManager::setInputDeviceIndex(AudioDeviceIndex devIndex)
+void AudioManager::setInputDevice(AudioDeviceIndex devIndex)
 {
     _pimpl->inputDeviceIndex = devIndex;
 }
 
-void AudioManager::setOutputDeviceIndex(AudioDeviceIndex devIndex)
+void AudioManager::setOutputDevice(AudioDeviceIndex devIndex)
 {
     _pimpl->outputDeviceIndex = devIndex;
 }
@@ -94,7 +101,7 @@ AudioDeviceInfoRef AudioManager::getDevices()
     return devInfoRef;
 }
 
-AudioManagerErrorCode AudioManager::error() const
+AudioManagerErrorCode AudioManager::getError() const
 {
     switch (_pimpl->dspKernel->paError)
     {
@@ -118,17 +125,21 @@ AudioManagerErrorCode AudioManager::error() const
 void AudioManager::setAudioProcessingUnit(AudioProcessingUnit *unit)
 {
     _pimpl->dspKernel->audioProcessingUnit = unit;
-    if (unit == NULL)
+    if (unit == NULL) {
+        APUGetLogger()->log(0, "APUnit is null!");
         return;
+    }
     unit->setSampleRate(_pimpl->dspKernel->sampleRate);
+    int refCount = unit->addRef();
+    APUGetLogger()->log(1, "unit refCount is %d", refCount);
 }
 
-bool AudioManager::open()
+bool AudioManager::initialize()
 {
-    return _pimpl->dspKernel->open(getOutputDeviceIndex());
+    return _pimpl->dspKernel->open(getOutputDevice());
 }
 
-bool AudioManager::close()
+bool AudioManager::destroy()
 {
     if (_pimpl->dspKernel->close())
     {
@@ -159,12 +170,12 @@ bool AudioManager::setInputFile(AudioFile *file)
     return true;
 }
 
-AudioFile * AudioManager::getInputFile()
+AudioFile * AudioManager::getInputFile() const
 {
-    return _pimpl->dspKernel->audioFile.ptr();
+    return _pimpl->dspKernel->audioFile;
 }
 
-AudioManagerStatus AudioManager::status()
+AudioManagerStatus AudioManager::getStatus() const
 {
     return _pimpl->dspKernel->status;
 }
@@ -179,20 +190,38 @@ void AudioManager::setLooping(bool looping)
     _pimpl->dspKernel->audioFile->setLooping(looping);
 }
 
-void AudioManager::setOnStatusChangedCallback(AudioManagerStatusChangedCallback *cb)
+void AudioManager::subscribe(APUHostEventSink *eventSink)
 {
-    _pimpl->statusChangedCallback = cb;
+    if (eventSink) {
+        _pimpl->eventSinks->put((int)_pimpl->eventSinks->size(), eventSink);
+    }
+}
+
+void AudioManager::unsubscribe(APUHostEventSink *eventSink)
+{
+    if (eventSink) {
+        auto it = _pimpl->eventSinks->begin();
+        while (it.valid()) {
+            if (it.second() == eventSink) {
+                _pimpl->eventSinks->put(it.first(), NULL);
+                break;
+            }
+            ++it;
+        }
+    }
 }
 
 void AudioManager::streamStatusChangeCallback(void *ctx)
 {
     AudioManager *audioManager = (AudioManager *)ctx;
-    if (audioManager->_pimpl->statusChangedCallback) {
-        audioManager->_pimpl->statusChangedCallback->onStatusChanged(audioManager);
+    auto it = audioManager->_pimpl->eventSinks->begin();
+    while (it.valid()) {
+        it.second()->handleEvent(APUHOST_EVENT_STATUSCHANGED, audioManager);
     }
 }
 
 AudioManager::pimpl::~pimpl()
 {
+    assert(eventSinks->size() == 0);
     delete dspKernel;
 }
