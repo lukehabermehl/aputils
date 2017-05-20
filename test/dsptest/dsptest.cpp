@@ -42,7 +42,7 @@ int main()
     audioManager->setOutputDevice(1);
     audioManager->setNumOutputChannels(2);
 
-    APUPtr<AudioFile> file = new AudioFile("/Users/Luke/Projects/blockdsp/test/resources/guitar.wav",
+    APUPtr<AudioFile> file = new AudioFile("test/dsptest/guitar.wav",
                                            AudioFileModeReadOnly);
 
     if (!file) {
