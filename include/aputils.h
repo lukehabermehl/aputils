@@ -14,6 +14,8 @@
 #include <aputils/autil_logger.hpp>
 #include <aputils/autil_manager.hpp>
 #include <aputils/autil_number.hpp>
+#include <aputils/autil_obj.hpp>
+#include <aputils/autil_osc.hpp>
 #include <aputils/autil_parameter.hpp>
 #include <aputils/autil_parametermap.hpp>
 #include <aputils/autil_stringlist.hpp>

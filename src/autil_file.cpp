@@ -8,8 +8,8 @@
 
 #include "autil_file.hpp"
 #include "autil_file_private.hpp"
-//#include "bdsp_logger.hpp"
 #include "autil_thread_manager.hpp"
+#include "autil_logger.hpp"
 
 #include <vector>
 
@@ -63,6 +63,11 @@ AudioFile::AudioFile(const char *filepath, AudioFileMode mode)
     
     _pimpl->mode = mode;
     _pimpl->sndfile = sf_open(filepath, sfmode, &_pimpl->sfInfo);
+    if (!_pimpl->sndfile) {
+        const char *errormsg = sf_strerror(_pimpl->sndfile);
+        APUGetLogger()->log(0, "Failed to load file: %s", errormsg);
+        return;
+    }
     _pimpl->totalSize = _pimpl->sfInfo.channels * _pimpl->sfInfo.frames;
     _pimpl->readIndex = 0;
     _pimpl->currentBufIndex = 0;

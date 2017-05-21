@@ -79,6 +79,10 @@ bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
         return false;
     }
 
+    if (audioProcessingUnit) {
+        audioProcessingUnit->setSampleRate(sampleRate);
+    }
+
     return true;
 }
 
