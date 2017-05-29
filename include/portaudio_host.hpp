@@ -5,12 +5,12 @@
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
-/** @file autil_dspkernel.hpp 
+/** @file portaudio_host.hpp 
   * Internal interface to PortAudio API
   */
 
-#ifndef AudioDSPKernel_hpp
-#define AudioDSPKernel_hpp
+#ifndef PortAudioKernel_hpp
+#define PortAudioKernel_hpp
 
 #include <portaudio.h>
 
@@ -18,13 +18,13 @@
 #include "autil_audioprocessingunit.hpp"
 #include "autil_manager.hpp"
 
-static const char *kAudioDSPKernelLogPrefix = "[AudioDSPKernel]";
+static const char *kPortAudioKernelLogPrefix = "[PortAudioKernel]";
 
-class AudioDSPKernel {
+class PortAudioKernel {
 public:
     typedef void (*StreamStatusChangeCallback)(void *);
-    AudioDSPKernel();
-    ~AudioDSPKernel();
+    PortAudioKernel();
+    ~PortAudioKernel();
     
     bool open(PaDeviceIndex outputDevIndex);
     bool close();
@@ -44,7 +44,7 @@ public:
                           PaStreamCallbackFlags statusFlags,
                           void *userData)
     {
-        AudioDSPKernel *kernel = (AudioDSPKernel *)userData;
+        PortAudioKernel *kernel = (PortAudioKernel *)userData;
         return kernel->paCallbackMethod(inputBuffer,
                                         outputBuffer,
                                         framesPerBuffer,
@@ -58,7 +58,7 @@ public:
     int numInputChannels;
     unsigned long sampleRate;
     PaStream *stream;
-    bool useFileInput;
+    AudioInputMode inputMode;
     APUPtr<AudioFile> audioFile;
     APUPtr<AudioProcessingUnit> audioProcessingUnit;
     AudioManagerStatus status;
@@ -72,4 +72,4 @@ private:
 };
 
 
-#endif /* AudioDSPKernel_hpp */
+#endif /* PortAudioKernel_hpp */

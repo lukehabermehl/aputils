@@ -10,7 +10,7 @@
 #define AudioManager_Private_h
 
 #include "autil_manager.hpp"
-#include "autil_dspkernel.hpp"
+#include "portaudio_host.hpp"
 #include "autil_objmap.hpp"
 
 #include <string.h>
@@ -19,24 +19,10 @@ class AudioManager::pimpl
 {
 public:
     ~pimpl();
-    AudioDSPKernel *dspKernel;
+    PortAudioKernel *dspKernel;
     AudioDeviceIndex outputDeviceIndex;
     AudioDeviceIndex inputDeviceIndex;
     APUPtr<APUObjectMap<int, APUHostEventSink> > eventSinks;
 };
-
-AudioDeviceInfoRef AudioDeviceInfoCreate(AudioDeviceIndex index, const char *name)
-{
-    AudioDeviceInfoRef devInfoRef(new AudioDeviceInfo());
-    
-    devInfoRef->index = index;
-    devInfoRef->next = NULL;
-    
-    char *str = (char *)malloc(strlen(name));
-    strcpy(str, name);
-    devInfoRef->name = str;
-    
-    return devInfoRef;
-}
 
 #endif /* AudioManager_Private_h */

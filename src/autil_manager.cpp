@@ -19,7 +19,7 @@ static const char *kAudioManagerLogPrefix = "[AudioManager]";
 AudioManager::AudioManager()
 {
     _pimpl = new pimpl;
-    _pimpl->dspKernel = new AudioDSPKernel;
+    _pimpl->dspKernel = new PortAudioKernel();
     _pimpl->dspKernel->streamStatusChangeCallback = AudioManager::streamStatusChangeCallback;
     _pimpl->dspKernel->streamStatusChangeCallbackCtx = this;
     _pimpl->outputDeviceIndex = 1;
@@ -46,16 +46,7 @@ int AudioManager::getNumOutputChannels() const
 
 void AudioManager::setInputMode(AudioInputMode mode)
 {
-    switch (mode)
-    {
-        case AudioInputModeFile:
-            _pimpl->dspKernel->useFileInput = true;
-            _pimpl->inputDeviceIndex = -1;
-            break;
-        default:
-            _pimpl->dspKernel->useFileInput = false;
-            break;
-    }
+    _pimpl->dspKernel->inputMode = mode;
 }
 
 AudioDeviceIndex AudioManager::getInputDevice()
@@ -78,27 +69,22 @@ void AudioManager::setOutputDevice(AudioDeviceIndex devIndex)
     _pimpl->outputDeviceIndex = devIndex;
 }
 
-AudioDeviceInfoRef AudioManager::getDevices()
+APUEnumerable<AudioDevice> *
+AudioManager::getDevices()
 {
     //Scan for audio devices
     //BDLog(kAudioManagerLogPrefix, "Scan for audio devices");
     int devCount = Pa_GetDeviceCount();
-    AudioDeviceInfoRef devInfoRef;
-    AudioDeviceInfoRef currentRef;
+    APUPtr<APUEnumerator<AudioDevice> > devices = new APUEnumerator<AudioDevice>();
     
     for (int i=0; i<devCount; i++)
     {
         const PaDeviceInfo *info = Pa_GetDeviceInfo(i);
-        if (!devInfoRef) {
-            devInfoRef = AudioDeviceInfoCreate(i, info->name);
-            currentRef = devInfoRef;
-        } else {
-            currentRef->next = AudioDeviceInfoCreate(i, info->name);
-            currentRef = currentRef->next;
-        }
+        APUPtr<AudioDevice> dev = new AudioDevice(i, info->name);
+        devices->addObject(dev);
     }
     
-    return devInfoRef;
+    return (APUEnumerable<AudioDevice> *)devices.ptr();
 }
 
 AudioManagerErrorCode AudioManager::getError() const

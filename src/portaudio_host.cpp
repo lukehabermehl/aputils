@@ -1,20 +1,20 @@
 //
-//  AudioDSPKernel.cpp
+//  portaudio_kernel.cpp
 //  libblockdsp
 //
 //  Created by Luke on 5/23/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
-#include "autil_dspkernel.hpp"
+#include "portaudio_host.hpp"
 #include "autil_logger.hpp"
 
-AudioDSPKernel::AudioDSPKernel()
+PortAudioKernel::PortAudioKernel()
 : audioProcessingUnit(NULL)
 , numInputChannels(1)
 , numOutputChannels(1)
 , stream(NULL)
-, useFileInput(false)
+, inputMode(AudioInputModeNone)
 , status(AudioManagerStatusDone)
 , streamStatusChangeCallback(NULL)
 , streamStatusChangeCallbackCtx(NULL)
@@ -22,20 +22,20 @@ AudioDSPKernel::AudioDSPKernel()
     passthroughUnit = AudioProcessingUnit::createPassthroughUnit();
 }
 
-AudioDSPKernel::~AudioDSPKernel()
+PortAudioKernel::~PortAudioKernel()
 {
     if (stream) {
         close();
     }
 }
 
-bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
+bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
 {
     PaStreamParameters outputParameters;
     outputParameters.device = outputDevIndex;
     if (outputParameters.device == paNoDevice)
     {
-        APUGetLogger()->log(0, "AudioDSPKernel Failed to find output device!");
+        APUGetLogger()->log(0, "PortAudioKernel Failed to find output device!");
         return false;
     }
 
@@ -46,32 +46,43 @@ bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
 
     outputParameters.hostApiSpecificStreamInfo = NULL;
 
-    if (useFileInput)
+    PaStreamParameters inputParameters;
+
+
+    if (inputMode == AudioInputModeDevice) {
         sampleRate = audioFile->sampleRate();
+    }
     else
     {
+        //TODO: use set inputDeviceIndex
         const PaDeviceInfo *inputDevInfo = Pa_GetDeviceInfo(Pa_GetDefaultInputDevice());
         sampleRate = inputDevInfo->defaultSampleRate;
+        inputParameters.channelCount = inputDevInfo->maxInputChannels;
+        inputParameters.sampleFormat = paFloat32;
+        inputParameters.device = Pa_GetDefaultInputDevice();
+        inputParameters.suggestedLatency = inputDevInfo->defaultLowInputLatency;
     }
 
     APUGetLogger()->log(2, "Open stream with sample rate: %lu", sampleRate);
 
+    const PaStreamParameters *pParams = (inputMode == AudioInputModeFile) ? NULL : &inputParameters;
+
     paError = Pa_OpenStream(&stream,
-                                NULL,
-                                &outputParameters,
-                                sampleRate,
-                                1,
-                                0,
-                                &AudioDSPKernel::paCallback,
-                                this);
+                            pParams,
+                            &outputParameters,
+                            sampleRate,
+                            1,
+                            0,
+                            &PortAudioKernel::paCallback,
+                            this);
 
     if (paError != paNoError)
     {
-        APUGetLogger()->log(0, "AudioDSPKernel Failed to open stream! PAError code: %d", paError);
+        APUGetLogger()->log(0, "PortAudioKernel Failed to open stream! PAError code: %d", paError);
         return false;
     }
 
-    paError = Pa_SetStreamFinishedCallback(stream, &AudioDSPKernel::paStreamFinished);
+    paError = Pa_SetStreamFinishedCallback(stream, &PortAudioKernel::paStreamFinished);
     if (paError != paNoError)
     {
         Pa_CloseStream(stream);
@@ -86,7 +97,7 @@ bool AudioDSPKernel::open(PaDeviceIndex outputDevIndex)
     return true;
 }
 
-bool AudioDSPKernel::close()
+bool PortAudioKernel::close()
 {
     if (stream == 0)
         return false;
@@ -97,7 +108,7 @@ bool AudioDSPKernel::close()
     return (paError == paNoError);
 }
 
-bool AudioDSPKernel::start()
+bool PortAudioKernel::start()
 {
     if (stream == 0)
         return false;
@@ -112,7 +123,7 @@ bool AudioDSPKernel::start()
     return (paError == paNoError);
 }
 
-bool AudioDSPKernel::stop()
+bool PortAudioKernel::stop()
 {
     if (stream == 0)
         return false;
@@ -121,7 +132,7 @@ bool AudioDSPKernel::stop()
     return true;
 }
 
-void AudioDSPKernel::paStreamFinishedMethod()
+void PortAudioKernel::paStreamFinishedMethod()
 {
     status = AudioManagerStatusDone;
     close();
@@ -130,7 +141,7 @@ void AudioDSPKernel::paStreamFinishedMethod()
     }
 }
 
-int AudioDSPKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffer,
+int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffer,
                      unsigned long framesPerBuffer,
                      const PaStreamCallbackTimeInfo *timeInfo,
                      PaStreamCallbackFlags statusFlags)
@@ -139,7 +150,7 @@ int AudioDSPKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffer
 
     float *out = (float *)outputBuffer;
     float *in = 0;
-    if (!useFileInput)
+    if (inputMode != AudioInputModeDevice)
     {
         in = (float *)inputBuffer;
     }
@@ -148,7 +159,7 @@ int AudioDSPKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffer
 
     for (unsigned long i=0; i<framesPerBuffer; i++)
     {
-        if (useFileInput)
+        if (inputMode == AudioInputModeDevice)
         {
             if (audioFile->nextFrame(&in) != AudioFileBufferStatusOK)
             {
@@ -173,9 +184,9 @@ int AudioDSPKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffer
     return ret;
 }
 
-void AudioDSPKernel::paStreamFinished(void *userData)
+void PortAudioKernel::paStreamFinished(void *userData)
 {
-    return ((AudioDSPKernel *)userData)->paStreamFinishedMethod();
+    return ((PortAudioKernel *)userData)->paStreamFinishedMethod();
 }
 
 

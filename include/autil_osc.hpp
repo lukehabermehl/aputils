@@ -11,15 +11,21 @@
 
 #include "autil_obj.hpp"
 
+/** Interface for objects that generate waveforms */
 class APUWaveSource
 : public APUObjectInterface
 {
+    /** Set the center frequency */
     virtual void setFrequency(double freqHz) = 0;
+    /** Get the center frequency */
     virtual double getFrequency() = 0;
+    /** Get the next sample in the waveform */
     virtual float getNextSample() = 0;
+    /** Set the sampling rate */
     virtual void setSampleRate(double sampleRate) = 0;
 };
 
+/** A very basic oscillator that generates samples using a modulo counter */
 class APUTrivialOscillator
 : public APUWaveSource
 , private APUObject
@@ -27,6 +33,7 @@ class APUTrivialOscillator
 public:
     APUOBJ_FWDDECL
 
+    /** Supported waveform types */
     enum Waveform {
         SAW,
         SQUARE
@@ -35,7 +42,11 @@ public:
     APUTrivialOscillator();
     virtual ~APUTrivialOscillator();
 
+    /** Set the waveform type of the oscillator */
     virtual void setWaveform(Waveform waveform);
+    /** Set the pulse width
+      * @param pulseWidthPct the percentage (0.0 - 1.0) of the ON state compared to the OFF state
+      */
     virtual void setPulseWidth(double pulseWidthPct);
 
     // APUWaveSource

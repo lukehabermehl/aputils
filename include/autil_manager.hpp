@@ -41,10 +41,8 @@ public:
     /** Specify the audio input source */
     virtual void setInputMode(AudioInputMode mode);
 
-    /** Get a list of the available audio devices
-     @returns a linked list of AudioDeviceInfo
-     */
-    virtual AudioDeviceInfoRef getDevices();
+    /** Get a list of the available audio devices */
+    virtual APUEnumerable<AudioDevice> * getDevices();
 
     /** Set the input device index (use with AudioInputModeDevice) */
     virtual void setInputDevice(AudioDeviceIndex devIndex);

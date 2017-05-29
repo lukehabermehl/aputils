@@ -9,13 +9,15 @@
 #ifndef autil_host_h
 #define autil_host_h
 
-struct AudioDeviceInfo;
+#include "autil_obj.hpp"
+#include "autil_obj_enum.hpp"
 
 #define APUHOST_EVENT_STATUSCHANGED "status_changed"
 
 /** Indicates where the Audio Manager will pull input from */
 enum AudioInputMode
 {
+    AudioInputModeNone,
     AudioInputModeFile,
     AudioInputModeDevice
 };
@@ -41,18 +43,27 @@ enum AudioManagerErrorCode
 /** Use AudioDeviceIndex when referring to the integer index of an audio device */
 typedef int AudioDeviceIndex;
 
-/** AudioDeviceInfoRef as a smart pointer to an AudioDeviceInfo struct */
-typedef std::shared_ptr<AudioDeviceInfo> AudioDeviceInfoRef;
-
-/** Contains useful information about an output device. Generally, functions involving this struct will return values of type *AudioDeviceInfoRef*, which is typedef'd to be a smart pointer to an AudioDeviceInfo struct */
-struct AudioDeviceInfo
+/** Contains useful information about an input or output device */
+class AudioDevice
+: public APUObject
 {
-    /** Index number of the device */
-    AudioDeviceIndex index;
-    /** Name of the device */
-    const char *name;
-    /** Next device in the linked list or NULL */
-    AudioDeviceInfoRef next;
+public:
+    APUOBJ_FWDDECL
+
+    AudioDevice(AudioDeviceIndex index, const char *name)
+    : name_(name)
+    , index_(index)
+    {}
+
+    virtual ~AudioDevice()
+    {}
+
+    const char *getName() const { return name_.c_str(); }
+    AudioDeviceIndex getIndex() const { return index_; }
+
+private:
+    std::string name_;
+    AudioDeviceIndex index_;
 };
 
 class APUHostInterface;
@@ -71,7 +82,7 @@ class APUHostInterface
 {
 public:
     virtual void setInputMode(AudioInputMode inputMode) = 0;
-    virtual AudioDeviceInfoRef getDevices() = 0;
+    virtual APUEnumerable<AudioDevice> * getDevices() = 0;
     virtual void setInputDevice(AudioDeviceIndex index) = 0;
     virtual AudioDeviceIndex getInputDevice() = 0;
     virtual void setOutputDevice(AudioDeviceIndex index) = 0;
