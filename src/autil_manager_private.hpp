@@ -11,7 +11,7 @@
 
 #include "autil_manager.hpp"
 #include "portaudio_host.hpp"
-#include "autil_objmap.hpp"
+#include "autil_obj_enum.hpp"
 
 #include <string.h>
 
@@ -22,7 +22,7 @@ public:
     PortAudioKernel *dspKernel;
     AudioDeviceIndex outputDeviceIndex;
     AudioDeviceIndex inputDeviceIndex;
-    APUPtr<APUObjectMap<int, APUHostEventSink> > eventSinks;
+    APUPtr<APUEnumerator<APUHostEventSink> > eventSinks;
 };
 
 #endif /* AudioManager_Private_h */

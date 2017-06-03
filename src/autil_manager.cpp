@@ -23,7 +23,7 @@ AudioManager::AudioManager()
     _pimpl->dspKernel->streamStatusChangeCallback = AudioManager::streamStatusChangeCallback;
     _pimpl->dspKernel->streamStatusChangeCallbackCtx = this;
     _pimpl->outputDeviceIndex = 1;
-    _pimpl->eventSinks = new APUObjectMap<int, APUHostEventSink>();
+    _pimpl->eventSinks = new APUEnumerator<APUHostEventSink>();
     
     Pa_Initialize();
 }
@@ -177,30 +177,26 @@ void AudioManager::setLooping(bool looping)
 void AudioManager::subscribe(APUHostEventSink *eventSink)
 {
     if (eventSink) {
-        _pimpl->eventSinks->put((int)_pimpl->eventSinks->size(), eventSink);
+        _pimpl->eventSinks->addObject(eventSink);
     }
 }
 
 void AudioManager::unsubscribe(APUHostEventSink *eventSink)
 {
-    if (eventSink) {
-        auto it = _pimpl->eventSinks->begin();
-        while (it.valid()) {
-            if (it.second() == eventSink) {
-                _pimpl->eventSinks->put(it.first(), NULL);
-                break;
-            }
-            ++it;
-        }
+    if (eventSink && _pimpl->eventSinks->size()) {
+        _pimpl->eventSinks->removeObject(eventSink);
     }
 }
 
 void AudioManager::streamStatusChangeCallback(void *ctx)
 {
     AudioManager *audioManager = (AudioManager *)ctx;
-    auto it = audioManager->_pimpl->eventSinks->begin();
-    while (it.valid()) {
-        it.second()->handleEvent(APUHOST_EVENT_STATUSCHANGED, audioManager);
+    if (audioManager->_pimpl->eventSinks->size()) {
+        audioManager->_pimpl->eventSinks->reset();
+        do {
+            audioManager->_pimpl->eventSinks->getCurrent()->handleEvent(APUHOST_EVENT_STATUSCHANGED,
+                                                                        audioManager);
+        } while (audioManager->_pimpl->eventSinks->moveNext());
     }
 }
 

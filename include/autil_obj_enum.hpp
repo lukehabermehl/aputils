@@ -96,6 +96,28 @@ public:
         m_size++;
     }
 
+    void removeObject(T * obj) {
+        if (first && obj) {
+            if (obj == first) {
+                first = first->next;
+                if (obj == last) {
+                    last = first;
+                }
+            } else {
+                Item *current = first->next;
+                Item *prev = first;
+                while (current) {
+                    if (current == obj) {
+                        prev->next = obj->next;
+                        delete current;
+                        m_size--;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     void reset() {
         current = first;
     }
