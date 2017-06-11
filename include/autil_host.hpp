@@ -22,24 +22,6 @@ enum AudioInputMode
     AudioInputModeDevice
 };
 
-/** Indicates the current status of the Audio Manager */
-enum AudioManagerStatus
-{
-    AudioManagerStatusRunning = 0,
-    AudioManagerStatusDone
-};
-
-enum AudioManagerErrorCode
-{
-    AudioManagerOK = 0,
-    AudioManagerErrorUnintialized,
-    AudioManagerErrorInvalidChannelCount,
-    AudioManagerErrorInvalidSampleRate,
-    AudioManagerErrorInvalidDevice,
-    AudioManagerErrorDeviceUnavailable,
-    AudioManagerErrorCodeOther
-};
-
 /** Use AudioDeviceIndex when referring to the integer index of an audio device */
 typedef int AudioDeviceIndex;
 
@@ -81,10 +63,25 @@ class APUHostInterface
 : public APUObjectInterface
 {
 public:
+    enum ErrorCode {
+        OK = 0,
+        UNINITIALIZED,
+        INVALID_CHANNEL_COUNT,
+        INVALID_SAMPLE_RATE,
+        INVALID_DEVICE,
+        DEVICE_UNAVAILABLE,
+        UNKNOWN,
+    };
+
+    enum Status {
+        DONE = 0,
+        RUNNING
+    };
+
     virtual void setInputMode(AudioInputMode inputMode) = 0;
-    virtual APUEnumerable<AudioDevice> * getDevices() = 0;
+    virtual APUEnumerable<AudioDevice> * getDevices() const = 0;
     virtual void setInputDevice(AudioDeviceIndex index) = 0;
-    virtual AudioDeviceIndex getInputDevice() = 0;
+    virtual AudioDeviceIndex getInputDevice() const = 0;
     virtual void setOutputDevice(AudioDeviceIndex index) = 0;
     virtual AudioDeviceIndex getOutputDevice() const = 0;
 
@@ -97,8 +94,8 @@ public:
     virtual bool start() = 0;
     virtual bool stop() = 0;
 
-    virtual AudioManagerStatus getStatus() const = 0;
-    virtual AudioManagerErrorCode getError() const = 0;
+    virtual Status getStatus() const = 0;
+    virtual ErrorCode getError() const = 0;
     virtual void subscribe(APUHostEventSink *eventSink) = 0;
     virtual void unsubscribe(APUHostEventSink *eventSink) = 0;
 

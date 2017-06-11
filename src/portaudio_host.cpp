@@ -15,7 +15,7 @@ PortAudioKernel::PortAudioKernel()
 , numOutputChannels(1)
 , stream(NULL)
 , inputMode(AudioInputModeNone)
-, status(AudioManagerStatusDone)
+, status(APUHostInterface::DONE)
 , streamStatusChangeCallback(NULL)
 , streamStatusChangeCallbackCtx(NULL)
 {
@@ -116,7 +116,7 @@ bool PortAudioKernel::start()
     doStop = false;
 
     paError = Pa_StartStream(stream);
-    status = AudioManagerStatusRunning;
+    status = APUHostInterface::RUNNING;
     if (streamStatusChangeCallback) {
         streamStatusChangeCallback(streamStatusChangeCallbackCtx);
     }
@@ -134,7 +134,7 @@ bool PortAudioKernel::stop()
 
 void PortAudioKernel::paStreamFinishedMethod()
 {
-    status = AudioManagerStatusDone;
+    status = APUHostInterface::DONE;
     close();
     if (streamStatusChangeCallback) {
         streamStatusChangeCallback(streamStatusChangeCallbackCtx);
@@ -150,8 +150,7 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     float *out = (float *)outputBuffer;
     float *in = 0;
-    if (inputMode != AudioInputModeDevice)
-    {
+    if (inputMode != AudioInputModeDevice) {
         in = (float *)inputBuffer;
     }
 
@@ -159,10 +158,8 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     for (unsigned long i=0; i<framesPerBuffer; i++)
     {
-        if (inputMode == AudioInputModeDevice)
-        {
-            if (audioFile->nextFrame(&in) != AudioFileBufferStatusOK)
-            {
+        if (inputMode == AudioInputModeFile) {
+            if (audioFile->nextFrame(&in) != AudioFileBufferStatusOK) {
                 ret = paComplete;
                 break;
             }

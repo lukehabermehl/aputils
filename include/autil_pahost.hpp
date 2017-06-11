@@ -5,44 +5,32 @@
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
-/** @file autil_manager.hpp */
+/** @file autil_pahost.hpp */
 
-#ifndef AudioManager_hpp
-#define AudioManager_hpp
+#ifndef APUPortAudioHost_hpp
+#define APUPortAudioHost_hpp
 
 #include "autil_audioprocessingunit.hpp"
 #include "autil_file.hpp"
 #include "autil_host.hpp"
 #include <memory>
 
-
-class AudioManager;
-
-/** Abstract callback class */
-class AudioManagerStatusChangedCallback
-{
-public:
-    /** Called when the audio manager's status changes.
-      * @param audioManager a pointer to the audioManager instance that sent the notification */
-    virtual void onStatusChanged(AudioManager *audioManager) = 0;
-};
-
 /** Provides an interface for loading and processing audio from a file or input device */
-class AudioManager
+class APUPortAudioHost
 : public APUHostInterface
 , public APUObject
 {
 public:
     APUOBJ_FWDDECL
 
-    AudioManager();
-    virtual ~AudioManager();
+    APUPortAudioHost();
+    virtual ~APUPortAudioHost();
 
     /** Specify the audio input source */
     virtual void setInputMode(AudioInputMode mode);
 
     /** Get a list of the available audio devices */
-    virtual APUEnumerable<AudioDevice> * getDevices();
+    virtual APUEnumerable<AudioDevice> * getDevices() const;
 
     /** Set the input device index (use with AudioInputModeDevice) */
     virtual void setInputDevice(AudioDeviceIndex devIndex);
@@ -50,7 +38,7 @@ public:
     /** Get the current input device index.
      @returns -1 if no input is selected or if using file
      */
-    virtual AudioDeviceIndex getInputDevice();
+    virtual AudioDeviceIndex getInputDevice() const;
 
     /** Set the output device */
     virtual void setOutputDevice(AudioDeviceIndex devIndex);
@@ -79,12 +67,12 @@ public:
     virtual bool stop();
 
     /** Get the current status of the Audio Manager */
-    virtual AudioManagerStatus getStatus() const;
+    virtual APUHostInterface::Status getStatus() const;
 
     /** Get the error code of the last error the ocurred.
-     * @return AudioManagerErrorNoError is everything is OK
+     * @return APUPortAudioHostErrorNoError is everything is OK
      */
-    virtual AudioManagerErrorCode getError() const;
+    virtual APUHostInterface::ErrorCode getError() const;
 
     virtual void subscribe(APUHostEventSink *eventSink);
     virtual void unsubscribe(APUHostEventSink *eventSink);
@@ -111,4 +99,4 @@ private:
 };
 
 
-#endif /* AudioManager_hpp */
+#endif /* APUPortAudioHost_hpp */

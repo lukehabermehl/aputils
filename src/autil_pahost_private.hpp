@@ -1,21 +1,21 @@
 //
-//  AudioManager_Private.hpp
+//  APUPortAudioHost_Private.hpp
 //  libblockdsp
 //
 //  Created by Luke on 5/30/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
-#ifndef AudioManager_Private_h
-#define AudioManager_Private_h
+#ifndef APUPortAudioHost_Private_h
+#define APUPortAudioHost_Private_h
 
-#include "autil_manager.hpp"
+#include "autil_pahost.hpp"
 #include "portaudio_host.hpp"
 #include "autil_obj_enum.hpp"
 
 #include <string.h>
 
-class AudioManager::pimpl
+class APUPortAudioHost::pimpl
 {
 public:
     ~pimpl();
@@ -25,4 +25,4 @@ public:
     APUPtr<APUEnumerator<APUHostEventSink> > eventSinks;
 };
 
-#endif /* AudioManager_Private_h */
+#endif /* APUPortAudioHost_Private_h */

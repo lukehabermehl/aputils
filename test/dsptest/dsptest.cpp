@@ -36,19 +36,14 @@ public:
 
 int main()
 {
-    APUPtr<AudioManager> audioManager = new AudioManager();
+    APUPtr<APUPortAudioHost> audioManager = new APUPortAudioHost();
     audioManager->setInputMode(AudioInputModeFile);
     audioManager->setInputDevice(-1);
     audioManager->setOutputDevice(1);
     audioManager->setNumOutputChannels(2);
 
-    APUPtr<AudioFile> file = new AudioFile("test/dsptest/guitar.wav",
+    APUPtr<AudioFile> file = new AudioFile("/Users/Luke/Projects/aputils/test/dsptest/guitar.wav",
                                            AudioFileModeReadOnly);
-
-    if (!file) {
-        APUGetLogger()->log(0, "Failed to load audio file!!");
-        abort();
-    }
 
     APUPtr<AudioProcessingUnit> unit = new SimpleGainUnit();
     audioManager->setInputFile(file);

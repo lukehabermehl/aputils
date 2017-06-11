@@ -16,7 +16,7 @@
 
 #include "autil_file.hpp"
 #include "autil_audioprocessingunit.hpp"
-#include "autil_manager.hpp"
+#include "autil_pahost.hpp"
 
 static const char *kPortAudioKernelLogPrefix = "[PortAudioKernel]";
 
@@ -61,7 +61,7 @@ public:
     AudioInputMode inputMode;
     APUPtr<AudioFile> audioFile;
     APUPtr<AudioProcessingUnit> audioProcessingUnit;
-    AudioManagerStatus status;
+    APUHostInterface::Status status;
     StreamStatusChangeCallback streamStatusChangeCallback;
     PaError paError;
     void *streamStatusChangeCallbackCtx;

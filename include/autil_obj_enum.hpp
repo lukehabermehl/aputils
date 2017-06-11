@@ -97,18 +97,21 @@ public:
     }
 
     void removeObject(T * obj) {
-        if (first && obj) {
-            if (obj == first) {
+        if (first->current.ptr() && obj) {
+            if (obj == first->current.ptr()) {
+                Item *temp = first;
                 first = first->next;
-                if (obj == last) {
+                if (obj == last->current.ptr()) {
                     last = first;
                 }
+                delete temp;
+                m_size--;
             } else {
                 Item *current = first->next;
                 Item *prev = first;
                 while (current) {
-                    if (current == obj) {
-                        prev->next = obj->next;
+                    if (current->current.ptr() == obj) {
+                        prev->next = current->next;
                         delete current;
                         m_size--;
                         break;
