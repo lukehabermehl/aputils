@@ -9,6 +9,11 @@
 #ifndef autil_logger_h
 #define autil_logger_h
 
+#define LOG_LEVEL_URGENT 0
+#define LOG_LEVEL_ERROR 1
+#define LOG_LEVEL_WARNING 2
+#define LOG_LEVEL_DEBUG 3
+
 #include <memory>
 #include "autil_obj.hpp"
 
@@ -18,8 +23,9 @@ class APULoggerInterface
 : public APUObjectInterface
 {
 public:
-    virtual void log(int logLevel, const char *fmt, ...) = 0;
+    virtual void log(const char *tag, int logLevel, const char *fmt, ...) = 0;
     virtual void setOutputFilepath(const char *filepath) = 0;
+    virtual void setLogLevel(int level) = 0;
 
     virtual ~APULoggerInterface() {}
 };
@@ -36,8 +42,9 @@ public:
     APUDefaultLogger();
     virtual ~APUDefaultLogger();
 
-    void log(int logLevel, const char *fmt, ...);
-    void setOutputFilepath(const char *filepath);
+    virtual void log(const char *tag, int logLevel, const char *fmt, ...);
+    virtual void setOutputFilepath(const char *filepath);
+    virtual void setLogLevel(int level);
 
     class Pimpl;
 

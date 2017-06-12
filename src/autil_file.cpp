@@ -65,7 +65,9 @@ AudioFile::AudioFile(const char *filepath, AudioFileMode mode)
     _pimpl->sndfile = sf_open(filepath, sfmode, &_pimpl->sfInfo);
     if (!_pimpl->sndfile) {
         const char *errormsg = sf_strerror(_pimpl->sndfile);
-        APUGetLogger()->log(0, "Failed to load file: %s", errormsg);
+        APUGetLogger()->log(kAudioFileLoggerPrefix, LOG_LEVEL_ERROR,
+                            "Failed to load file: %s",
+                            errormsg);
         return;
     }
     _pimpl->totalSize = _pimpl->sfInfo.channels * _pimpl->sfInfo.frames;

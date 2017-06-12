@@ -35,7 +35,9 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
     outputParameters.device = outputDevIndex;
     if (outputParameters.device == paNoDevice)
     {
-        APUGetLogger()->log(0, "PortAudioKernel Failed to find output device!");
+        APUGetLogger()->log(kPortAudioKernelLogPrefix,
+                            LOG_LEVEL_ERROR,
+                            "PortAudioKernel Failed to find output device!");
         return false;
     }
 
@@ -63,7 +65,9 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
         inputParameters.suggestedLatency = inputDevInfo->defaultLowInputLatency;
     }
 
-    APUGetLogger()->log(2, "Open stream with sample rate: %lu", sampleRate);
+    APUGetLogger()->log(kPortAudioKernelLogPrefix, LOG_LEVEL_DEBUG,
+                        "Open stream with sample rate: %lu",
+                        sampleRate);
 
     const PaStreamParameters *pParams = (inputMode == AudioInputModeFile) ? NULL : &inputParameters;
 
@@ -78,7 +82,10 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
 
     if (paError != paNoError)
     {
-        APUGetLogger()->log(0, "PortAudioKernel Failed to open stream! PAError code: %d", paError);
+        APUGetLogger()->log(kPortAudioKernelLogPrefix,
+                            LOG_LEVEL_ERROR,
+                            "Failed to open stream! PAError code: %d",
+                            paError);
         return false;
     }
 

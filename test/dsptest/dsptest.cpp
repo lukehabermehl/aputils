@@ -36,6 +36,7 @@ public:
 
 int main()
 {
+    APUGetLogger()->setLogLevel(LOG_LEVEL_DEBUG);
     APUPtr<APUPortAudioHost> audioManager = new APUPortAudioHost();
     audioManager->setInputMode(AudioInputModeFile);
     audioManager->setInputDevice(-1);

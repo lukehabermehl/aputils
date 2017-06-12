@@ -12,6 +12,7 @@
 #include <mutex>
 #include <string>
 #include <thread>
+#include <sstream>
 #include "autil_logger.hpp"
 
 class APUDefaultLogger::Pimpl
@@ -27,17 +28,21 @@ public:
     std::thread workerThread;
     FILE *outputFile;
     bool shutdown;
+    int logLevel;
+
 };
 
 class APUDefaultLogger::Pimpl::Queue
 {
 public:
     struct Item {
-        Item(std::string s, FILE *f)
-        : str(s)
+        Item(std::string tag, std::string s, FILE *f)
+        : tag(tag)
+        , str(s)
         , file(f)
         {}
 
+        std::string tag;
         std::string str;
         FILE *file;
         Item *next;

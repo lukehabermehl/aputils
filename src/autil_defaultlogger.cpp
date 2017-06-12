@@ -55,9 +55,9 @@ void logger_worker(LoggerImpl *loggerImpl)
 
         LoggerQueue::Item *item = queue->first;
         while (item != NULL) {
-            fprintf(item->file, "%s\n", item->str.c_str());
+            fprintf(item->file, "%s %s\n", item->tag.c_str(), item->str.c_str());
             if (loggerImpl->outputFile) {
-                fprintf(loggerImpl->outputFile, "%s\n", item->str.c_str());
+                fprintf(loggerImpl->outputFile, "%s %s\n", item->tag.c_str(), item->str.c_str());
             }
             queue->popFront();
             item = queue->first;
@@ -72,6 +72,11 @@ LoggerImpl::Pimpl()
     workerThread = std::thread(logger_worker, this);
     outputFile = NULL;
     queue = new Queue();
+#ifdef DEBUG
+    logLevel = LOG_LEVEL_DEBUG;
+#else
+    logLevel = LOG_LEVEL_ERROR;
+#endif
 }
 
 LoggerImpl::~Pimpl()
@@ -127,17 +132,27 @@ APUDefaultLogger::~APUDefaultLogger()
     delete pimpl_;
 }
 
-void APUDefaultLogger::log(int logLevel, const char *fmt, ...)
+void APUDefaultLogger::log(const char *tag, int logLevel, const char *fmt, ...)
 {
+    if (logLevel > pimpl_->logLevel) {
+        return;
+    }
+
     char logstr[4096];
+    logstr[4095] = '\0';
     va_list args;
     va_start(args, fmt);
     vsprintf(logstr, fmt, args);
 
-    logger_append(pimpl_, new LoggerQueue::Item(logstr, stdout));
+    logger_append(pimpl_, new LoggerQueue::Item(tag, logstr, stdout));
 }
 
 void APUDefaultLogger::setOutputFilepath(const char *filepath)
 {
     pimpl_->outputFile = fopen(filepath, "a");
+}
+
+void APUDefaultLogger::setLogLevel(int level)
+{
+    pimpl_->logLevel = level;
 }

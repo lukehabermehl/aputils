@@ -112,7 +112,9 @@ void APUPortAudioHost::setAudioProcessingUnit(AudioProcessingUnit *unit)
 {
     _pimpl->dspKernel->audioProcessingUnit = unit;
     if (unit == NULL) {
-        APUGetLogger()->log(0, "APUnit is null!");
+        APUGetLogger()->log(kAPUPortAudioHostLogPrefix,
+                            LOG_LEVEL_ERROR,
+                            "APUnit is null!");
         return;
     }
     unit->setSampleRate(_pimpl->dspKernel->sampleRate);
