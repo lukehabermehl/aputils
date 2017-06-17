@@ -11,6 +11,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 set(PUBLIC_HEADERS "include/autil_audioprocessingunit.hpp"
+	"include/autil_array.hpp"
 	"include/autil_file.hpp"
 	"include/autil_host.hpp"
 	"include/autil_logger.hpp"
@@ -21,7 +22,7 @@ set(PUBLIC_HEADERS "include/autil_audioprocessingunit.hpp"
 	"include/autil_pahost.hpp"
 	"include/autil_parameter.hpp"
 	"include/autil_parametermap.hpp"
-	"include/autil_stringlist.hpp"
+	"include/autil_str.hpp"
 	"include/autil_thread_manager.hpp"
 	"include/autil_uiattrs.h"
 	"include/aputils.h")

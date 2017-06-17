@@ -30,12 +30,13 @@ APUParameter::~APUParameter()
 
 const char * APUParameter::getName()
 {
-    return _pimpl->name;
+    APUString *str = _pimpl->name;
+    return str == NULL ? NULL : str->str();
 }
 
 void APUParameter::setName(const char *name)
 {
-    _pimpl->setName(name);
+    _pimpl->name = new APUString(name);
 }
 
 const char * APUParameter::getUnits()
@@ -226,15 +227,15 @@ void APUParameter::setUIAttributes(APUUIAttribute attr)
 // APUEnumParameter
 //----------------------------------------------------------------------------
 
-APUEnumParameter::APUEnumParameter(const char *name, APUStringList *strings, APUParameterCallback *cb)
+APUEnumParameter::APUEnumParameter(const char *name, APUArray<APUString> *strings, APUParameterCallback *cb)
 : APUParameter(name, APUNUM_UINT, APUNUM_UINT(0), APUNUM_UINT((uint32_t)strings->size()), APUNUM_UINT(0), cb)
 {
     _enumParamPimpl = new EnumParamPimpl();
     if (strings) {
-        _enumParamPimpl->strings = strings->copy();
+        _enumParamPimpl->strings = strings;
     }
     else {
-        _enumParamPimpl->strings = new APUStringList();
+        _enumParamPimpl->strings = NULL;
     }
 }
 
@@ -245,7 +246,12 @@ APUEnumParameter::~APUEnumParameter()
 
 const char * APUEnumParameter::stringForValue(uint32_t value)
 {
-    return _enumParamPimpl->strings->getString(value);
+    if (!_enumParamPimpl->strings) {
+        return NULL;
+    }
+
+    APUString *str = _enumParamPimpl->strings->getAt(value);
+    return str == NULL ? NULL : str->str();
 }
 
 void APUEnumParameter::setMinValue(APUNumber minVal)

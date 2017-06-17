@@ -14,11 +14,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../include/ ${CMAKE_CURRENT_S
 
 set (SOURCES "test_apuptr.cpp"
 	"test_apu_api.cpp"
+	"test_apu_array.cpp"
 	"test_apu_obj_enum.cpp"
 	"test_apu_objmap.cpp"
 	"test_apu_parameter.cpp"
 	"test_apu_parametermap.cpp"
-	"test_apu_stringlist.cpp"
+	"test_apustring.cpp"
 	"test_thread_manager.cpp"
 	"test_all.cpp")
 

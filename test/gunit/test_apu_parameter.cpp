@@ -85,9 +85,11 @@ TEST_F(APUParameterTestFixture, test_units)
 
 TEST_F(APUParameterTestFixture, test_enum_param)
 {
-	APUPtr<APUStringList> strings(new APUStringList());
-	strings->append("OFF");
-	strings->append("ON");
+	APUPtr<APUEnumerator<APUString> > stringsEnum = new APUEnumerator<APUString>();
+	stringsEnum->addObject(new APUString("OFF"));
+	stringsEnum->addObject(new APUString("ON"));
+
+	APUPtr<APUArray<APUString> > strings = new APUArray<APUString>(stringsEnum);
 	APUEnumParameter enumParam("enumParam", strings.ptr(), NULL);
 
 	std::string value0Str = enumParam.stringForValue(0);

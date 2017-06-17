@@ -10,7 +10,6 @@
 #define autil_parameter_private_h
 
 #include "autil_parameter.hpp"
-#include "autil_stringlist.hpp"
 #include <string>
 
 class APUParameter::Pimpl
@@ -39,27 +38,12 @@ public:
                 current.setBoolValue(false);
         }
 
-        setName(pname);
+        name = new APUString(pname);
         memset(units, 0, BDSP_MAX_UNITS_STRLEN + 1);
     }
 
     ~Pimpl()
     {
-        if (name) {
-            delete []name;
-        }
-    }
-
-    void setName(const char *pname)
-    {
-        if (name) {
-            delete []name;
-        }
-
-        size_t lenName = strlen(pname) + 1;
-        name = new char[lenName];
-        memset(name, 0, lenName);
-        memcpy(name, pname, lenName-1);
     }
 
     bool isSmoothing;
@@ -67,7 +51,7 @@ public:
     double smoothingInterval_msec;
     size_t smoothingFrames;
 
-    char *name;
+    APUPtr<APUString> name;
 
     APUNumber target;
     APUNumber current;
@@ -85,7 +69,7 @@ public:
 class APUEnumParameter::EnumParamPimpl
 {
 public:
-    APUPtr<APUStringList> strings;
+    APUPtr<APUArray<APUString> > strings;
 };
 
 

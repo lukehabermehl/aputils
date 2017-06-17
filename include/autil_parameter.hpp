@@ -11,7 +11,8 @@
 
 #include "autil_number.hpp"
 #include "autil_uiattrs.h"
-#include "autil_stringlist.hpp"
+#include "autil_array.hpp"
+#include "autil_str.hpp"
 
 #define BDSP_MAX_UNITS_STRLEN 16
 
@@ -110,7 +111,7 @@ public:
       * @param strings list of strings for the enum values
       * @param cb optional callback object
       */
-    APUEnumParameter(const char *name, APUStringList * strings, APUParameterCallback *cb=NULL);
+    APUEnumParameter(const char *name, APUArray<APUString> *strings, APUParameterCallback *cb=NULL);
     virtual ~APUEnumParameter();
 
     /** NO-OP: Cannot set min value for enums. Minimum is always 0 */
