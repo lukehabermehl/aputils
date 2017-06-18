@@ -33,9 +33,6 @@ public:
     APUNumber();
     //Default type is float
     APUNumber(float f);
-    
-    /** Get a copy of the number */
-    APUNumber copy();
 
     /** Get the primitive type of the number */
     APUNumberType getType() const;

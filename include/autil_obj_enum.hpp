@@ -10,6 +10,7 @@
 #define autil_obj_enum_hpp
 
 #include "autil_obj.hpp"
+#include <cassert>
 
 /** Interface for enumerable collections. 
   * The class T must conform to APUObjectInterface

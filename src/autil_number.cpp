@@ -20,12 +20,6 @@ APUNumber::APUNumber(float f)
     setFloatValue(f);
 }
 
-APUNumber APUNumber::copy()
-{
-    APUNumber num = (*this);
-    return num;
-}
-
 APUNumberType APUNumber::getType() const
 {
     return numberType_;
