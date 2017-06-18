@@ -23,14 +23,21 @@ class APULoggerInterface
 : public APUObjectInterface
 {
 public:
+    /** Log a message.
+      * @param tag prefix for the message
+      * @param logLevel the urgency of the message
+      * @param fmt a format string followed by any format arguments
+      */
     virtual void log(const char *tag, int logLevel, const char *fmt, ...) = 0;
+    /** Set an optional file to which to write the logs */
     virtual void setOutputFilepath(const char *filepath) = 0;
+    /** Set the urgency level to filter to */
     virtual void setLogLevel(int level) = 0;
 
     virtual ~APULoggerInterface() {}
 };
 
-/// Built-in thread-safe logger
+/** Built-in thread-safe logger. This is the default logger if you do not call APUSetLogger() */
 class APUDefaultLogger
 : public APULoggerInterface
 , public APUObject
@@ -52,7 +59,9 @@ private:
     Pimpl *pimpl_;
 };
 
+/** Set the singleton logger. If no logger is set, the built-in logger is used */
 void APUSetLogger(APULoggerInterface *logger);
+/** Get the singleton logger */
 APULoggerInterface * APUGetLogger();
 
 #endif /* autil_logger_h */

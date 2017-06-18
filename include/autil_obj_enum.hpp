@@ -76,7 +76,14 @@ public:
         }
     }
 
+    /** Add an object to the end of the linked list 
+      * @param non-null pointer to the object to add
+      */
     void addObject(T * obj) {
+        assert(obj != NULL);
+        if (obj == NULL) {
+            return;
+        }
         Item *item = new Item();
         item->current = obj;
         item->next = NULL;
@@ -96,6 +103,7 @@ public:
         m_size++;
     }
 
+    /** Remove an object from the list (via linear search) */
     void removeObject(T * obj) {
         if (first->current.ptr() && obj) {
             if (obj == first->current.ptr()) {

@@ -12,6 +12,7 @@
 #include "autil_obj.hpp"
 #include "autil_obj_enum.hpp"
 
+/** An immutable array that holds strong references to its objects */
 template <class T>
 class APUArray
 : public APUEnumerable<T>
@@ -24,12 +25,17 @@ private:
 public:
     APUOBJ_FWDDECL
 
+    /** Constrcut an empty array */
     APUArray()
     : m_size(0)
     , m_currentIdx(0)
     , m_itemArray(NULL)
     {}
 
+    /** Construct an array from an enumerable. The constructed array will
+      * contain all of the items in the enumerable in the order that they are
+      * enumerated.
+      */
     APUArray(APUEnumerable<T> *enumerable) {
         m_currentIdx = 0;
         enumerable->reset();
@@ -53,10 +59,15 @@ public:
         }
     }
 
+    /** The number of items in the array */
     size_t size() {
         return m_size;
     }
 
+    /** Get the item at the given index
+      * @param idx the 0-based index
+      * @return the item or NULL if the index is out of range
+      */
     T * getAt(size_t idx) {
         if (idx >= m_size) {
             return NULL;

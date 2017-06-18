@@ -23,8 +23,9 @@ enum APUNumberType {
     APUNUM_BOOLEAN
 };
 
-/** An object that represents common numeric types
-  * Note: this class has built-in reference counting. No need for pointers! 
+/** An object that represents common numeric types.
+  * Note: APUNumber does not implement APUObjectInterface and is always
+  * passed by copy unless explicitly specified
   */
 class APUNumber
 {
