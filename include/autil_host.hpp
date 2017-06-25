@@ -81,7 +81,7 @@ public:
     /** Set the input mode of the host */
     virtual void setInputMode(AudioInputMode inputMode) = 0;
     /** Get an enumerable list of all the available audio devices */
-    virtual APUEnumerable<AudioDevice> * getDevices() const = 0;
+    virtual APUObjRet<APUEnumerable<AudioDevice> > getDevices() const = 0;
     /** Set the input audio device by index */
     virtual void setInputDevice(AudioDeviceIndex index) = 0;
     /** Get the index of the current input device */
@@ -140,7 +140,7 @@ public:
     virtual bool setInputFile(AudioFile *file) = 0;
 
     /** Get a pointer to the current input file */
-    virtual AudioFile *getInputFile() const = 0;
+    virtual APUObjRet<AudioFile> getInputFile() const = 0;
 };
 
 #endif /* autil_host_h */

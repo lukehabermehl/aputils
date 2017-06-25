@@ -50,26 +50,33 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
 
     PaStreamParameters inputParameters;
 
-
-    if (inputMode == AudioInputModeDevice) {
-        sampleRate = audioFile->sampleRate();
-    }
-    else
-    {
-        //TODO: use set inputDeviceIndex
-        const PaDeviceInfo *inputDevInfo = Pa_GetDeviceInfo(Pa_GetDefaultInputDevice());
-        sampleRate = inputDevInfo->defaultSampleRate;
-        inputParameters.channelCount = inputDevInfo->maxInputChannels;
-        inputParameters.sampleFormat = paFloat32;
-        inputParameters.device = Pa_GetDefaultInputDevice();
-        inputParameters.suggestedLatency = inputDevInfo->defaultLowInputLatency;
+    switch (inputMode) {
+        case AudioInputModeNone:
+            if (audioProcessingUnit) {
+                sampleRate = audioProcessingUnit->getPreferredSampleRate();
+            } else {
+                sampleRate = 44100;
+            }
+            break;
+        case AudioInputModeFile:
+            sampleRate = audioFile->sampleRate();
+            break;
+        case AudioInputModeDevice:
+            //TODO: use set inputDeviceIndex
+            const PaDeviceInfo *inputDevInfo = Pa_GetDeviceInfo(Pa_GetDefaultInputDevice());
+            sampleRate = inputDevInfo->defaultSampleRate;
+            inputParameters.channelCount = inputDevInfo->maxInputChannels;
+            inputParameters.sampleFormat = paFloat32;
+            inputParameters.device = Pa_GetDefaultInputDevice();
+            inputParameters.suggestedLatency = inputDevInfo->defaultLowInputLatency;
+            break;
     }
 
     APUGetLogger()->log(kPortAudioKernelLogPrefix, LOG_LEVEL_DEBUG,
                         "Open stream with sample rate: %lu",
                         sampleRate);
 
-    const PaStreamParameters *pParams = (inputMode == AudioInputModeFile) ? NULL : &inputParameters;
+    const PaStreamParameters *pParams = (inputMode != AudioInputModeDevice) ? NULL : &inputParameters;
 
     paError = Pa_OpenStream(&stream,
                             pParams,

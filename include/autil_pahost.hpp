@@ -30,7 +30,7 @@ public:
     virtual void setInputMode(AudioInputMode mode);
 
     /** Get a list of the available audio devices */
-    virtual APUEnumerable<AudioDevice> * getDevices() const;
+    virtual APUObjRet<APUEnumerable<AudioDevice> > getDevices() const;
 
     /** Set the input device index (use with AudioInputModeDevice) */
     virtual void setInputDevice(AudioDeviceIndex devIndex);
@@ -83,7 +83,7 @@ public:
     /** Get the current input file.
       * @return NULL if none has been specified
       */
-    virtual AudioFile *getInputFile() const;
+    virtual APUObjRet<AudioFile> getInputFile() const;
 
     /** Enable/disable looping when using an input file */
     virtual void setLooping(bool looping);

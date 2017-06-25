@@ -71,6 +71,11 @@ unsigned long AudioProcessingUnit::getSampleRate()
     return _pimpl->sampleRate;
 }
 
+unsigned long AudioProcessingUnit::getPreferredSampleRate()
+{
+    return 44100;
+}
+
 const char * AudioProcessingUnit::getName()
 {
     return "Default APU";

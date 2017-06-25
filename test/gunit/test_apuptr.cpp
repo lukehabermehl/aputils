@@ -1,25 +1,18 @@
 #include "gtest/gtest.h"
 #include "autil_obj.hpp"
 
-class TestObj : public APUObjectInterface
+class TestObj : public APUObject
 {
 public:
-	TestObj() : pDidDestroy(NULL), refCount(0) {}
+	APUOBJ_FWDDECL
+	TestObj() : pDidDestroy(NULL) {}
 	~TestObj() {
 		if (pDidDestroy) {
 			*pDidDestroy = true;
 		}
 	}
 
-	int addRef() { 
-		return ++refCount;
-	}
-	int decRef() { 
-		return --refCount; 
-	}
-
 	bool *pDidDestroy;
-	int refCount;
 };
 
 class TestContainer
@@ -30,7 +23,7 @@ public:
 		obj = new TestObj();
 	}
 
-	APUPtr<TestObj> getObj() { return obj; }
+	APUObjRet<TestObj> getObj() { return obj; }
 	void setObj(TestObj *ob) { obj = ob; }
 };
 
@@ -76,7 +69,7 @@ TEST_F(APUPtrTestFixture, test_return)
 {
 	TestContainer *container = new TestContainer();
 	APUPtr<TestObj> obj = container->getObj();
-	EXPECT_EQ(2, obj->refCount);
+	EXPECT_EQ(2, obj->getRefCount());
 
 	delete container;
 }
@@ -85,10 +78,10 @@ TEST_F(APUPtrTestFixture, test_pass)
 {
 	TestContainer *container = new TestContainer();
 	APUPtr<TestObj> obj = new TestObj();
-	EXPECT_EQ(1, obj->refCount);
+	EXPECT_EQ(1, obj->getRefCount());
 	container->setObj(obj);
 
-	EXPECT_EQ(2, obj->refCount);
+	EXPECT_EQ(2, obj->getRefCount());
 
 	delete container;
 }

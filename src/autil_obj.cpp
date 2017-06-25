@@ -26,3 +26,8 @@ int APUObject::decRef()
 {
     return --refCount_;
 }
+
+int APUObject::getRefCount()
+{
+    return refCount_;
+}

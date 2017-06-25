@@ -38,14 +38,14 @@ APUString::str()
     return pimpl_->strbuf;
 }
 
-APUString *
+APUObjRet<APUString>
 APUString::copy()
 {
     APUString *copystr = new APUString(str());
     return copystr;
 }
 
-APUString *
+APUObjRet<APUString>
 APUString::append(APUString *appendStr)
 {
     if (!appendStr) {
@@ -74,7 +74,7 @@ APUString::compare(APUString *rhs)
     return c < 0;
 }
 
-APUString *
+APUObjRet<APUString>
 APUString::format(const char *fmt, ...)
 {
     if (fmt == NULL) {

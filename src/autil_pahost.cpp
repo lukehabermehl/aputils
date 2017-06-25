@@ -69,7 +69,7 @@ void APUPortAudioHost::setOutputDevice(AudioDeviceIndex devIndex)
     _pimpl->outputDeviceIndex = devIndex;
 }
 
-APUEnumerable<AudioDevice> *
+APUObjRet<APUEnumerable<AudioDevice> >
 APUPortAudioHost::getDevices() const
 {
     //Scan for audio devices
@@ -156,7 +156,7 @@ bool APUPortAudioHost::setInputFile(AudioFile *file)
     return true;
 }
 
-AudioFile * APUPortAudioHost::getInputFile() const
+APUObjRet<AudioFile> APUPortAudioHost::getInputFile() const
 {
     return _pimpl->dspKernel->audioFile;
 }

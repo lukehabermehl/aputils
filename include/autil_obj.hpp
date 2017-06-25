@@ -14,7 +14,8 @@
 /// Use this macro to implement call forwarding of APUObjectInterface methods
 /// to an APUObject base class. Add under the public: section of your subclass header
 #define APUOBJ_FWDDECL virtual int addRef() { return APUObject::addRef(); } \
-virtual int decRef() { return APUObject::decRef(); }
+virtual int decRef() { return APUObject::decRef(); } \
+virtual int getRefCount() { return APUObject::getRefCount(); }
 
 /// Interface declaring reference counting methods for use with APUPtr
 class APUObjectInterface
@@ -22,6 +23,7 @@ class APUObjectInterface
 public:
     virtual int addRef() = 0;
     virtual int decRef() = 0;
+    virtual int getRefCount() = 0;
 };
 
 /// Inheritable implementation of the reference counting methods above
@@ -35,16 +37,22 @@ public:
 
     int addRef();
     int decRef();
+    int getRefCount();
 
 private:
     int refCount_;
 };
+
+template <class T>
+class APUObjRet;
 
 /// A custom ptr-type class to facilitate reference counting
 /// Can be used with classes that conform to APUObjectInterface
 template <class T>
 class APUPtr
 {
+    friend class APUObjRet<T>;
+
     T *obj_;
     void decRef()
     {
@@ -65,6 +73,14 @@ public:
     APUPtr(const APUPtr<T> &orig)
     {
         obj_ = orig.obj_;
+        if (obj_) {
+            obj_->addRef();
+        }
+    }
+
+    APUPtr(const APUObjRet<T>& orig)
+    {
+        obj_ = orig.ptr();
         if (obj_) {
             obj_->addRef();
         }
@@ -120,6 +136,11 @@ public:
         return obj_ != NULL;
     }
 
+    operator APUObjRet<T>()
+    {
+        return APUObjRet<T>(obj_);
+    }
+
     ~APUPtr<T>()
     {
         decRef();
@@ -133,10 +154,75 @@ public:
     void clear()
     {
         if (obj_) {
-            delete obj_;
+            decRef();
             obj_ = NULL;
         }
     }
 };
+
+template <class T>
+class APUObjRet
+{
+    T * obj_;
+    bool hasRef_;
+public:
+    APUObjRet(T *obj=NULL)
+    : obj_(obj)
+    , hasRef_(false)
+    {
+    }
+
+    APUObjRet(const APUPtr<T>& rhs)
+    {
+        obj_ = rhs.obj_;
+        if (obj_) {
+            obj_->addRef();
+            hasRef_ = true;
+        } else {
+            hasRef_ = false;
+        }
+    }
+
+    ~APUObjRet()
+    {
+        if (hasRef_) {
+            obj_->decRef();
+        }
+        if (obj_ && obj_->getRefCount() == 0) {
+            delete obj_;
+        }
+    }
+
+    T *operator->()
+    {
+        return obj_;
+    }
+
+    APUObjRet<T>& operator=(T * rhs)
+    {
+        if (obj_ == rhs) {
+            return *this;
+        }
+
+        obj_ = rhs;
+        return *this;
+    }
+
+    operator T* ()
+    {
+        return obj_;
+    }
+
+    operator bool() const
+    {
+        return obj_ != NULL;
+    }
+
+    T * ptr() const
+    {
+        return obj_;
+    }
+};
+
 
 #endif /* autil_obj_h */

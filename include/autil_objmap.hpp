@@ -28,7 +28,7 @@ public:
     /** Get the value for the given key
       * @return a weak pointer to the value or NULL if there is no value for the key
       */
-    V * get(const K& key) const
+    APUObjRet<V> get(const K& key) const
     {
         auto it = map_.find(key);
         if (it != map_.end()) {

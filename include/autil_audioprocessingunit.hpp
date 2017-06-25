@@ -43,6 +43,8 @@ public:
     /** Get the name of the APU */
     virtual const char * getName();
 
+    virtual unsigned long getPreferredSampleRate();
+
     /** Get the number of parameters associated with this APU */
     size_t getNumParameters();
     /** Get the parameter with the given name.

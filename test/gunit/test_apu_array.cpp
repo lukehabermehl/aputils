@@ -31,8 +31,8 @@ TEST_F(APUArrayTestFixture, test_empty)
 {
 	APUPtr<APUStringArray> arr = new APUStringArray();
 	EXPECT_EQ(0, arr->size());
-	EXPECT_EQ(NULL, arr->getAt(0));
-	EXPECT_EQ(NULL, arr->getCurrent());
+	EXPECT_FALSE((bool) arr->getAt(0));
+	EXPECT_FALSE((bool) arr->getCurrent());
 }
 
 TEST_F(APUArrayTestFixture, test_getat)
@@ -55,7 +55,7 @@ TEST_F(APUArrayTestFixture, test_getat)
 	ASSERT_TRUE((str != NULL));
 	EXPECT_EQ(0, strcmp(str->str(), "three"));
 
-	EXPECT_EQ(NULL, arr->getAt(3));
+	EXPECT_FALSE((bool)arr->getAt(3));
 }
 
 TEST_F(APUArrayTestFixture, test_enum)
@@ -67,7 +67,7 @@ TEST_F(APUArrayTestFixture, test_enum)
 	ASSERT_EQ(3, arr->size());
 
 	arr->reset();
-	ASSERT_TRUE((arr->getCurrent() != NULL));
+	ASSERT_TRUE((bool)arr->getCurrent());
 
 	for (int i=0; i<3; i++) {
 		APUPtr<APUString> current = arr->getCurrent();
@@ -79,5 +79,5 @@ TEST_F(APUArrayTestFixture, test_enum)
 	}
 
 	EXPECT_FALSE(arr->moveNext());
-	EXPECT_EQ(NULL, arr->getCurrent());
+	EXPECT_FALSE((bool)arr->getCurrent());
 }

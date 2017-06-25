@@ -68,7 +68,7 @@ public:
       * @param idx the 0-based index
       * @return the item or NULL if the index is out of range
       */
-    T * getAt(size_t idx) {
+    APUObjRet<T> getAt(size_t idx) {
         if (idx >= m_size) {
             return NULL;
         }
@@ -80,7 +80,7 @@ public:
         m_currentIdx = 0;
     }
 
-    T * getCurrent() {
+    APUObjRet<T> getCurrent() {
         return getAt(m_currentIdx);
     }
 

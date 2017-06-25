@@ -27,7 +27,7 @@ public:
     /** Get the object at the current position
       * @return NULL if the the position is not valid
       */
-    virtual T * getCurrent() = 0;
+    virtual APUObjRet<T> getCurrent() = 0;
     /** Advance the current iterator position
       * @return true if the position is valid after advancing. Else, false
       */
@@ -134,7 +134,7 @@ public:
         current = first;
     }
 
-    T * getCurrent() {
+    APUObjRet<T> getCurrent() {
         return current == NULL ? (T*)NULL : (T*)current->current;
     }
 

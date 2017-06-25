@@ -30,13 +30,13 @@ public:
     /** Get a pointer to the internal null-terminated char buffer */
     const char *str();
     /** Create a deep copy of the string */
-    APUString *copy();
+    APUObjRet<APUString> copy();
     /** Get a new string whose value is that of the target object appended with that of the argument
       * The target and the arguments are left unchanged.
       * @param str the string to append. If NULL, the behavior is equal to copy()
       * @return a new string instance
       */
-    APUString *append(APUString *str);
+    APUObjRet<APUString> append(APUString *str);
 
     /** Create a string with a C-style format and arguments.
       * Example:
@@ -44,7 +44,7 @@ public:
       *     APUPtr<APUString> formatted = APUString::format("%s, %s!", "Hello", "world");
       * @endcode
       */
-    static APUString *format(const char *fmt, ...);
+    static APUObjRet<APUString> format(const char *fmt, ...);
 
     /** Determine if a string has the same value as the target
       * @return true if the target and the argument have the same value

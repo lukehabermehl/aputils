@@ -2,25 +2,18 @@
 #include "autil_obj.hpp"
 #include "autil_obj_enum.hpp"
 
-class TestObj : public APUObjectInterface
+class TestObj : public APUObject
 {
 public:
-	TestObj() : pDidDestroy(NULL), refCount(0) {}
+	APUOBJ_FWDDECL
+	TestObj() : pDidDestroy(NULL) {}
 	~TestObj() {
 		if (pDidDestroy) {
 			*pDidDestroy = true;
 		}
 	}
 
-	int addRef() { 
-		return ++refCount;
-	}
-	int decRef() { 
-		return --refCount; 
-	}
-
 	bool *pDidDestroy;
-	int refCount;
 	int value;
 };
 
@@ -38,10 +31,21 @@ TEST_F(APUObjEnumTestFixture, test_memory)
 {
 	APUPtr<TestObj> obj1 = new TestObj();
 	obj1->value = 1;
-	EXPECT_EQ(1, obj1->refCount);
+	EXPECT_EQ(1, obj1->getRefCount());
 
 	objEnum->addObject(obj1);
-	EXPECT_EQ(2, obj1->refCount);
+	EXPECT_EQ(2, obj1->getRefCount());
+
+	APUPtr<TestObj> rv = objEnum->getCurrent();
+	EXPECT_TRUE((bool)rv);
+	EXPECT_EQ(3, rv->getRefCount());
+
+	rv.clear();
+	EXPECT_EQ(2, obj1->getRefCount());
+
+	TestObj *weakrv = objEnum->getCurrent();
+	ASSERT_TRUE(weakrv);
+	EXPECT_EQ(2, weakrv->getRefCount());
 }
 
 TEST_F(APUObjEnumTestFixture, test_add)
@@ -51,12 +55,12 @@ TEST_F(APUObjEnumTestFixture, test_add)
 	APUPtr<TestObj> obj2 = new TestObj();
 	obj2->value = 2;
 
-	EXPECT_EQ(NULL, objEnum->getCurrent());
+	EXPECT_FALSE((bool)objEnum->getCurrent());
 	objEnum->addObject(obj1);
-	EXPECT_EQ(obj1.ptr(), objEnum->getCurrent());
+	EXPECT_EQ(obj1.ptr(), objEnum->getCurrent().ptr());
 	EXPECT_EQ(1, objEnum->size());
 	objEnum->addObject(obj2);
-	EXPECT_EQ(obj1.ptr(), objEnum->getCurrent());
+	EXPECT_EQ(obj1.ptr(), objEnum->getCurrent().ptr());
 	EXPECT_EQ(2, objEnum->size());
 
 	objEnum->reset();
@@ -64,7 +68,7 @@ TEST_F(APUObjEnumTestFixture, test_add)
 	do {
 		APUPtr<TestObj> current = objEnum->getCurrent();
 		EXPECT_TRUE((bool) current);
-		EXPECT_EQ(3, current->refCount);
+		EXPECT_EQ(3, current->getRefCount());
 		if (count == 0) {
 			EXPECT_EQ(1, current->value);
 		} else {
@@ -86,12 +90,12 @@ TEST_F(APUObjEnumTestFixture, test_remove)
 	EXPECT_EQ(1, objEnum->size());
 	objEnum->removeObject(obj1);
 	EXPECT_EQ(0, objEnum->size());
-	EXPECT_EQ(1, obj1->refCount);
+	EXPECT_EQ(1, obj1->getRefCount());
 
 	objEnum->addObject(obj1);
 	objEnum->addObject(obj2);
 	EXPECT_EQ(2, objEnum->size());
 	objEnum->removeObject(obj2);
 	EXPECT_EQ(1, objEnum->size());
-	EXPECT_EQ(1, obj2->refCount);
+	EXPECT_EQ(1, obj2->getRefCount());
 }

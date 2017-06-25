@@ -2,25 +2,18 @@
 #include "autil_obj.hpp"
 #include "autil_objmap.hpp"
 
-class TestObj : public APUObjectInterface
+class TestObj : public APUObject
 {
 public:
-	TestObj() : pDidDestroy(NULL), refCount(0) {}
+	APUOBJ_FWDDECL
+	TestObj() : pDidDestroy(NULL) {}
 	~TestObj() {
 		if (pDidDestroy) {
 			*pDidDestroy = true;
 		}
 	}
 
-	int addRef() { 
-		return ++refCount;
-	}
-	int decRef() { 
-		return --refCount; 
-	}
-
 	bool *pDidDestroy;
-	int refCount;
 	int value;
 };
 
@@ -38,15 +31,15 @@ TEST_F(APUObjMapTestFixture, test_put_get)
 {
 	APUPtr<TestObj> one = new TestObj();
 	one->value = 1;
-	EXPECT_EQ(1, one->refCount);
+	EXPECT_EQ(1, one->getRefCount());
 
 	objMap->put("one", one);
-	EXPECT_EQ(2, one->refCount);
+	EXPECT_EQ(2, one->getRefCount());
 
 	APUPtr<TestObj> got = objMap->get("one");
 	ASSERT_TRUE((bool)got);
 	EXPECT_EQ(1, got->value);
-	EXPECT_EQ(3, one->refCount);
+	EXPECT_EQ(3, one->getRefCount());
 }
 
 TEST_F(APUObjMapTestFixture, test_size)
@@ -68,7 +61,7 @@ TEST_F(APUObjMapTestFixture, test_remove)
 	obj->pDidDestroy = &didDestroy;
 
 	objMap->put("one", obj);
-	EXPECT_EQ(1, obj->refCount);
+	EXPECT_EQ(1, obj->getRefCount());
 	EXPECT_EQ(1, objMap->size());
 
 	objMap->put("one", NULL);
