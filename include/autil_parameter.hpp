@@ -13,6 +13,7 @@
 #include "autil_uiattrs.h"
 #include "autil_array.hpp"
 #include "autil_str.hpp"
+#include "autil_mod.hpp"
 
 #define BDSP_MAX_UNITS_STRLEN 16
 
@@ -83,6 +84,12 @@ public:
     virtual double getSmoothingInterval();
     /** Determine if smoothing is enabled for the parameter */
     bool isSmoothingEnabled();
+
+    /** Set the modulation signal source */
+    void setModulationSource(APUModSource *source);
+
+    /** Set the modulation depth (0.0 -- 1.0) */
+    void setModulationDepth(float depth);
 
     /** Get the description of the UI control for the parameter */
     virtual APUUIAttribute getUIAttributes();

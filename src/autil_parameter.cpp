@@ -70,16 +70,14 @@ void APUParameter::setCallback(APUParameterCallback *cb)
 
 APUNumber APUParameter::getTarget()
 {
-    APUNumber num;
-    num = _pimpl->target;
-    return num;
+    return _pimpl->target;
 }
 
 APUNumber APUParameter::getCurrentValue()
 {
-    APUNumber num;
-    num = _pimpl->current;
-    return num;
+    _pimpl->doModulate();
+    normalizeValue(_pimpl->current);
+    return _pimpl->current;
 }
 
 bool APUParameter::setValue(APUNumber value)
@@ -218,6 +216,16 @@ bool APUParameter::normalizeValue(APUNumber &value)
     return didNormalize;
 }
 
+void APUParameter::setModulationDepth(float depth)
+{
+    _pimpl->modRange = depth * (_pimpl->maxValue.floatValue() - _pimpl->minValue.floatValue());
+}
+
+void APUParameter::setModulationSource(APUModSource *source)
+{
+    _pimpl->modSource = source;
+}
+
 void APUParameter::setUIAttributes(APUUIAttribute attr)
 {
     _pimpl->uiAttr = attr;
@@ -264,3 +272,18 @@ void APUEnumParameter::setMaxValue(APUNumber maxVal)
     //No-op
 }
 
+//---------------------------------------------------------
+// APUParameter::Pimpl
+//---------------------------------------------------------
+
+void
+APUParameter::Pimpl::doModulate()
+{
+    if (!modSource || !modRange) {
+        return;
+    }
+
+    float fCurrent = current.floatValue();
+    float fModValue = modSource->getModulationValue() * modRange;
+    current.setFloatValue(fCurrent + fModValue);
+}

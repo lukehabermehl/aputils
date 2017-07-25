@@ -17,7 +17,7 @@ class APUParameter::Pimpl
 public:
     Pimpl(APUNumberType vtype, const char *pname, APUParameterCallback *callbck)
     :isSmoothing(false), smoothingEnabled(false), smoothingInterval_msec(0), smoothingFrames(0)
-    ,uiAttr(0), name(NULL), valueType(vtype)
+    ,modRange(0), uiAttr(0), name(NULL), valueType(vtype)
     ,cb(NULL)
     {
         switch (valueType) {
@@ -46,6 +46,8 @@ public:
     {
     }
 
+    void doModulate();
+
     bool isSmoothing;
     bool smoothingEnabled;
     double smoothingInterval_msec;
@@ -57,6 +59,8 @@ public:
     APUNumber current;
     APUNumber minValue;
     APUNumber maxValue;
+    float modRange;
+    APUPtr<APUModSource> modSource;
     float diffPerUpdate;
     APUNumberType valueType;
     APUUIAttribute uiAttr;
