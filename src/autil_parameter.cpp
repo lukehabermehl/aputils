@@ -8,6 +8,7 @@
 
 #include "autil_parameter.hpp"
 #include "autil_parameter_private.hpp"
+#include "autil_logger.hpp"
 #include <cmath>
 #include <climits>
 #include <assert.h>
@@ -76,6 +77,7 @@ bool APUParameter::setValue(APUNumber value)
     _pimpl->isSmoothing = false;
     _pimpl->current = value;
     _pimpl->target = value;
+    _pimpl->base = value;
 
     if (_pimpl->cb) {
         _pimpl->cb->onParameterChanged(this);
@@ -154,6 +156,7 @@ void APUParameter::update()
         float cv = _pimpl->current.floatValue();
         cv += _pimpl->diffPerUpdate;
         _pimpl->current.setFloatValue(cv);
+        _pimpl->base.setFloatValue(cv);
         
         if (cv == _pimpl->target.floatValue()) {
             _pimpl->isSmoothing = false;
@@ -272,7 +275,7 @@ APUParameter::Pimpl::doModulate()
         return;
     }
 
-    float fCurrent = current.floatValue();
-    float fModValue = modSource->getModulationValue() * modRange;
+    float fCurrent = base.floatValue();
+    float fModValue = modSource->getModulationValue() * (modRange / 2.f);
     current.setFloatValue(fCurrent + fModValue);
 }

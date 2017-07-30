@@ -20,7 +20,7 @@ public:
     /** Prepare for the next modulation value */
     virtual void next() = 0;
 
-    virtual ~APUModSource();
+    virtual ~APUModSource() {}
 };
 
 #endif /* autil_mod_h */

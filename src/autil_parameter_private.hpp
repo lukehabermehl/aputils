@@ -57,6 +57,7 @@ public:
 
     APUNumber target;
     APUNumber current;
+    APUNumber base;
     APUNumber minValue;
     APUNumber maxValue;
     float modRange;

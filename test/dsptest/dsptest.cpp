@@ -8,53 +8,96 @@
 
 #include <aputils/aputils.h>
 
-class SimpleGainUnit
+class ModulatingOsc
+: public APUWaveSource
+, public APUObject
+{
+    APUPtr<APUTrivialOscillator> m_osc;
+    APUPtr<APUTrivialOscillator> m_modOsc;
+    APUPtr<APUOscModSource> m_modSrc;
+    APUPtr<APUParameter> m_freqParam;
+public:
+    APUOBJ_FWDDECL
+    ModulatingOsc() {
+        m_osc = new APUTrivialOscillator();
+        m_osc->setFrequency(220);
+        m_modOsc = new APUTrivialOscillator();
+        m_modOsc->setFrequency(5);
+
+        m_freqParam = new APUParameter("Frequency",
+                                       APUNUM_FLOAT,
+                                       APUNUM_FLOAT(80),
+                                       APUNUM_FLOAT(10000),
+                                       APUNUM_FLOAT(220),
+                                       NULL);
+
+        m_freqParam->setTarget(APUNUM_FLOAT(440));
+        m_freqParam->setModulationDepth(0.05);
+        m_modSrc = new APUOscModSource(m_modOsc);
+        m_freqParam->setModulationSource(m_modSrc);
+    }
+
+    void setFrequency(double freqHz) {
+        m_osc->setFrequency(freqHz);
+    }
+
+    APUObjRet<APUParameter> getFrequencyParameter() { return m_freqParam; }
+
+    double getFrequency() { return m_osc->getFrequency(); }
+
+    float getNextSample() {
+        APUNumber freqVal = m_freqParam->getCurrentValue();
+        if (freqVal.floatValue() != getFrequency()) {
+            setFrequency(freqVal.floatValue());
+        }
+        m_modSrc->next();
+        return m_osc->getNextSample();
+    }
+
+    void setSampleRate(double sampleRate) {
+        m_osc->setSampleRate(sampleRate);
+        m_freqParam->setSampleRate(sampleRate);
+        m_modOsc->setSampleRate(sampleRate);
+    }
+
+};
+
+class TestAPU
 : public AudioProcessingUnit
 {
+    APUPtr<ModulatingOsc> m_osc;
 public:
-    virtual void processAudio(float *inputBuffer, float *outputBuffer,
-                              int numInputChannels, int numOutputChannels)
+    TestAPU() {
+        m_osc = new ModulatingOsc();
+    }
+
+    void setupInitialState() {
+        m_osc->setSampleRate(getSampleRate());
+    }
+
+    void processAudio(float *inputBuffer, float *outputBuffer,
+                      int numInputChannels, int numOutputChannels)
     {
-        outputBuffer[0] = inputBuffer[0] * 0.707;
-        if (numOutputChannels == 2) {
-            if (numInputChannels == 2) {
-                outputBuffer[1] = inputBuffer[1] * 0.707;
-            } else {
-                outputBuffer[1] = outputBuffer[0];
-            }
+        outputBuffer[0] = m_osc->getNextSample();
+        if (numOutputChannels > 1) {
+            outputBuffer[1] = outputBuffer[0];
         }
-    }
-
-    virtual const char * getName() {
-        return "SimpleGainUnit";
-    }
-
-    virtual void setupInitialState() {
-        /* empty */
     }
 };
 
+
 int main()
 {
-    APUGetLogger()->setLogLevel(LOG_LEVEL_DEBUG);
-    APUPtr<APUPortAudioHost> audioManager = new APUPortAudioHost();
-    audioManager->setInputMode(AudioInputModeFile);
-    audioManager->setInputDevice(-1);
-    audioManager->setOutputDevice(1);
-    audioManager->setNumOutputChannels(2);
-
-    APUPtr<AudioFile> file = new AudioFile("/Users/Luke/Projects/aputils/test/dsptest/guitar.wav",
-                                           AudioFileModeReadOnly);
-
-    APUPtr<AudioProcessingUnit> unit = new SimpleGainUnit();
-    audioManager->setInputFile(file);
-    audioManager->setAudioProcessingUnit(unit);
-    audioManager->initialize();
-    audioManager->setLooping(false);
-    audioManager->start();
-    audioManager->sleep(5000);
-    audioManager->stop();
-    audioManager->destroy();
+    APUPtr<APUPortAudioHost> host = new APUPortAudioHost();
+    host->setInputMode(AudioInputModeNone);
+    host->setOutputDevice(1);
+    APUPtr<AudioProcessingUnit> apu = new TestAPU();
+    host->setAudioProcessingUnit(apu);
+    host->initialize();
+    host->start();
+    host->sleep(5000);
+    host->stop();
+    host->destroy();
 }
 
 

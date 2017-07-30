@@ -108,11 +108,12 @@ public:
     /** Get the description of the UI control for the parameter */
     virtual APUUIAttribute getUIAttributes();
 
+    /** Set the sample rate internally to calculate smoothing time */
+    virtual void setSampleRate(size_t sampleRate);
+
 protected:
     /** Called by the APU to update the current parameter value for smoothing */
     virtual void update();
-    /** Set the sample rate internally to calculate smoothing time */
-    virtual void setSampleRate(size_t sampleRate);
     /** Clamp the value to the min/max if needed */
     bool normalizeValue(APUNumber &value);
     /** Set the UI attribute flags */
