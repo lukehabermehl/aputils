@@ -86,7 +86,7 @@ size_t AudioProcessingUnit::getNumParameters()
     return _pimpl->parameterMap->size();
 }
 
-APUParameter * AudioProcessingUnit::getParameterWithName(const char *name)
+APUObjRet<APUParameter> AudioProcessingUnit::getParameterWithName(const char *name)
 {
     return _pimpl->parameterMap->parameterWithName(name);
 }
@@ -98,7 +98,8 @@ const APUParameterMap * AudioProcessingUnit::getParameterMap()
 
 bool AudioProcessingUnit::addParameter(APUParameter *param)
 {
-    if (getParameterWithName(param->getName()->str()) != NULL) {
+    APUPtr<APUParameter> existing = getParameterWithName(param->getName()->str());
+    if (existing) {
         return false;
     }
 
