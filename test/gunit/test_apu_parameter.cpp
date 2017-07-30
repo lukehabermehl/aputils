@@ -27,9 +27,9 @@ public:
 TEST_F(APUParameterTestFixture, test_essentials)
 {
 	APUParameter param("param", APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0));
-	EXPECT_EQ(0, strcmp("param", param.getName()));
+	EXPECT_TRUE(param.getName()->equals("param"));
 	param.setName("new_name");
-	EXPECT_EQ(0, strcmp("new_name", param.getName()));
+	EXPECT_TRUE(param.getName()->equals("new_name"));
 
 	EXPECT_EQ(APUNUM_FLOAT, param.type());
 	EXPECT_EQ(0.0, param.getCurrentValue().floatValue());
@@ -74,11 +74,7 @@ TEST_F(APUParameterTestFixture, test_units)
 {
 	APUParameter *param = new APUParameter("param", APUNUM_FLOAT, -5, 5, 0);
 	param->setUnits("Hertz");
-	EXPECT_EQ("Hertz", std::string(param->getUnits()));
-
-	//Test max size = 16
-	param->setUnits("12345678901234567");
-	EXPECT_EQ("1234567890123456", std::string(param->getUnits()));
+	EXPECT_TRUE(param->getUnits()->equals("Hertz"));
 
 	delete param;
 }
@@ -92,11 +88,11 @@ TEST_F(APUParameterTestFixture, test_enum_param)
 	APUPtr<APUArray<APUString> > strings = new APUArray<APUString>(stringsEnum);
 	APUEnumParameter enumParam("enumParam", strings.ptr(), NULL);
 
-	std::string value0Str = enumParam.stringForValue(0);
-	EXPECT_EQ("OFF", value0Str);
+	APUPtr<APUString> value0Str = enumParam.stringForValue(0);
+	EXPECT_TRUE(value0Str->equals("OFF"));
 
-	std::string value1Str = enumParam.stringForValue(1);
-	EXPECT_EQ("ON", value1Str);
+	APUPtr<APUString> value1Str = enumParam.stringForValue(1);
+	EXPECT_TRUE(value1Str->equals("ON"));
 
 	EXPECT_EQ(NULL, enumParam.stringForValue(2));
 }

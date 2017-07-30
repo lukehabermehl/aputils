@@ -38,10 +38,24 @@ class APUParameter
 public:
     APUOBJ_FWDDECL
 
-    APUParameter(const char *name, APUNumberType valueType, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb=NULL);
+    /** Construct a parameter object
+      * @param name the name of the parameter
+      * @param valueType type of the underlying number
+      * @param minValue the minimum value allowed for the parameter
+      * @param maxValue the maximum value allowed for the parameter
+      * @param defaultValue the initial value for the parameter
+      * @param cb optional callback object to handle parameter changes
+      */
+    APUParameter(const char *name,
+                 APUNumberType valueType,
+                 APUNumber minValue,
+                 APUNumber maxValue,
+                 APUNumber defaultValue,
+                 APUParameterCallback *cb=NULL);
+
     virtual ~APUParameter();
     void setName(const char *name);
-    const char *getName();
+    APUObjRet<APUString> getName();
 
     /** Get the target value of the parameter (value after smoothing) (copy) */
     APUNumber getTarget();
@@ -53,7 +67,7 @@ public:
     /** Set the string representing the units of the parameter value */
     void setUnits(const char *units);
     /** Get the string representing the units of the parameter value */
-    const char *getUnits();
+    APUObjRet<APUString> getUnits();
 
     /** Set the callback object for the parameter */
     void setCallback(APUParameterCallback *cb);
@@ -127,7 +141,7 @@ public:
     void setMaxValue(APUNumber maxVal);
 
     /** Get the string representation of the given value */
-    const char * stringForValue(uint32_t value);
+    APUObjRet<APUString> stringForValue(uint32_t value);
 
 private:
     class EnumParamPimpl;

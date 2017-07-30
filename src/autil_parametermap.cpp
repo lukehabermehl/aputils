@@ -25,13 +25,13 @@ void APUParameterMap::addParameter(APUParameter *parameter)
     if (parameter == NULL)
         return;
 
-    APUPtr<APUParameter> param = parameterWithName(parameter->getName());
+    APUPtr<APUParameter> param = parameterWithName(parameter->getName()->str());
     if (param.ptr() == parameter) {
         return;
     } else if (param) {
         param->decRef();
     }
-    pimpl_->params[parameter->getName()] = parameter;
+    pimpl_->params[parameter->getName()->str()] = parameter;
     parameter->addRef();
 }
 

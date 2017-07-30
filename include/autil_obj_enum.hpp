@@ -78,7 +78,7 @@ public:
     }
 
     /** Add an object to the end of the linked list 
-      * @param non-null pointer to the object to add
+      * @param obj non-null pointer to the object to add
       */
     void addObject(T * obj) {
         assert(obj != NULL);

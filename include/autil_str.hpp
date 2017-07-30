@@ -50,10 +50,13 @@ public:
       * @return true if the target and the argument have the same value
       */
     bool equals(APUString *);
+    bool equals(const char *);
+
     /** Compare two strings alphabetically. Can be used with the likes of std::sort()
       * @return true if the target string is ordered before the argument, else return false.
       */
     bool compare(APUString *);
+    bool compare(const char *);
 
 private:
     class Pimpl;
