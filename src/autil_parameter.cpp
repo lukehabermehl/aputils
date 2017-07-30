@@ -8,6 +8,7 @@
 
 #include "autil_parameter.hpp"
 #include "autil_parameter_private.hpp"
+#include "autil_logger.hpp"
 #include <cmath>
 #include <climits>
 #include <assert.h>
@@ -28,10 +29,9 @@ APUParameter::~APUParameter()
     delete _pimpl;
 }
 
-const char * APUParameter::getName()
+APUObjRet<APUString> APUParameter::getName()
 {
-    APUString *str = _pimpl->name;
-    return str == NULL ? NULL : str->str();
+    return _pimpl->name;
 }
 
 void APUParameter::setName(const char *name)
@@ -39,23 +39,14 @@ void APUParameter::setName(const char *name)
     _pimpl->name = new APUString(name);
 }
 
-const char * APUParameter::getUnits()
+APUObjRet<APUString> APUParameter::getUnits()
 {
     return _pimpl->units;
 }
 
 void APUParameter::setUnits(const char *units)
 {
-    size_t l = strlen(units);
-    if (l < BDSP_MAX_UNITS_STRLEN)
-    {
-        memcpy(_pimpl->units, units, l);
-        memset(&_pimpl->units[l], 0, BDSP_MAX_UNITS_STRLEN - l);
-    }
-    else
-    {
-        memcpy(_pimpl->units, units, BDSP_MAX_UNITS_STRLEN);
-    }
+    _pimpl->units = new APUString(units);
 }
 
 APUNumberType APUParameter::type()
@@ -70,16 +61,14 @@ void APUParameter::setCallback(APUParameterCallback *cb)
 
 APUNumber APUParameter::getTarget()
 {
-    APUNumber num;
-    num = _pimpl->target;
-    return num;
+    return _pimpl->target;
 }
 
 APUNumber APUParameter::getCurrentValue()
 {
-    APUNumber num;
-    num = _pimpl->current;
-    return num;
+    _pimpl->doModulate();
+    normalizeValue(_pimpl->current);
+    return _pimpl->current;
 }
 
 bool APUParameter::setValue(APUNumber value)
@@ -88,6 +77,7 @@ bool APUParameter::setValue(APUNumber value)
     _pimpl->isSmoothing = false;
     _pimpl->current = value;
     _pimpl->target = value;
+    _pimpl->base = value;
 
     if (_pimpl->cb) {
         _pimpl->cb->onParameterChanged(this);
@@ -166,6 +156,7 @@ void APUParameter::update()
         float cv = _pimpl->current.floatValue();
         cv += _pimpl->diffPerUpdate;
         _pimpl->current.setFloatValue(cv);
+        _pimpl->base.setFloatValue(cv);
         
         if (cv == _pimpl->target.floatValue()) {
             _pimpl->isSmoothing = false;
@@ -218,6 +209,16 @@ bool APUParameter::normalizeValue(APUNumber &value)
     return didNormalize;
 }
 
+void APUParameter::setModulationDepth(float depth)
+{
+    _pimpl->modRange = depth * (_pimpl->maxValue.floatValue() - _pimpl->minValue.floatValue());
+}
+
+void APUParameter::setModulationSource(APUModSource *source)
+{
+    _pimpl->modSource = source;
+}
+
 void APUParameter::setUIAttributes(APUUIAttribute attr)
 {
     _pimpl->uiAttr = attr;
@@ -244,14 +245,13 @@ APUEnumParameter::~APUEnumParameter()
     delete _enumParamPimpl;
 }
 
-const char * APUEnumParameter::stringForValue(uint32_t value)
+APUObjRet<APUString> APUEnumParameter::stringForValue(uint32_t value)
 {
     if (!_enumParamPimpl->strings) {
         return NULL;
     }
 
-    APUString *str = _enumParamPimpl->strings->getAt(value);
-    return str == NULL ? NULL : str->str();
+    return _enumParamPimpl->strings->getAt(value);
 }
 
 void APUEnumParameter::setMinValue(APUNumber minVal)
@@ -264,3 +264,18 @@ void APUEnumParameter::setMaxValue(APUNumber maxVal)
     //No-op
 }
 
+//---------------------------------------------------------
+// APUParameter::Pimpl
+//---------------------------------------------------------
+
+void
+APUParameter::Pimpl::doModulate()
+{
+    if (!modSource || !modRange) {
+        return;
+    }
+
+    float fCurrent = base.floatValue();
+    float fModValue = modSource->getModulationValue() * (modRange / 2.f);
+    current.setFloatValue(fCurrent + fModValue);
+}

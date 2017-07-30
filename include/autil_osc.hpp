@@ -10,11 +10,13 @@
 #define autil_osc_h
 
 #include "autil_obj.hpp"
+#include "autil_mod.hpp"
 
 /** Interface for objects that generate waveforms */
 class APUWaveSource
 : public APUObjectInterface
 {
+public:
     /** Set the center frequency */
     virtual void setFrequency(double freqHz) = 0;
     /** Get the center frequency */
@@ -23,6 +25,28 @@ class APUWaveSource
     virtual float getNextSample() = 0;
     /** Set the sampling rate */
     virtual void setSampleRate(double sampleRate) = 0;
+
+    virtual ~APUWaveSource() {}
+};
+
+/** Modulation source implementation using an oscillator */
+class APUOscModSource
+: public APUModSource
+, public APUObject
+{
+public:
+    APUOBJ_FWDDECL
+
+    APUOscModSource(APUWaveSource *waveSource);
+    virtual ~APUOscModSource();
+
+    // APUModSource
+    virtual float getModulationValue();
+    virtual void next();
+
+private:
+    class Pimpl;
+    Pimpl *m_pimpl;
 };
 
 /** A very basic oscillator that generates samples using a modulo counter */

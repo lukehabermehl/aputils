@@ -51,25 +51,48 @@ APUString::append(APUString *appendStr)
     if (!appendStr) {
         return copy();
     }
-    return APUString::format("%s%s", str(), appendStr->str());
+
+    char *buffer = new char[length() + appendStr->length() + 1];
+    memcpy(buffer, pimpl_->strbuf, length());
+    memcpy(&buffer[length()], appendStr->str(), appendStr->length());
+    buffer[length() + appendStr->length()] = '\0';
+
+    APUString *ret = new APUString(buffer);
+    delete []buffer;
+
+    return ret;
 }
 
 bool
 APUString::equals(APUString *rhs)
 {
-    if (!rhs) {
-        return false;
-    }
+    if (!rhs) return false;
 
     return 0 == strcmp(str(), rhs->str());
 }
 
 bool
+APUString::equals(const char *rhs)
+{
+    if (!rhs) return false;
+
+    return 0 == strcmp(str(), rhs);
+}
+
+bool
+APUString::compare(const char *rhs)
+{
+    if (!rhs) return false;
+
+    int c = strcmp(str(), rhs);
+    return c < 0;
+}
+
+bool
 APUString::compare(APUString *rhs)
 {
-    if (!rhs) {
-        return false;
-    }
+    if (!rhs) return false;
+
     int c = strcmp(str(), rhs->str());
     return c < 0;
 }

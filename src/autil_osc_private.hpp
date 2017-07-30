@@ -34,5 +34,12 @@ public:
     void updateInc();
 };
 
+class APUOscModSource::Pimpl
+{
+public:
+    APUPtr<APUWaveSource> waveSource;
+    float currentValue;
+};
+
 
 #endif /* autil_osc_private_h */

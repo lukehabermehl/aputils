@@ -98,7 +98,7 @@ const APUParameterMap * AudioProcessingUnit::getParameterMap()
 
 bool AudioProcessingUnit::addParameter(APUParameter *param)
 {
-    if (getParameterWithName(param->getName()) != NULL) {
+    if (getParameterWithName(param->getName()->str()) != NULL) {
         return false;
     }
 

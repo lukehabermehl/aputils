@@ -33,19 +33,19 @@ public:
     APUOBJ_FWDDECL
 
     AudioDevice(AudioDeviceIndex index, const char *name)
-    : name_(name)
-    , index_(index)
+    : m_name(new APUString(name))
+    , m_index(index)
     {}
 
     virtual ~AudioDevice()
     {}
 
-    const char *getName() const { return name_.c_str(); }
-    AudioDeviceIndex getIndex() const { return index_; }
+    APUObjRet<APUString> getName() const { return m_name; }
+    AudioDeviceIndex getIndex() const { return m_index; }
 
 private:
-    std::string name_;
-    AudioDeviceIndex index_;
+    APUPtr<APUString> m_name;
+    AudioDeviceIndex m_index;
 };
 
 class APUHostInterface;

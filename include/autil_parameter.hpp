@@ -13,6 +13,7 @@
 #include "autil_uiattrs.h"
 #include "autil_array.hpp"
 #include "autil_str.hpp"
+#include "autil_mod.hpp"
 
 #define BDSP_MAX_UNITS_STRLEN 16
 
@@ -37,10 +38,24 @@ class APUParameter
 public:
     APUOBJ_FWDDECL
 
-    APUParameter(const char *name, APUNumberType valueType, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb=NULL);
+    /** Construct a parameter object
+      * @param name the name of the parameter
+      * @param valueType type of the underlying number
+      * @param minValue the minimum value allowed for the parameter
+      * @param maxValue the maximum value allowed for the parameter
+      * @param defaultValue the initial value for the parameter
+      * @param cb optional callback object to handle parameter changes
+      */
+    APUParameter(const char *name,
+                 APUNumberType valueType,
+                 APUNumber minValue,
+                 APUNumber maxValue,
+                 APUNumber defaultValue,
+                 APUParameterCallback *cb=NULL);
+
     virtual ~APUParameter();
     void setName(const char *name);
-    const char *getName();
+    APUObjRet<APUString> getName();
 
     /** Get the target value of the parameter (value after smoothing) (copy) */
     APUNumber getTarget();
@@ -52,7 +67,7 @@ public:
     /** Set the string representing the units of the parameter value */
     void setUnits(const char *units);
     /** Get the string representing the units of the parameter value */
-    const char *getUnits();
+    APUObjRet<APUString> getUnits();
 
     /** Set the callback object for the parameter */
     void setCallback(APUParameterCallback *cb);
@@ -84,14 +99,21 @@ public:
     /** Determine if smoothing is enabled for the parameter */
     bool isSmoothingEnabled();
 
+    /** Set the modulation signal source */
+    void setModulationSource(APUModSource *source);
+
+    /** Set the modulation depth (0.0 -- 1.0) */
+    void setModulationDepth(float depth);
+
     /** Get the description of the UI control for the parameter */
     virtual APUUIAttribute getUIAttributes();
+
+    /** Set the sample rate internally to calculate smoothing time */
+    virtual void setSampleRate(size_t sampleRate);
 
 protected:
     /** Called by the APU to update the current parameter value for smoothing */
     virtual void update();
-    /** Set the sample rate internally to calculate smoothing time */
-    virtual void setSampleRate(size_t sampleRate);
     /** Clamp the value to the min/max if needed */
     bool normalizeValue(APUNumber &value);
     /** Set the UI attribute flags */
@@ -120,7 +142,7 @@ public:
     void setMaxValue(APUNumber maxVal);
 
     /** Get the string representation of the given value */
-    const char * stringForValue(uint32_t value);
+    APUObjRet<APUString> stringForValue(uint32_t value);
 
 private:
     class EnumParamPimpl;

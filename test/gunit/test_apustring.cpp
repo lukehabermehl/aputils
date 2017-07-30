@@ -29,6 +29,15 @@ TEST_F(APUStringTestFixture, test_compare)
 	EXPECT_TRUE(str1->equals(str2));
 }
 
+TEST_F(APUStringTestFixture, test_append)
+{
+	APUPtr<APUString> string1 = new APUString("Hello");
+	APUPtr<APUString> string2 = new APUString(", world!");
+	APUPtr<APUString> combined = string1->append(string2);
+
+	EXPECT_TRUE(combined->equals("Hello, world!"));
+}
+
 TEST_F(APUStringTestFixture, test_format)
 {
 	APUPtr<APUString> formatted = APUString::format("%s, %s!", "Hello", "world");

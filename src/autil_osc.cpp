@@ -71,7 +71,7 @@ APUTrivialOscillator::Pimpl::getNextSample()
         }
         case SQUARE:
         {
-            return modulo > pulseWidth ? -1 : 1;
+            return modulo > pulseWidth ? 0 : 1;
         }
     }
 }
@@ -80,4 +80,32 @@ void
 APUTrivialOscillator::Pimpl::updateInc()
 {
     inc = freqHz / sampleRate;
+}
+
+//---------------------------------------------------------
+// APUOscModSource
+//---------------------------------------------------------
+
+APUOscModSource::APUOscModSource(APUWaveSource *waveSource)
+{
+    m_pimpl = new Pimpl();
+    m_pimpl->waveSource = waveSource;
+    m_pimpl->currentValue = waveSource->getNextSample();
+}
+
+APUOscModSource::~APUOscModSource()
+{
+    delete m_pimpl;
+}
+
+float
+APUOscModSource::getModulationValue()
+{
+    return m_pimpl->currentValue;
+}
+
+void
+APUOscModSource::next()
+{
+    m_pimpl->currentValue = m_pimpl->waveSource->getNextSample();
 }
