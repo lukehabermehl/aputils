@@ -12,27 +12,27 @@ class ModulatingOsc
 : public APUWaveSource
 , public APUObject
 {
-    APUPtr<APUTrivialOscillator> m_osc;
-    APUPtr<APUTrivialOscillator> m_modOsc;
+    APUPtr<APUWaveTableOscillator> m_osc;
+    APUPtr<APUWaveTableOscillator> m_modOsc;
     APUPtr<APUOscModSource> m_modSrc;
     APUPtr<APUParameter> m_freqParam;
 public:
     APUOBJ_FWDDECL
     ModulatingOsc() {
-        m_osc = new APUTrivialOscillator();
-        m_osc->setFrequency(220);
-        m_modOsc = new APUTrivialOscillator();
-        m_modOsc->setFrequency(5);
+        m_osc = new APUWaveTableOscillator();
+        m_osc->setFrequency(440);
+        m_modOsc = new APUWaveTableOscillator();
+        m_modOsc->setFrequency(300);
 
         m_freqParam = new APUParameter("Frequency",
                                        APUNUM_FLOAT,
                                        APUNUM_FLOAT(80),
                                        APUNUM_FLOAT(10000),
-                                       APUNUM_FLOAT(220),
+                                       APUNUM_FLOAT(800),
                                        NULL);
 
         m_freqParam->setTarget(APUNUM_FLOAT(440));
-        m_freqParam->setModulationDepth(0.05);
+        m_freqParam->setModulationDepth(0.2);
         m_modSrc = new APUOscModSource(m_modOsc);
         m_freqParam->setModulationSource(m_modSrc);
     }
