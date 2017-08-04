@@ -46,7 +46,7 @@ public:
       * @param defaultValue the initial value for the parameter
       * @param cb optional callback object to handle parameter changes
       */
-    APUParameter(const char *name,
+    APUParameter(APUString *name,
                  APUNumberType valueType,
                  APUNumber minValue,
                  APUNumber maxValue,
@@ -54,7 +54,7 @@ public:
                  APUParameterCallback *cb=NULL);
 
     virtual ~APUParameter();
-    void setName(const char *name);
+    void setName(APUString *name);
     APUObjRet<APUString> getName();
 
     /** Get the target value of the parameter (value after smoothing) (copy) */
@@ -65,7 +65,7 @@ public:
     APUNumberType type();
 
     /** Set the string representing the units of the parameter value */
-    void setUnits(const char *units);
+    void setUnits(APUString *units);
     /** Get the string representing the units of the parameter value */
     APUObjRet<APUString> getUnits();
 
@@ -133,7 +133,7 @@ public:
       * @param strings list of strings for the enum values
       * @param cb optional callback object
       */
-    APUEnumParameter(const char *name, APUArray<APUString> *strings, APUParameterCallback *cb=NULL);
+    APUEnumParameter(APUString *name, APUArray<APUString> *strings, APUParameterCallback *cb=NULL);
     virtual ~APUEnumParameter();
 
     /** NO-OP: Cannot set min value for enums. Minimum is always 0 */

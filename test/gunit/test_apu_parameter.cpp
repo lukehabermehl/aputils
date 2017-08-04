@@ -17,7 +17,7 @@ protected:
 class SliderParameter : public APUParameter
 {
 public:
-	SliderParameter(const char *name, APUNumberType type)
+	SliderParameter(APUString *name, APUNumberType type)
 	: APUParameter(name, type, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0)) {}
 	APUUIAttribute getUIAttributes() {
 		return (APU_UI_TYPE_SLIDER ^ APU_UI_ORIENTATION_HORIZONTAL);
@@ -26,9 +26,10 @@ public:
 
 TEST_F(APUParameterTestFixture, test_essentials)
 {
-	APUParameter param("param", APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0));
-	EXPECT_TRUE(param.getName()->equals("param"));
-	param.setName("new_name");
+	APUPtr<APUString> paramName = APUStringMake("param");
+	APUParameter param(paramName, APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0));
+	EXPECT_TRUE(param.getName()->equals(paramName));
+	param.setName(APUStringMake("new_name"));
 	EXPECT_TRUE(param.getName()->equals("new_name"));
 
 	EXPECT_EQ(APUNUM_FLOAT, param.type());
@@ -43,7 +44,7 @@ TEST_F(APUParameterTestFixture, test_essentials)
 
 TEST_F(APUParameterTestFixture, test_value_clamping)
 {
-	APUParameter *param = new APUParameter("param", APUNUM_FLOAT, APUNUM_FLOAT(-5), APUNUM_FLOAT(5), APUNUM_FLOAT(0));
+	APUParameter *param = new APUParameter(APUStringMake("param"), APUNUM_FLOAT, APUNUM_FLOAT(-5), APUNUM_FLOAT(5), APUNUM_FLOAT(0));
 
 	APUNumber val = APUNUM_FLOAT(3.5);
 	param->setValue(val);
@@ -62,7 +63,7 @@ TEST_F(APUParameterTestFixture, test_value_clamping)
 
 TEST_F(APUParameterTestFixture, test_ui_attrs)
 {
-	SliderParameter *param = new SliderParameter("param", APUNUM_FLOAT);
+	SliderParameter *param = new SliderParameter(APUStringMake("param"), APUNUM_FLOAT);
 	APUUIAttribute uiAttrs = param->getUIAttributes();
 
 	EXPECT_TRUE(((uiAttrs & APU_UI_TYPE_SLIDER) > 0));
@@ -72,8 +73,8 @@ TEST_F(APUParameterTestFixture, test_ui_attrs)
 
 TEST_F(APUParameterTestFixture, test_units)
 {
-	APUParameter *param = new APUParameter("param", APUNUM_FLOAT, -5, 5, 0);
-	param->setUnits("Hertz");
+	APUParameter *param = new APUParameter(APUStringMake("param"), APUNUM_FLOAT, -5, 5, 0);
+	param->setUnits(APUStringMake("Hertz"));
 	EXPECT_TRUE(param->getUnits()->equals("Hertz"));
 
 	delete param;
@@ -86,7 +87,7 @@ TEST_F(APUParameterTestFixture, test_enum_param)
 	stringsEnum->addObject(new APUString("ON"));
 
 	APUPtr<APUArray<APUString> > strings = new APUArray<APUString>(stringsEnum);
-	APUEnumParameter enumParam("enumParam", strings.ptr(), NULL);
+	APUEnumParameter enumParam(APUStringMake("enumParam"), strings.ptr(), NULL);
 
 	APUPtr<APUString> value0Str = enumParam.stringForValue(0);
 	EXPECT_TRUE(value0Str->equals("OFF"));

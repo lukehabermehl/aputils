@@ -15,9 +15,9 @@
 class APUParameter::Pimpl
 {
 public:
-    Pimpl(APUNumberType vtype, const char *pname, APUParameterCallback *callbck)
+    Pimpl(APUNumberType vtype, APUString *pname, APUParameterCallback *callbck)
     :isSmoothing(false), smoothingEnabled(false), smoothingInterval_msec(0), smoothingFrames(0)
-    ,modRange(0), uiAttr(0), name(NULL), valueType(vtype)
+    ,name(pname), modRange(0), uiAttr(0), valueType(vtype)
     ,cb(NULL)
     {
         switch (valueType) {
@@ -37,8 +37,6 @@ public:
                 target.setBoolValue(false);
                 current.setBoolValue(false);
         }
-
-        name = new APUString(pname);
     }
 
     ~Pimpl()

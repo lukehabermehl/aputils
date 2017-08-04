@@ -35,7 +35,7 @@ void APUParameterMap::addParameter(APUParameter *parameter)
     parameter->addRef();
 }
 
-APUParameter * APUParameterMap::parameterWithName(const char *name) const
+APUObjRet<APUParameter> APUParameterMap::parameterWithName(const char *name) const
 {
     auto it = pimpl_->params.find(std::string(name));
     if (it == pimpl_->params.end())
@@ -67,13 +67,13 @@ APUParameterMap::Iterator APUParameterMap::begin() const
     return it;
 }
 
-const char * APUParameterMap::Iterator::first()
+APUObjRet<APUString> APUParameterMap::Iterator::first()
 {
     if (!valid()) return NULL;
-    return pimpl_->mapIterator->first.c_str();
+    return pimpl_->mapIterator->second->getName();
 }
 
-APUParameter * APUParameterMap::Iterator::second()
+APUObjRet<APUParameter> APUParameterMap::Iterator::second()
 {
     if (!valid()) return NULL;
     return pimpl_->mapIterator->second;
@@ -93,5 +93,10 @@ APUParameterMap::Iterator& APUParameterMap::Iterator::operator++()
 bool APUParameterMap::Iterator::valid()
 {
     return pimpl_->mapIterator != pimpl_->mapPtr->end();
+}
+
+APUObjRet<APUString> APUStringMake(const char *name)
+{
+    return new APUString(name);
 }
 

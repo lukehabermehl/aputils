@@ -15,7 +15,7 @@
 
 #define MIN2(_a, _b) ((_a <= _b) ? _a : _b)
 
-APUParameter::APUParameter(const char *name, APUNumberType valueType, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb)
+APUParameter::APUParameter(APUString *name, APUNumberType valueType, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb)
 {
     _pimpl = new Pimpl(valueType, name, cb);
     setMinValue(minValue);
@@ -34,9 +34,9 @@ APUObjRet<APUString> APUParameter::getName()
     return _pimpl->name;
 }
 
-void APUParameter::setName(const char *name)
+void APUParameter::setName(APUString *name)
 {
-    _pimpl->name = new APUString(name);
+    _pimpl->name = name;
 }
 
 APUObjRet<APUString> APUParameter::getUnits()
@@ -44,9 +44,9 @@ APUObjRet<APUString> APUParameter::getUnits()
     return _pimpl->units;
 }
 
-void APUParameter::setUnits(const char *units)
+void APUParameter::setUnits(APUString *units)
 {
-    _pimpl->units = new APUString(units);
+    _pimpl->units = units;
 }
 
 APUNumberType APUParameter::type()
@@ -228,7 +228,7 @@ void APUParameter::setUIAttributes(APUUIAttribute attr)
 // APUEnumParameter
 //----------------------------------------------------------------------------
 
-APUEnumParameter::APUEnumParameter(const char *name, APUArray<APUString> *strings, APUParameterCallback *cb)
+APUEnumParameter::APUEnumParameter(APUString *name, APUArray<APUString> *strings, APUParameterCallback *cb)
 : APUParameter(name, APUNUM_UINT, APUNUM_UINT(0), APUNUM_UINT((uint32_t)strings->size()), APUNUM_UINT(0), cb)
 {
     _enumParamPimpl = new EnumParamPimpl();

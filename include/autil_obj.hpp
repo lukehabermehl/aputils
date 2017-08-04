@@ -131,7 +131,7 @@ public:
         return obj_;
     }
 
-    operator bool()
+    operator bool() const
     {
         return obj_ != NULL;
     }

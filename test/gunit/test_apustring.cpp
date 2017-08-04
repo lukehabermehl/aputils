@@ -43,3 +43,19 @@ TEST_F(APUStringTestFixture, test_format)
 	APUPtr<APUString> formatted = APUString::format("%s, %s!", "Hello", "world");
 	EXPECT_EQ(0, strcmp(formatted->str(), "Hello, world!"));
 }
+
+struct MemoryTestHelper
+{
+	APUPtr<APUString> str;
+	MemoryTestHelper(APUString *paramStr)
+	: str(paramStr)
+	{
+	}
+};
+
+TEST_F(APUStringTestFixture, test_memory)
+{
+	MemoryTestHelper helper(APUStringMake("test"));
+	EXPECT_TRUE(helper.str);
+	EXPECT_EQ(1, helper.str->getRefCount());
+}

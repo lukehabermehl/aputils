@@ -63,5 +63,8 @@ private:
     Pimpl *pimpl_;
 };
 
+// Helper to create a new APUString reference
+APUObjRet<APUString> APUStringMake(const char *str);
+
 
 #endif /* autil_str_h */
