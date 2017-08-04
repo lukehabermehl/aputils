@@ -50,7 +50,7 @@ public:
     /** Get the parameter with the given name.
       * @return the parameter or NULL if not found
       */
-    APUParameter * getParameterWithName(const char *name);
+    APUObjRet<APUParameter> getParameterWithName(const char *name);
     /** Get the parameter map */
     const APUParameterMap * getParameterMap();
     
@@ -60,7 +60,7 @@ protected:
     /** This method will be called when the sample rate is set. Override this in subclasses to be handle sample rate changes */
     virtual void onSampleRateChanged();
     /** Add a parameter to the APU 
-      * @return true if the parameter was added successfully, false if a parameter with that name exists alreadu
+      * @return true if the parameter was added successfully, false if a parameter with that name exists already
       */
     virtual bool addParameter(APUParameter *param);
     

@@ -84,4 +84,30 @@ private:
     Pimpl *pimpl_;
 };
 
+class APUWaveTableOscillator
+: public APUWaveSource
+, public APUObject
+{
+public:
+    APUOBJ_FWDDECL
+
+    APUWaveTableOscillator();
+    virtual ~APUWaveTableOscillator();
+
+    enum Waveform {
+        SINE
+    };
+
+    virtual void setWaveform(Waveform waveform);
+
+    virtual void setFrequency(double freqHq);
+    virtual double getFrequency();
+    virtual float getNextSample();
+    virtual void setSampleRate(double sampleRate);
+
+private:
+    class Pimpl;
+    Pimpl *m_pimpl;
+};
+
 #endif /* autil_osc_h */
