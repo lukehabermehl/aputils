@@ -20,10 +20,8 @@ public:
     APUOBJ_FWDDECL
     ModulatingOsc() {
         m_osc = new APUWaveTableOscillator();
-        m_osc->setSampleRate(44100);
         m_osc->setFrequency(440);
         m_modOsc = new APUWaveTableOscillator();
-        m_modOsc->setSampleRate(44100);
         m_modOsc->setFrequency(5);
 
         m_freqParam = new APUParameter("Frequency",
@@ -48,11 +46,11 @@ public:
     double getFrequency() { return m_osc->getFrequency(); }
 
     float getNextSample() {
+        m_modSrc->next();
         APUNumber freqVal = m_freqParam->getCurrentValue();
         if (freqVal.floatValue() != getFrequency()) {
             setFrequency(freqVal.floatValue());
         }
-        m_modSrc->next();
         return m_osc->getNextSample();
     }
 
@@ -60,6 +58,8 @@ public:
         m_osc->setSampleRate(sampleRate);
         m_freqParam->setSampleRate(sampleRate);
         m_modOsc->setSampleRate(sampleRate);
+
+        m_osc->setFrequency(m_freqParam->getTarget().floatValue());
     }
 
 };

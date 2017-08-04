@@ -92,7 +92,6 @@ APUOscModSource::APUOscModSource(APUWaveSource *waveSource)
 {
     m_pimpl = new Pimpl();
     m_pimpl->waveSource = waveSource;
-    m_pimpl->currentValue = waveSource->getNextSample();
 }
 
 APUOscModSource::~APUOscModSource()
