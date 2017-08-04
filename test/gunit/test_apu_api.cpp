@@ -8,8 +8,8 @@ class APUApiTestAPU : public AudioProcessingUnit
 public:
 	APUApiTestAPU() : AudioProcessingUnit()
 	{
-		APUParameter *param1 = new APUParameter("param1", APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
-		APUParameter *param2 = new APUParameter("param2", APUNUM_BOOLEAN, APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0));
+		APUParameter *param1 = new APUParameter(APUStringMake("param1"), APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
+		APUParameter *param2 = new APUParameter(APUStringMake("param2"), APUNUM_BOOLEAN, APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0));
 
 		addParameter(param1);
 		addParameter(param2);
@@ -34,16 +34,16 @@ protected:
 
 TEST_F(APUApiTestFixture, test_param_lookup)
 {
-	APUParameter *param1 = apu->getParameterWithName("param1");
-	EXPECT_TRUE(param1 != NULL);
+	APUPtr<APUParameter> param1 = apu->getParameterWithName("param1");
+	EXPECT_TRUE(param1);
 	EXPECT_EQ(APUNUM_FLOAT, param1->type());
 
-	APUParameter *param2 = apu->getParameterWithName("param2");
-	EXPECT_TRUE(param2 != NULL);
+	APUPtr<APUParameter> param2 = apu->getParameterWithName("param2");
+	EXPECT_TRUE(param2);
 	EXPECT_EQ(APUNUM_BOOLEAN, param2->type());
 
-	APUParameter *nullParam = apu->getParameterWithName("shouldNotExist");
-	EXPECT_EQ(NULL, nullParam);
+	APUPtr<APUParameter> nullParam = apu->getParameterWithName("shouldNotExist");
+	EXPECT_FALSE(nullParam);
 }
 
 TEST_F(APUApiTestFixture, test_param_list)

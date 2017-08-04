@@ -8,8 +8,8 @@ protected:
 	void SetUp()
 	{
 		paramMap = new APUParameterMap();
-		paramMap->addParameter(new APUParameter("param1", APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0)));
-		paramMap->addParameter(new APUParameter("param2", APUNUM_BOOLEAN, APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0)));
+		paramMap->addParameter(new APUParameter(APUStringMake("param1"), APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0)));
+		paramMap->addParameter(new APUParameter(APUStringMake("param2"), APUNUM_BOOLEAN, APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0)));
 	}
 };
 
@@ -24,20 +24,20 @@ TEST_F(APUParameterMapTestFixture, test_iterator)
 
 	for (; it.valid(); ++it)
 	{
-		std::string name = it.first();
-		if (name == "param1")
+		APUPtr<APUString> name = it.first();
+		if (name->equals("param1"))
 		{
 			found[0] = true;
-			EXPECT_TRUE(it.second() != NULL);
+			EXPECT_TRUE(it.second());
 		}
-		else if (name == "param2")
+		else if (name->equals("param2"))
 		{
 			found[1] = true;
-			EXPECT_TRUE(it.second()!= NULL);
+			EXPECT_TRUE(it.second());
 		}
 		else
 		{
-			std::cout << "name was: " << name << std::endl;
+			std::cout << "name was: " << name->str() << std::endl;
 			EXPECT_TRUE(false); //Something bad happened
 		}
 	}
@@ -62,7 +62,7 @@ TEST_F(APUParameterMapTestFixture, test_api)
 TEST_F(APUParameterMapTestFixture, test_memory)
 {
 	APUParameterMap *memParamMap = new APUParameterMap();
-	APUPtr<APUParameter> param = new APUParameter("memParam", APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
+	APUPtr<APUParameter> param = new APUParameter(APUStringMake("memParam"), APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
 	memParamMap->addParameter(param);
 	EXPECT_EQ(3, param->addRef());
 	EXPECT_EQ(2, param->decRef());

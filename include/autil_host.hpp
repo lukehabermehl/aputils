@@ -32,8 +32,8 @@ class AudioDevice
 public:
     APUOBJ_FWDDECL
 
-    AudioDevice(AudioDeviceIndex index, const char *name)
-    : m_name(new APUString(name))
+    AudioDevice(AudioDeviceIndex index, APUString *deviceName)
+    : m_name(deviceName)
     , m_index(index)
     {}
 

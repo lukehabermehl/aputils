@@ -41,7 +41,7 @@ public:
     /** Get the sample rate */
     unsigned long getSampleRate();
     /** Get the name of the APU */
-    virtual const char * getName();
+    virtual APUObjRet<APUString> getName();
 
     virtual unsigned long getPreferredSampleRate();
 

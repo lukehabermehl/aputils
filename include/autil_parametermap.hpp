@@ -28,9 +28,9 @@ public:
         
     public:
         /** The name of the parameter */
-        const char *first();
+        APUObjRet<APUString> first();
         /** The parameter instance */
-        APUParameter *second();
+        APUObjRet<APUParameter> second();
         /** Move the iterator forward to the next key/value pair */
         Iterator& operator++();
         /** @return true if iterator points to a valid key/value pair. Otherwise, false. */
@@ -47,7 +47,7 @@ public:
     virtual ~APUParameterMap();
 
     void addParameter(APUParameter *parameter);
-    APUParameter *parameterWithName(const char *name) const;
+    APUObjRet<APUParameter> parameterWithName(const char *name) const;
     size_t size() const;
 
     Iterator begin() const;
