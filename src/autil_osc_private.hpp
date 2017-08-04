@@ -90,10 +90,16 @@ public:
         }
     }
 
-    inline float getAt(size_t index) {
+    inline float getAt(double index) {
         assert(index < WAVE_TABLE_SIZE);
         assert(m_table != NULL);
-        return m_table[index];
+
+        size_t low = floor(index);
+        size_t high = ceil(index);
+
+        double slope = (m_table[high] - m_table[low]) / ((double)high - (double)low);
+
+        return m_table[low] + ((index - (double)low) * slope);
     }
 };
 
@@ -110,7 +116,7 @@ public:
     double freqHz;
     double inc;
 
-    size_t index;
+    double index;
 
     void update();
     float getNextSample();

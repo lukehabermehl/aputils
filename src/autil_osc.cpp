@@ -171,8 +171,8 @@ float
 APUWaveTableOscillator::Pimpl::getNextSample()
 {
     index += inc;
-    if (index >= WAVE_TABLE_SIZE) {
-        index -= WAVE_TABLE_SIZE;
+    if (index >= (double)WAVE_TABLE_SIZE) {
+        index -= (double)WAVE_TABLE_SIZE;
     }
 
     return SineWaveTable::getSingleton().getAt(index);
