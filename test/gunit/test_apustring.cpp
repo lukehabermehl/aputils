@@ -7,7 +7,7 @@ class APUStringTestFixture : public ::testing::Test
 
 TEST_F(APUStringTestFixture, test_basics)
 {
-	APUPtr<APUString> str = new APUString("Hello, world!");
+	APUPtr<APUString> str = APUStringMake("Hello, world!");
 	EXPECT_EQ(13, str->length());
 
 	EXPECT_EQ(0, strcmp("Hello, world!", str->str()));
@@ -15,13 +15,13 @@ TEST_F(APUStringTestFixture, test_basics)
 
 TEST_F(APUStringTestFixture, test_compare)
 {
-	APUPtr<APUString> str1 = new APUString("one");
-	APUPtr<APUString> str2 = new APUString("two");
+	APUPtr<APUString> str1 = APUStringMake("one");
+	APUPtr<APUString> str2 = APUStringMake("two");
 
 	EXPECT_TRUE(str1->compare(str2));
 	EXPECT_FALSE(str2->compare(str1));
 
-	str2 = new APUString("one");
+	str2 = (APUString *)APUStringMake("one");
 
 	EXPECT_FALSE(str1->compare(str2));
 	EXPECT_FALSE(str2->compare(str1));
@@ -31,8 +31,8 @@ TEST_F(APUStringTestFixture, test_compare)
 
 TEST_F(APUStringTestFixture, test_append)
 {
-	APUPtr<APUString> string1 = new APUString("Hello");
-	APUPtr<APUString> string2 = new APUString(", world!");
+	APUPtr<APUString> string1 = APUStringMake("Hello");
+	APUPtr<APUString> string2 = APUStringMake(", world!");
 	APUPtr<APUString> combined = string1->append(string2);
 
 	EXPECT_TRUE(combined->equals("Hello, world!"));

@@ -94,9 +94,3 @@ bool APUParameterMap::Iterator::valid()
 {
     return pimpl_->mapIterator != pimpl_->mapPtr->end();
 }
-
-APUObjRet<APUString> APUStringMake(const char *name)
-{
-    return new APUString(name);
-}
-

@@ -78,7 +78,7 @@ unsigned long AudioProcessingUnit::getPreferredSampleRate()
 
 APUObjRet<APUString> AudioProcessingUnit::getName()
 {
-    static APUPtr<APUString> defaultName = new APUString("Unnamed APU");
+    static APUPtr<APUString> defaultName = APUStringMake("Unnamed APU");
     return defaultName;
 }
 

@@ -11,6 +11,7 @@
 
 #include "autil_obj.hpp"
 
+/** Interface for modulation sources */
 class APUModSource
 : public APUObjectInterface
 {

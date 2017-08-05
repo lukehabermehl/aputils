@@ -80,7 +80,7 @@ APUPortAudioHost::getDevices() const
     for (int i=0; i<devCount; i++)
     {
         const PaDeviceInfo *info = Pa_GetDeviceInfo(i);
-        APUPtr<AudioDevice> dev = new AudioDevice(i, new APUString(info->name));
+        APUPtr<AudioDevice> dev = new AudioDevice(i, APUStringMake(info->name));
         devices->addObject(dev);
     }
     

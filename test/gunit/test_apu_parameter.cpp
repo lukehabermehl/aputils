@@ -83,8 +83,8 @@ TEST_F(APUParameterTestFixture, test_units)
 TEST_F(APUParameterTestFixture, test_enum_param)
 {
 	APUPtr<APUEnumerator<APUString> > stringsEnum = new APUEnumerator<APUString>();
-	stringsEnum->addObject(new APUString("OFF"));
-	stringsEnum->addObject(new APUString("ON"));
+	stringsEnum->addObject(APUStringMake("OFF"));
+	stringsEnum->addObject(APUStringMake("ON"));
 
 	APUPtr<APUArray<APUString> > strings = new APUArray<APUString>(stringsEnum);
 	APUEnumParameter enumParam(APUStringMake("enumParam"), strings.ptr(), NULL);
