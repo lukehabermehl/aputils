@@ -46,6 +46,9 @@ public:
       */
     static APUObjRet<APUString> format(const char *fmt, ...);
 
+    /** Equivalent to APUStringMake(). */
+    static APUObjRet<APUString> newInstance(const char *str);
+
     /** Determine if a string has the same value as the target
       * @return true if the target and the argument have the same value
       */
@@ -58,12 +61,17 @@ public:
     bool compare(APUString *);
     bool compare(const char *);
 
+protected:
+    void * operator new(size_t);
+
 private:
     class Pimpl;
     Pimpl *pimpl_;
 };
 
-// Helper to create a new APUString reference
+/** Helper to create a new APUString reference.
+  * Use this function instead of calling the new() operator
+  */
 APUObjRet<APUString> APUStringMake(const char *str);
 
 

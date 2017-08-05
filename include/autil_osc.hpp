@@ -23,7 +23,7 @@ public:
     virtual double getFrequency() = 0;
     /** Get the next sample in the waveform */
     virtual float getNextSample() = 0;
-    /** Set the sampling rate */
+    /** Set the sample rate. Must be called before getNextSample() */
     virtual void setSampleRate(double sampleRate) = 0;
 
     virtual ~APUWaveSource() {}
@@ -37,8 +37,18 @@ class APUOscModSource
 public:
     APUOBJ_FWDDECL
 
+    /** Construct the modulation source using the given wave source.
+      * This object will use the wave source internally to generate modulation values
+      */
     APUOscModSource(APUWaveSource *waveSource);
     virtual ~APUOscModSource();
+
+    /** Set the sample rate of the internal wave source */
+    virtual void setSampleRate(double sampleRate);
+    /** Set the frequency of the internal wave source */
+    virtual void setFrequency(double freqHz);
+    /** Get the frequency of the internal wave source */
+    virtual double getFrequency();
 
     // APUModSource
     virtual float getModulationValue();
@@ -84,6 +94,7 @@ private:
     Pimpl *pimpl_;
 };
 
+/** Oscillator that uses a wave table to lookup values */
 class APUWaveTableOscillator
 : public APUWaveSource
 , public APUObject
@@ -94,15 +105,21 @@ public:
     APUWaveTableOscillator();
     virtual ~APUWaveTableOscillator();
 
+    /** Available waveforms for this type of oscillator */
     enum Waveform {
         SINE
     };
 
+    /** Set the waveform to generate */
     virtual void setWaveform(Waveform waveform);
 
-    virtual void setFrequency(double freqHq);
+    /** Set the center frequency (pitch) in Hertz */
+    virtual void setFrequency(double freqHz);
+    /** Get the center frequency (pitch) */
     virtual double getFrequency();
+    /** Get the next sample value for the waveform at the current frequency */
     virtual float getNextSample();
+    /** Set the sample rate. This must be set before calling getNextSample() */
     virtual void setSampleRate(double sampleRate);
 
 private:

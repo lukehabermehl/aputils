@@ -112,6 +112,24 @@ APUOscModSource::next()
     m_pimpl->currentValue = m_pimpl->waveSource->getNextSample();
 }
 
+void
+APUOscModSource::setSampleRate(double sampleRate)
+{
+    m_pimpl->waveSource->setSampleRate(sampleRate);
+}
+
+void
+APUOscModSource::setFrequency(double freqHz)
+{
+    m_pimpl->waveSource->setFrequency(freqHz);
+}
+
+double
+APUOscModSource::getFrequency()
+{
+    return m_pimpl->waveSource->getFrequency();
+}
+
 //---------------------------------------------------------
 // APUWaveTableOscillator
 //---------------------------------------------------------

@@ -41,7 +41,7 @@ APUString::str()
 APUObjRet<APUString>
 APUString::copy()
 {
-    APUString *copystr = new APUString(str());
+    APUString *copystr = APUStringMake(str());
     return copystr;
 }
 
@@ -57,7 +57,7 @@ APUString::append(APUString *appendStr)
     memcpy(&buffer[length()], appendStr->str(), appendStr->length());
     buffer[length() + appendStr->length()] = '\0';
 
-    APUString *ret = new APUString(buffer);
+    APUString *ret = ::new APUString(buffer);
     delete []buffer;
 
     return ret;
@@ -101,7 +101,7 @@ APUObjRet<APUString>
 APUString::format(const char *fmt, ...)
 {
     if (fmt == NULL) {
-        return new APUString();
+        return ::new APUString();
     }
     va_list args;
     va_start(args, fmt);
@@ -122,7 +122,20 @@ APUString::format(const char *fmt, ...)
         }
     }
 
-    APUString *ret = new APUString(buf);
+    APUString *ret = ::new APUString(buf);
     delete[] buf;
     return ret;
 }
+
+APUObjRet<APUString>
+APUString::newInstance(const char *str)
+{
+    return ::new APUString(str);
+}
+
+APUObjRet<APUString>
+APUStringMake(const char *str)
+{
+    return APUString::newInstance(str);
+}
+

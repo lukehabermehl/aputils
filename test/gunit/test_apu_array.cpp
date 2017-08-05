@@ -19,9 +19,9 @@ protected:
 
 	void initEnum() {
 		m_enum = new APUEnumerator<APUString>();
-		m_enum->addObject(new APUString("one"));
-		m_enum->addObject(new APUString("two"));
-		m_enum->addObject(new APUString("three"));
+		m_enum->addObject(APUStringMake("one"));
+		m_enum->addObject(APUStringMake("two"));
+		m_enum->addObject(APUStringMake("three"));
 	}
 
 	APUPtr<APUEnumerator<APUString> > m_enum;
