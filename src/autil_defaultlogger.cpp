@@ -124,17 +124,17 @@ void LoggerImpl::Queue::popFront()
 APUDefaultLogger::APUDefaultLogger()
 : BASE_CLASS()
 {
-    pimpl_ = new Pimpl();
+    m_pimpl = new Pimpl();
 }
 
 APUDefaultLogger::~APUDefaultLogger()
 {
-    delete pimpl_;
+    delete m_pimpl;
 }
 
 void APUDefaultLogger::log(const char *tag, int logLevel, const char *fmt, ...)
 {
-    if (logLevel > pimpl_->logLevel) {
+    if (logLevel > m_pimpl->logLevel) {
         return;
     }
 
@@ -144,15 +144,15 @@ void APUDefaultLogger::log(const char *tag, int logLevel, const char *fmt, ...)
     va_start(args, fmt);
     vsprintf(logstr, fmt, args);
 
-    logger_append(pimpl_, new LoggerQueue::Item(tag, logstr, stdout));
+    logger_append(m_pimpl, new LoggerQueue::Item(tag, logstr, stdout));
 }
 
 void APUDefaultLogger::setOutputFilepath(const char *filepath)
 {
-    pimpl_->outputFile = fopen(filepath, "a");
+    m_pimpl->outputFile = fopen(filepath, "a");
 }
 
 void APUDefaultLogger::setLogLevel(int level)
 {
-    pimpl_->logLevel = level;
+    m_pimpl->logLevel = level;
 }

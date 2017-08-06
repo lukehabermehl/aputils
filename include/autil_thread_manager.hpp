@@ -19,14 +19,14 @@
 typedef void (*dispatchable_fn)(void *);
 
 /** Simplify memory managment for threads */
-class AUtilThreadManager
+class APUThreadManager
 {
 public:
-    AUtilThreadManager();
-    ~AUtilThreadManager();
+    APUThreadManager();
+    ~APUThreadManager();
     
     /** Get the singleton instance */
-    static AUtilThreadManager * sharedThreadManager();
+    static APUThreadManager * sharedThreadManager();
     
     /** Create a new managed thread. The memory will be automatically released when the thread exits
       * @param func function to call in the thread
@@ -35,10 +35,10 @@ public:
     void dispatch(dispatchable_fn func, void *ctx);
     
 private:
-    std::thread *worker_;
-    std::deque<std::thread *> threads_;
-    std::mutex mtx_;
-    bool isRunning_;
+    std::thread *m_worker;
+    std::deque<std::thread *> m_threads;
+    std::mutex m_mtx;
+    bool m_isRunning;
     
     static void workerFunction(void *ctx);
 };
@@ -47,6 +47,6 @@ private:
   * @param func function to call
   * @param ctx context pointer to pass
   */
-void AUtilDispatchThread(dispatchable_fn func, void *ctx);
+void APUDispatchThread(dispatchable_fn func, void *ctx);
 
 #endif /* autil_thread_manager_h */

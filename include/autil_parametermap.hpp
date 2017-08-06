@@ -38,7 +38,7 @@ public:
 
     private:
         class Pimpl;
-        Pimpl * pimpl_;
+        Pimpl * m_pimpl;
     };
 
     APUOBJ_FWDDECL
@@ -54,7 +54,7 @@ public:
 
 private:
     class Pimpl;
-    Pimpl *pimpl_;
+    Pimpl *m_pimpl;
 };
 
 #endif /* autil_parametermap_hpp */

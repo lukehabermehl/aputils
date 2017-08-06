@@ -56,7 +56,7 @@ public:
     class Pimpl;
 
 private:
-    Pimpl *pimpl_;
+    Pimpl *m_pimpl;
 };
 
 /** Set the singleton logger. If no logger is set, the built-in logger is used */

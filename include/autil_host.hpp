@@ -17,9 +17,9 @@
 /** Indicates where the Audio Manager will pull input from */
 enum AudioInputMode
 {
-    AudioInputModeNone,
-    AudioInputModeFile,
-    AudioInputModeDevice
+    INPUT_NONE,
+    INPUT_FILE,
+    INPUT_DEVICE
 };
 
 /** Use AudioDeviceIndex when referring to the integer index of an audio device */

@@ -14,7 +14,7 @@ PortAudioKernel::PortAudioKernel()
 , numInputChannels(1)
 , numOutputChannels(1)
 , stream(NULL)
-, inputMode(AudioInputModeNone)
+, inputMode(INPUT_NONE)
 , status(APUHostInterface::DONE)
 , streamStatusChangeCallback(NULL)
 , streamStatusChangeCallbackCtx(NULL)
@@ -51,17 +51,17 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
     PaStreamParameters inputParameters;
 
     switch (inputMode) {
-        case AudioInputModeNone:
+        case INPUT_NONE:
             if (audioProcessingUnit) {
                 sampleRate = audioProcessingUnit->getPreferredSampleRate();
             } else {
                 sampleRate = 44100;
             }
             break;
-        case AudioInputModeFile:
+        case INPUT_FILE:
             sampleRate = audioFile->sampleRate();
             break;
-        case AudioInputModeDevice:
+        case INPUT_DEVICE:
             //TODO: use set inputDeviceIndex
             const PaDeviceInfo *inputDevInfo = Pa_GetDeviceInfo(Pa_GetDefaultInputDevice());
             sampleRate = inputDevInfo->defaultSampleRate;
@@ -76,7 +76,7 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
                         "Open stream with sample rate: %lu",
                         sampleRate);
 
-    const PaStreamParameters *pParams = (inputMode != AudioInputModeDevice) ? NULL : &inputParameters;
+    const PaStreamParameters *pParams = (inputMode != INPUT_DEVICE) ? NULL : &inputParameters;
 
     paError = Pa_OpenStream(&stream,
                             pParams,
@@ -164,7 +164,7 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     float *out = (float *)outputBuffer;
     float *in = 0;
-    if (inputMode != AudioInputModeDevice) {
+    if (inputMode != INPUT_DEVICE) {
         in = (float *)inputBuffer;
     }
 
@@ -172,7 +172,7 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     for (unsigned long i=0; i<framesPerBuffer; i++)
     {
-        if (inputMode == AudioInputModeFile) {
+        if (inputMode == INPUT_FILE) {
             if (audioFile->nextFrame(&in) != AudioFileBufferStatusOK) {
                 ret = paComplete;
                 break;

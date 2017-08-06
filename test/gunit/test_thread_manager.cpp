@@ -35,7 +35,7 @@ TEST_F(ThreadManagerTestFixture, test_thread_dispatch)
 {
 	int count = 4;
 	for (int i=0; i<count; i++) {
-		AUtilDispatchThread(ThreadManagerTestFixture::ThreadWokerFunc, this);
+		APUDispatchThread(ThreadManagerTestFixture::ThreadWokerFunc, this);
 	}
 
 	sleep(2);

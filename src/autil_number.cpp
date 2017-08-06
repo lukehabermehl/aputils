@@ -11,8 +11,8 @@
 
 APUNumber::APUNumber()
 {
-    data_.intValue = 0;
-    numberType_ = APUNUM_INTEGER;
+    m_data.intValue = 0;
+    m_numberType = APUNUM_INTEGER;
 }
 
 APUNumber::APUNumber(float f)
@@ -22,44 +22,44 @@ APUNumber::APUNumber(float f)
 
 APUNumberType APUNumber::getType() const
 {
-    return numberType_;
+    return m_numberType;
 }
 
 void APUNumber::setIntegerValue(int32_t i)
 {
-    data_.intValue = i;
-    numberType_ = APUNumberType::APUNUM_INTEGER;
+    m_data.intValue = i;
+    m_numberType = APUNumberType::APUNUM_INTEGER;
 }
 
 void APUNumber::setUnsignedIntValue(uint32_t u)
 {
-    data_.unsignedIntValue = u;
-    numberType_ = APUNumberType::APUNUM_UINT;
+    m_data.unsignedIntValue = u;
+    m_numberType = APUNumberType::APUNUM_UINT;
 }
 
 void APUNumber::setFloatValue(float f)
 {
-    data_.floatValue = f;
-    numberType_ = APUNumberType::APUNUM_FLOAT;
+    m_data.floatValue = f;
+    m_numberType = APUNumberType::APUNUM_FLOAT;
 }
 
 void APUNumber::setBoolValue(bool b)
 {
-    data_.boolValue = b;
-    numberType_ = APUNumberType::APUNUM_BOOLEAN;
+    m_data.boolValue = b;
+    m_numberType = APUNumberType::APUNUM_BOOLEAN;
 }
 
 int32_t APUNumber::integerValue() const
 {
-    switch (numberType_) {
+    switch (m_numberType) {
         case APUNumberType::APUNUM_INTEGER:
-            return data_.intValue;
+            return m_data.intValue;
         case APUNumberType::APUNUM_UINT:
-            return data_.unsignedIntValue;
+            return m_data.unsignedIntValue;
         case APUNumberType::APUNUM_FLOAT:
-            return (int)floorf(data_.floatValue);
+            return (int)floorf(m_data.floatValue);
         case APUNumberType::APUNUM_BOOLEAN:
-            return data_.boolValue ? 1 : 0;
+            return m_data.boolValue ? 1 : 0;
         default:
             return 0;
     }
@@ -67,9 +67,9 @@ int32_t APUNumber::integerValue() const
 
 uint32_t APUNumber::unsignedIntValue() const
 {
-    switch(numberType_) {
+    switch(m_numberType) {
         case APUNumberType::APUNUM_UINT:
-            return data_.unsignedIntValue;
+            return m_data.unsignedIntValue;
         default:
             return integerValue();
     }
@@ -77,15 +77,15 @@ uint32_t APUNumber::unsignedIntValue() const
 
 float APUNumber::floatValue() const
 {
-    switch (numberType_) {
+    switch (m_numberType) {
         case APUNumberType::APUNUM_INTEGER:
-            return (float)(data_.intValue);
+            return (float)(m_data.intValue);
         case APUNumberType::APUNUM_UINT:
-            return (float)(data_.unsignedIntValue);
+            return (float)(m_data.unsignedIntValue);
         case APUNumberType::APUNUM_FLOAT:
-            return data_.floatValue;
+            return m_data.floatValue;
         case APUNumberType::APUNUM_BOOLEAN:
-            return data_.boolValue ? 1.f : 0.f;
+            return m_data.boolValue ? 1.f : 0.f;
         default:
             return 0;
     }

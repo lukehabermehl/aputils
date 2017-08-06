@@ -32,7 +32,7 @@ public:
     /** Get a list of the available audio devices */
     virtual APUObjRet<APUEnumerable<AudioDevice> > getDevices() const;
 
-    /** Set the input device index (use with AudioInputModeDevice) */
+    /** Set the input device index (use with INPUT_DEVICE mode) */
     virtual void setInputDevice(AudioDeviceIndex devIndex);
 
     /** Get the current input device index.
@@ -92,8 +92,8 @@ public:
     virtual void sleep(unsigned long millisec);
     
 private:
-    class pimpl;
-    pimpl *_pimpl;
+    class Pimpl;
+    Pimpl *m_pimpl;
     
     static void streamStatusChangeCallback(void *ctx);
 };

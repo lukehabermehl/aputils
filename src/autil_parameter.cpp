@@ -17,70 +17,70 @@
 
 APUParameter::APUParameter(APUString *name, APUNumberType valueType, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb)
 {
-    _pimpl = new Pimpl(valueType, name, cb);
+    m_pimpl = new Pimpl(valueType, name, cb);
     setMinValue(minValue);
     setMaxValue(maxValue);
-    _pimpl->current = defaultValue;
-    _pimpl->target = defaultValue;
+    m_pimpl->current = defaultValue;
+    m_pimpl->target = defaultValue;
 }
 
 APUParameter::~APUParameter()
 {
-    delete _pimpl;
+    delete m_pimpl;
 }
 
 APUObjRet<APUString> APUParameter::getName()
 {
-    return _pimpl->name;
+    return m_pimpl->name;
 }
 
 void APUParameter::setName(APUString *name)
 {
-    _pimpl->name = name;
+    m_pimpl->name = name;
 }
 
 APUObjRet<APUString> APUParameter::getUnits()
 {
-    return _pimpl->units;
+    return m_pimpl->units;
 }
 
 void APUParameter::setUnits(APUString *units)
 {
-    _pimpl->units = units;
+    m_pimpl->units = units;
 }
 
 APUNumberType APUParameter::type()
 {
-    return _pimpl->valueType;
+    return m_pimpl->valueType;
 }
 
 void APUParameter::setCallback(APUParameterCallback *cb)
 {
-    _pimpl->cb = cb;
+    m_pimpl->cb = cb;
 }
 
 APUNumber APUParameter::getTarget()
 {
-    return _pimpl->target;
+    return m_pimpl->target;
 }
 
 APUNumber APUParameter::getCurrentValue()
 {
-    _pimpl->doModulate();
-    normalizeValue(_pimpl->current);
-    return _pimpl->current;
+    m_pimpl->doModulate();
+    normalizeValue(m_pimpl->current);
+    return m_pimpl->current;
 }
 
 bool APUParameter::setValue(APUNumber value)
 {
     bool ret = normalizeValue(value);
-    _pimpl->isSmoothing = false;
-    _pimpl->current = value;
-    _pimpl->target = value;
-    _pimpl->base = value;
+    m_pimpl->isSmoothing = false;
+    m_pimpl->current = value;
+    m_pimpl->target = value;
+    m_pimpl->base = value;
 
-    if (_pimpl->cb) {
-        _pimpl->cb->onParameterChanged(this);
+    if (m_pimpl->cb) {
+        m_pimpl->cb->onParameterChanged(this);
     }
 
     return !ret;
@@ -92,9 +92,9 @@ bool APUParameter::setTarget(APUNumber target)
     if (!isSmoothingEnabled()) {
         setValue(target);
     } else {
-        _pimpl->isSmoothing = true;
-        _pimpl->target = target;
-        _pimpl->diffPerUpdate = (_pimpl->target.floatValue() - _pimpl->current.floatValue()) / (float)_pimpl->smoothingFrames;
+        m_pimpl->isSmoothing = true;
+        m_pimpl->target = target;
+        m_pimpl->diffPerUpdate = (m_pimpl->target.floatValue() - m_pimpl->current.floatValue()) / (float)m_pimpl->smoothingFrames;
     }
 
     return !ret;
@@ -102,68 +102,68 @@ bool APUParameter::setTarget(APUNumber target)
 
 void APUParameter::setMinValue(APUNumber minVal)
 {
-    _pimpl->minValue = minVal;
+    m_pimpl->minValue = minVal;
 }
 
 void APUParameter::setMaxValue(APUNumber maxVal)
 {
-    _pimpl->maxValue = maxVal;
+    m_pimpl->maxValue = maxVal;
 }
 
 APUNumber APUParameter::getMinValue()
 {
     APUNumber num;
-    num = _pimpl->minValue;
+    num = m_pimpl->minValue;
     return num;
 }
 
 APUNumber APUParameter::getMaxValue()
 {
     APUNumber num;
-    num = _pimpl->maxValue;
+    num = m_pimpl->maxValue;
     return num;
 }
 
 void APUParameter::setSmoothingEnabled(bool enabled)
 {
     if (type() == APUNUM_FLOAT)
-        _pimpl->smoothingEnabled = enabled;
+        m_pimpl->smoothingEnabled = enabled;
 }
 
 void APUParameter::setSmoothingInterval(double millisec)
 {
-    _pimpl->smoothingInterval_msec = millisec;
+    m_pimpl->smoothingInterval_msec = millisec;
 }
 
 double APUParameter::getSmoothingInterval()
 {
-    return _pimpl->smoothingInterval_msec;
+    return m_pimpl->smoothingInterval_msec;
 }
 
 bool APUParameter::isSmoothingEnabled()
 {
-    return _pimpl->smoothingEnabled;
+    return m_pimpl->smoothingEnabled;
 }
 
 APUUIAttribute APUParameter::getUIAttributes()
 {
-    return _pimpl->uiAttr;
+    return m_pimpl->uiAttr;
 }
 
 void APUParameter::update()
 {
-    if (_pimpl->isSmoothing) {
-        float cv = _pimpl->current.floatValue();
-        cv += _pimpl->diffPerUpdate;
-        _pimpl->current.setFloatValue(cv);
-        _pimpl->base.setFloatValue(cv);
+    if (m_pimpl->isSmoothing) {
+        float cv = m_pimpl->current.floatValue();
+        cv += m_pimpl->diffPerUpdate;
+        m_pimpl->current.setFloatValue(cv);
+        m_pimpl->base.setFloatValue(cv);
         
-        if (cv == _pimpl->target.floatValue()) {
-            _pimpl->isSmoothing = false;
+        if (cv == m_pimpl->target.floatValue()) {
+            m_pimpl->isSmoothing = false;
         }
 
-        if (_pimpl->cb) {
-            _pimpl->cb->onParameterChanged(this);
+        if (m_pimpl->cb) {
+            m_pimpl->cb->onParameterChanged(this);
         }
     }
 }
@@ -171,8 +171,8 @@ void APUParameter::update()
 void APUParameter::setSampleRate(size_t sampleRate)
 {
     double dSampleRate = (double)sampleRate;
-    double dFramesPerUpdate = dSampleRate * _pimpl->smoothingInterval_msec * 1000;
-    _pimpl->smoothingFrames = floor(dFramesPerUpdate);
+    double dFramesPerUpdate = dSampleRate * m_pimpl->smoothingInterval_msec * 1000;
+    m_pimpl->smoothingFrames = floor(dFramesPerUpdate);
 }
 
 bool APUParameter::normalizeValue(APUNumber &value)
@@ -182,22 +182,22 @@ bool APUParameter::normalizeValue(APUNumber &value)
     {
         case APUNUM_FLOAT:
         {
-            if (value.floatValue() < _pimpl->minValue.floatValue()) {
-                value.setFloatValue(_pimpl->minValue.floatValue());
+            if (value.floatValue() < m_pimpl->minValue.floatValue()) {
+                value.setFloatValue(m_pimpl->minValue.floatValue());
                 didNormalize = true;
-            } else if (value.floatValue() > _pimpl->maxValue.floatValue()) {
-                value.setFloatValue(_pimpl->maxValue.floatValue());
+            } else if (value.floatValue() > m_pimpl->maxValue.floatValue()) {
+                value.setFloatValue(m_pimpl->maxValue.floatValue());
                 didNormalize = true;
             }
             break;
         }
         case APUNUM_INTEGER:
         {
-            if (value.integerValue() < _pimpl->minValue.integerValue()) {
-                value.setIntegerValue(_pimpl->minValue.integerValue());
+            if (value.integerValue() < m_pimpl->minValue.integerValue()) {
+                value.setIntegerValue(m_pimpl->minValue.integerValue());
                 didNormalize = true;
-            } else if (value.integerValue() > _pimpl->maxValue.integerValue()) {
-                value.setIntegerValue(_pimpl->maxValue.integerValue());
+            } else if (value.integerValue() > m_pimpl->maxValue.integerValue()) {
+                value.setIntegerValue(m_pimpl->maxValue.integerValue());
                 didNormalize = true;
             }
             break;
@@ -211,17 +211,17 @@ bool APUParameter::normalizeValue(APUNumber &value)
 
 void APUParameter::setModulationDepth(float depth)
 {
-    _pimpl->modRange = depth * (_pimpl->maxValue.floatValue() - _pimpl->minValue.floatValue());
+    m_pimpl->modRange = depth * (m_pimpl->maxValue.floatValue() - m_pimpl->minValue.floatValue());
 }
 
 void APUParameter::setModulationSource(APUModSource *source)
 {
-    _pimpl->modSource = source;
+    m_pimpl->modSource = source;
 }
 
 void APUParameter::setUIAttributes(APUUIAttribute attr)
 {
-    _pimpl->uiAttr = attr;
+    m_pimpl->uiAttr = attr;
 }
 
 //----------------------------------------------------------------------------
@@ -231,27 +231,27 @@ void APUParameter::setUIAttributes(APUUIAttribute attr)
 APUEnumParameter::APUEnumParameter(APUString *name, APUArray<APUString> *strings, APUParameterCallback *cb)
 : APUParameter(name, APUNUM_UINT, APUNUM_UINT(0), APUNUM_UINT((uint32_t)strings->size()), APUNUM_UINT(0), cb)
 {
-    _enumParamPimpl = new EnumParamPimpl();
+    m_enumParamPimpl = new EnumParamPimpl();
     if (strings) {
-        _enumParamPimpl->strings = strings;
+        m_enumParamPimpl->strings = strings;
     }
     else {
-        _enumParamPimpl->strings = NULL;
+        m_enumParamPimpl->strings = NULL;
     }
 }
 
 APUEnumParameter::~APUEnumParameter()
 {
-    delete _enumParamPimpl;
+    delete m_enumParamPimpl;
 }
 
 APUObjRet<APUString> APUEnumParameter::stringForValue(uint32_t value)
 {
-    if (!_enumParamPimpl->strings) {
+    if (!m_enumParamPimpl->strings) {
         return NULL;
     }
 
-    return _enumParamPimpl->strings->getAt(value);
+    return m_enumParamPimpl->strings->getAt(value);
 }
 
 void APUEnumParameter::setMinValue(APUNumber minVal)

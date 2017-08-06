@@ -121,7 +121,7 @@ protected:
 
 private:
     class Pimpl;
-    Pimpl *_pimpl;
+    Pimpl *m_pimpl;
 };
 
 /** Parameter representing a set of discrete values */
@@ -146,7 +146,7 @@ public:
 
 private:
     class EnumParamPimpl;
-    EnumParamPimpl *_enumParamPimpl;
+    EnumParamPimpl *m_enumParamPimpl;
 };
 
 #endif /* autil_parameter_hpp */

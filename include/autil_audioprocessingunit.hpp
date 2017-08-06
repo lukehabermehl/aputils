@@ -66,7 +66,7 @@ protected:
     
 private:
     class Pimpl;
-    Pimpl *_pimpl;
+    Pimpl *m_pimpl;
 };
 
 #endif /* AudioProcessingUnit_hpp */

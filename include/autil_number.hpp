@@ -73,8 +73,8 @@ private:
         float floatValue;
     };
 
-    APUNumberContainer_ data_;
-    APUNumberType numberType_;
+    APUNumberContainer_ m_data;
+    APUNumberType m_numberType;
 };
 
 

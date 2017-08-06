@@ -20,7 +20,7 @@ class APUObjectMap
 : public APUObject
 {
     typedef std::unordered_map<K, V*> maptype;
-    maptype map_;
+    maptype m_map;
 
 public:
     APUOBJ_FWDDECL
@@ -30,8 +30,8 @@ public:
       */
     APUObjRet<V> get(const K& key) const
     {
-        auto it = map_.find(key);
-        if (it != map_.end()) {
+        auto it = m_map.find(key);
+        if (it != m_map.end()) {
             return it->second;
         }
         return NULL;
@@ -50,14 +50,14 @@ public:
         }
         if (value) {
             value->addRef();
-            map_[key] = value;
+            m_map[key] = value;
         } else {
-            map_.erase(key);
+            m_map.erase(key);
         }
     }
 
     /** @return the number of key/value pairs in the map */
-    size_t size() const { return map_.size(); }
+    size_t size() const { return m_map.size(); }
 
     /** Get all of the keys. Note that the map is unordered.
       * @param keys reference to a vector that will be populated with the the keys in the map
@@ -65,8 +65,8 @@ public:
     void getKeys(std::vector<K>& keys) const
     {
         keys.clear();
-        auto it = map_.begin();
-        while (it != map_.end()) {
+        auto it = m_map.begin();
+        while (it != m_map.end()) {
             keys.push_back(it->first);
             ++it;
         }
@@ -78,8 +78,8 @@ public:
     void getValues(std::vector<V *>& values) const
     {
         values.clear();
-        auto it = map_.begin();
-        while (it != map_.end()) {
+        auto it = m_map.begin();
+        while (it != m_map.end()) {
             values.push_back(it->second);
             ++it;
         }
@@ -118,8 +118,8 @@ public:
     Iterator begin() const
     {
         Iterator it;
-        it.mapptr_ = &map_;
-        it.iter_ = map_.begin();
+        it.mapptr_ = &m_map;
+        it.iter_ = m_map.begin();
 
         return it;
     }

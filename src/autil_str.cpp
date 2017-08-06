@@ -11,31 +11,31 @@
 
 APUString::APUString()
 {
-    pimpl_ = new Pimpl();
-    pimpl_->setStr("");
+    m_pimpl = new Pimpl();
+    m_pimpl->setStr("");
 }
 
 APUString::APUString(const char *cstr)
 {
-    pimpl_ = new Pimpl();
-    pimpl_->setStr(cstr);
+    m_pimpl = new Pimpl();
+    m_pimpl->setStr(cstr);
 }
 
 APUString::~APUString()
 {
-    delete pimpl_;
+    delete m_pimpl;
 }
 
 size_t
 APUString::length()
 {
-    return pimpl_->length;
+    return m_pimpl->length;
 }
 
 const char *
 APUString::str()
 {
-    return pimpl_->strbuf;
+    return m_pimpl->strbuf;
 }
 
 APUObjRet<APUString>
@@ -53,7 +53,7 @@ APUString::append(APUString *appendStr)
     }
 
     char *buffer = new char[length() + appendStr->length() + 1];
-    memcpy(buffer, pimpl_->strbuf, length());
+    memcpy(buffer, m_pimpl->strbuf, length());
     memcpy(&buffer[length()], appendStr->str(), appendStr->length());
     buffer[length() + appendStr->length()] = '\0';
 

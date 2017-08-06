@@ -71,9 +71,9 @@ public:
     /** Determine if the audio file is set to loop */
     bool isLooping();
     
-    class pimpl;
+    class Pimpl;
 private:
-    pimpl *_pimpl;
+    Pimpl *m_pimpl;
 };
 
 #endif /* AudioFile_hpp */
