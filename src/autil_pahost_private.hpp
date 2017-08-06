@@ -15,10 +15,10 @@
 
 #include <string.h>
 
-class APUPortAudioHost::pimpl
+class APUPortAudioHost::Pimpl
 {
 public:
-    ~pimpl();
+    ~Pimpl();
     PortAudioKernel *dspKernel;
     AudioDeviceIndex outputDeviceIndex;
     AudioDeviceIndex inputDeviceIndex;

@@ -91,7 +91,7 @@ public:
 int main()
 {
     APUPtr<APUPortAudioHost> host = new APUPortAudioHost();
-    host->setInputMode(AudioInputModeNone);
+    host->setInputMode(INPUT_NONE);
     host->setOutputDevice(1);
     APUPtr<AudioProcessingUnit> apu = new TestAPU();
     host->setAudioProcessingUnit(apu);

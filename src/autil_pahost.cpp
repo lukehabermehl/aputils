@@ -18,55 +18,55 @@ static const char *kAPUPortAudioHostLogPrefix = "[APUPortAudioHost]";
 
 APUPortAudioHost::APUPortAudioHost()
 {
-    _pimpl = new pimpl;
-    _pimpl->dspKernel = new PortAudioKernel();
-    _pimpl->dspKernel->streamStatusChangeCallback = APUPortAudioHost::streamStatusChangeCallback;
-    _pimpl->dspKernel->streamStatusChangeCallbackCtx = this;
-    _pimpl->outputDeviceIndex = 1;
-    _pimpl->eventSinks = new APUEnumerator<APUHostEventSink>();
+    m_pimpl = new Pimpl;
+    m_pimpl->dspKernel = new PortAudioKernel();
+    m_pimpl->dspKernel->streamStatusChangeCallback = APUPortAudioHost::streamStatusChangeCallback;
+    m_pimpl->dspKernel->streamStatusChangeCallbackCtx = this;
+    m_pimpl->outputDeviceIndex = 1;
+    m_pimpl->eventSinks = new APUEnumerator<APUHostEventSink>();
     
     Pa_Initialize();
 }
 
 APUPortAudioHost::~APUPortAudioHost()
 {
-    delete _pimpl;
+    delete m_pimpl;
     Pa_Terminate();
 }
 
 void APUPortAudioHost::setNumOutputChannels(int numOutputChannels)
 {
-    _pimpl->dspKernel->numOutputChannels = numOutputChannels;
+    m_pimpl->dspKernel->numOutputChannels = numOutputChannels;
 }
 
 int APUPortAudioHost::getNumOutputChannels() const
 {
-    return _pimpl->dspKernel->numOutputChannels;
+    return m_pimpl->dspKernel->numOutputChannels;
 }
 
 void APUPortAudioHost::setInputMode(AudioInputMode mode)
 {
-    _pimpl->dspKernel->inputMode = mode;
+    m_pimpl->dspKernel->inputMode = mode;
 }
 
 AudioDeviceIndex APUPortAudioHost::getInputDevice() const
 {
-    return _pimpl->inputDeviceIndex;
+    return m_pimpl->inputDeviceIndex;
 }
 
 AudioDeviceIndex APUPortAudioHost::getOutputDevice() const
 {
-    return _pimpl->outputDeviceIndex;
+    return m_pimpl->outputDeviceIndex;
 }
 
 void APUPortAudioHost::setInputDevice(AudioDeviceIndex devIndex)
 {
-    _pimpl->inputDeviceIndex = devIndex;
+    m_pimpl->inputDeviceIndex = devIndex;
 }
 
 void APUPortAudioHost::setOutputDevice(AudioDeviceIndex devIndex)
 {
-    _pimpl->outputDeviceIndex = devIndex;
+    m_pimpl->outputDeviceIndex = devIndex;
 }
 
 APUObjRet<APUEnumerable<AudioDevice> >
@@ -89,7 +89,7 @@ APUPortAudioHost::getDevices() const
 
 APUHostInterface::ErrorCode APUPortAudioHost::getError() const
 {
-    switch (_pimpl->dspKernel->paError)
+    switch (m_pimpl->dspKernel->paError)
     {
         case paNoError:
             return APUHostInterface::OK;
@@ -110,24 +110,24 @@ APUHostInterface::ErrorCode APUPortAudioHost::getError() const
 
 void APUPortAudioHost::setAudioProcessingUnit(AudioProcessingUnit *unit)
 {
-    _pimpl->dspKernel->audioProcessingUnit = unit;
+    m_pimpl->dspKernel->audioProcessingUnit = unit;
     if (unit == NULL) {
         APUGetLogger()->log(kAPUPortAudioHostLogPrefix,
                             LOG_LEVEL_ERROR,
                             "APUnit is null!");
         return;
     }
-    unit->setSampleRate(_pimpl->dspKernel->sampleRate);
+    unit->setSampleRate(m_pimpl->dspKernel->sampleRate);
 }
 
 bool APUPortAudioHost::initialize()
 {
-    return _pimpl->dspKernel->open(getOutputDevice());
+    return m_pimpl->dspKernel->open(getOutputDevice());
 }
 
 bool APUPortAudioHost::destroy()
 {
-    if (_pimpl->dspKernel->close())
+    if (m_pimpl->dspKernel->close())
     {
         return true;
     }
@@ -137,13 +137,13 @@ bool APUPortAudioHost::destroy()
 
 bool APUPortAudioHost::start()
 {
-    _pimpl->dspKernel->audioProcessingUnit->setupInitialState();
-    return _pimpl->dspKernel->start();
+    m_pimpl->dspKernel->audioProcessingUnit->setupInitialState();
+    return m_pimpl->dspKernel->start();
 }
 
 bool APUPortAudioHost::stop()
 {
-    return _pimpl->dspKernel->stop();
+    return m_pimpl->dspKernel->stop();
 }
 
 bool APUPortAudioHost::setInputFile(AudioFile *file)
@@ -151,19 +151,19 @@ bool APUPortAudioHost::setInputFile(AudioFile *file)
     if (file == NULL || file->mode() == AudioFileModeWriteOnly)
         return false;
     
-    _pimpl->dspKernel->audioFile = file;
+    m_pimpl->dspKernel->audioFile = file;
     
     return true;
 }
 
 APUObjRet<AudioFile> APUPortAudioHost::getInputFile() const
 {
-    return _pimpl->dspKernel->audioFile;
+    return m_pimpl->dspKernel->audioFile;
 }
 
 APUHostInterface::Status APUPortAudioHost::getStatus() const
 {
-    return _pimpl->dspKernel->status;
+    return m_pimpl->dspKernel->status;
 }
 
 void APUPortAudioHost::sleep(unsigned long millisec)
@@ -173,36 +173,36 @@ void APUPortAudioHost::sleep(unsigned long millisec)
 
 void APUPortAudioHost::setLooping(bool looping)
 {
-    _pimpl->dspKernel->audioFile->setLooping(looping);
+    m_pimpl->dspKernel->audioFile->setLooping(looping);
 }
 
 void APUPortAudioHost::subscribe(APUHostEventSink *eventSink)
 {
     if (eventSink) {
-        _pimpl->eventSinks->addObject(eventSink);
+        m_pimpl->eventSinks->addObject(eventSink);
     }
 }
 
 void APUPortAudioHost::unsubscribe(APUHostEventSink *eventSink)
 {
-    if (eventSink && _pimpl->eventSinks->size()) {
-        _pimpl->eventSinks->removeObject(eventSink);
+    if (eventSink && m_pimpl->eventSinks->size()) {
+        m_pimpl->eventSinks->removeObject(eventSink);
     }
 }
 
 void APUPortAudioHost::streamStatusChangeCallback(void *ctx)
 {
     APUPortAudioHost *audioManager = (APUPortAudioHost *)ctx;
-    if (audioManager->_pimpl->eventSinks->size()) {
-        audioManager->_pimpl->eventSinks->reset();
+    if (audioManager->m_pimpl->eventSinks->size()) {
+        audioManager->m_pimpl->eventSinks->reset();
         do {
-            audioManager->_pimpl->eventSinks->getCurrent()->handleEvent(APUHOST_EVENT_STATUSCHANGED,
+            audioManager->m_pimpl->eventSinks->getCurrent()->handleEvent(APUHOST_EVENT_STATUSCHANGED,
                                                                         audioManager);
-        } while (audioManager->_pimpl->eventSinks->moveNext());
+        } while (audioManager->m_pimpl->eventSinks->moveNext());
     }
 }
 
-APUPortAudioHost::pimpl::~pimpl()
+APUPortAudioHost::Pimpl::~Pimpl()
 {
     assert(eventSinks->size() == 0);
     delete dspKernel;

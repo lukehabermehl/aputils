@@ -19,7 +19,7 @@ static const char * kAudioFileLoggerPrefix = "[AudioFile]";
 
 void file_buffer_worker(void *ctx)
 {
-    AudioFile::pimpl *fileImpl = (AudioFile::pimpl *)ctx;
+    AudioFile::Pimpl *fileImpl = (AudioFile::Pimpl *)ctx;
     int writeBuffer = (fileImpl->currentBufIndex == 0) ? 1 : 0;
     sf_seek(fileImpl->sndfile, fileImpl->framesBuffered, SF_SEEK_SET);
     size_t read = sf_readf_float(fileImpl->sndfile, fileImpl->bufs[writeBuffer], FRAMES_PER_FILE_BUFFER);
@@ -59,100 +59,100 @@ AudioFile::AudioFile(const char *filepath, AudioFileMode mode)
             break;
     }
     
-    _pimpl = new pimpl;
+    m_pimpl = new Pimpl;
     
-    _pimpl->mode = mode;
-    _pimpl->sndfile = sf_open(filepath, sfmode, &_pimpl->sfInfo);
-    if (!_pimpl->sndfile) {
-        const char *errormsg = sf_strerror(_pimpl->sndfile);
+    m_pimpl->mode = mode;
+    m_pimpl->sndfile = sf_open(filepath, sfmode, &m_pimpl->sfInfo);
+    if (!m_pimpl->sndfile) {
+        const char *errormsg = sf_strerror(m_pimpl->sndfile);
         APUGetLogger()->log(kAudioFileLoggerPrefix, LOG_LEVEL_ERROR,
                             "Failed to load file: %s",
                             errormsg);
         return;
     }
-    _pimpl->totalSize = _pimpl->sfInfo.channels * _pimpl->sfInfo.frames;
-    _pimpl->readIndex = 0;
-    _pimpl->currentBufIndex = 0;
-    _pimpl->samplesRead = 0;
+    m_pimpl->totalSize = m_pimpl->sfInfo.channels * m_pimpl->sfInfo.frames;
+    m_pimpl->readIndex = 0;
+    m_pimpl->currentBufIndex = 0;
+    m_pimpl->samplesRead = 0;
     
     size_t framesPerBuffer = FRAMES_PER_FILE_BUFFER;
     if (framesPerBuffer > numFrames())
     {
         framesPerBuffer = numFrames();
-        _pimpl->bufferSize = framesPerBuffer * numChannels();
-        _pimpl->needsBuffer = false;
-        _pimpl->bufs[0] = new float[_pimpl->bufferSize];
-        _pimpl->bufs[1] = NULL;
+        m_pimpl->bufferSize = framesPerBuffer * numChannels();
+        m_pimpl->needsBuffer = false;
+        m_pimpl->bufs[0] = new float[m_pimpl->bufferSize];
+        m_pimpl->bufs[1] = NULL;
     }
     else
     {
-        _pimpl->bufferSize = framesPerBuffer * numChannels();
-        _pimpl->bufs[0] = new float[_pimpl->bufferSize];
-        _pimpl->bufs[1] = new float[_pimpl->bufferSize];
-        _pimpl->needsBuffer = true;
+        m_pimpl->bufferSize = framesPerBuffer * numChannels();
+        m_pimpl->bufs[0] = new float[m_pimpl->bufferSize];
+        m_pimpl->bufs[1] = new float[m_pimpl->bufferSize];
+        m_pimpl->needsBuffer = true;
     }
-    sf_seek(_pimpl->sndfile, 0, SF_SEEK_SET);
-    _pimpl->framesBuffered = sf_read_float(_pimpl->sndfile, &(_pimpl->bufs[0][0]), _pimpl->bufferSize) / numChannels();
-    sf_seek(_pimpl->sndfile, _pimpl->framesBuffered, SF_SEEK_SET);
-    AUtilDispatchThread(file_buffer_worker, _pimpl);
+    sf_seek(m_pimpl->sndfile, 0, SF_SEEK_SET);
+    m_pimpl->framesBuffered = sf_read_float(m_pimpl->sndfile, &(m_pimpl->bufs[0][0]), m_pimpl->bufferSize) / numChannels();
+    sf_seek(m_pimpl->sndfile, m_pimpl->framesBuffered, SF_SEEK_SET);
+    APUDispatchThread(file_buffer_worker, m_pimpl);
 }
 
 AudioFile::~AudioFile()
 {
     close();
-    delete _pimpl;
+    delete m_pimpl;
 }
 
 void AudioFile::close()
 {
-    if (_pimpl->sndfile)
-        sf_close(_pimpl->sndfile);
+    if (m_pimpl->sndfile)
+        sf_close(m_pimpl->sndfile);
     
-    _pimpl->sndfile = 0;
+    m_pimpl->sndfile = 0;
     
-    if (_pimpl->bufs[0]) {
-        delete [] _pimpl->bufs[0];
-        _pimpl->bufs[0] = NULL;
+    if (m_pimpl->bufs[0]) {
+        delete [] m_pimpl->bufs[0];
+        m_pimpl->bufs[0] = NULL;
     }
-    if (_pimpl->bufs[1]) {
-        delete [] _pimpl->bufs[1];
-        _pimpl->bufs[1] = 0;
+    if (m_pimpl->bufs[1]) {
+        delete [] m_pimpl->bufs[1];
+        m_pimpl->bufs[1] = 0;
     }
 }
 
 AudioFileBufferStatus AudioFile::nextFrame(float **frame)
 {
-    if (_pimpl->readIndex >= _pimpl->bufferSize)
+    if (m_pimpl->readIndex >= m_pimpl->bufferSize)
         return AudioFileBufferStatusOutOfBounds;
     
-    *frame = &((_pimpl->bufs[_pimpl->currentBufIndex])[_pimpl->readIndex]);
-    _pimpl->readIndex += _pimpl->sfInfo.channels;
-    _pimpl->samplesRead += _pimpl->sfInfo.channels;
+    *frame = &((m_pimpl->bufs[m_pimpl->currentBufIndex])[m_pimpl->readIndex]);
+    m_pimpl->readIndex += m_pimpl->sfInfo.channels;
+    m_pimpl->samplesRead += m_pimpl->sfInfo.channels;
     
-    if (_pimpl->readIndex >= _pimpl->bufferSize)
+    if (m_pimpl->readIndex >= m_pimpl->bufferSize)
     {
-        if (_pimpl->currentBufIndex == 0)
+        if (m_pimpl->currentBufIndex == 0)
         {
-            _pimpl->currentBufIndex = 1;
+            m_pimpl->currentBufIndex = 1;
         }
         else
         {
-            _pimpl->currentBufIndex = 0;
+            m_pimpl->currentBufIndex = 0;
         }
-        _pimpl->readIndex = 0;
+        m_pimpl->readIndex = 0;
         
-        if (_pimpl->needsBuffer && !_pimpl->isBuffering)
+        if (m_pimpl->needsBuffer && !m_pimpl->isBuffering)
         {
-            _pimpl->isBuffering = true;
-            AUtilDispatchThread(file_buffer_worker, _pimpl);
+            m_pimpl->isBuffering = true;
+            APUDispatchThread(file_buffer_worker, m_pimpl);
         }
     }
     
-    if (_pimpl->samplesRead >= totalSize())
+    if (m_pimpl->samplesRead >= totalSize())
     {
         if (isLooping())
         {
-            _pimpl->samplesRead = 0;
+            m_pimpl->samplesRead = 0;
         }
         else
         {
@@ -166,43 +166,43 @@ AudioFileBufferStatus AudioFile::nextFrame(float **frame)
 
 unsigned long AudioFile::sampleRate()
 {
-    return _pimpl->sfInfo.samplerate;
+    return m_pimpl->sfInfo.samplerate;
 }
 
 unsigned long AudioFile::numFrames()
 {
-    return _pimpl->sfInfo.frames;
+    return m_pimpl->sfInfo.frames;
 }
 
 int AudioFile::numChannels()
 {
-    return _pimpl->sfInfo.channels;
+    return m_pimpl->sfInfo.channels;
 }
 
 size_t AudioFile::totalSize()
 {
-    if (_pimpl->totalSize == 0)
-        _pimpl->totalSize = _pimpl->sfInfo.channels * _pimpl->sfInfo.frames;
+    if (m_pimpl->totalSize == 0)
+        m_pimpl->totalSize = m_pimpl->sfInfo.channels * m_pimpl->sfInfo.frames;
     
-    return _pimpl->totalSize;
+    return m_pimpl->totalSize;
 }
 
 void AudioFile::setLooping(bool looping)
 {
-    _pimpl->looping = looping;
+    m_pimpl->looping = looping;
 }
 
 bool AudioFile::isLooping()
 {
-    return _pimpl->looping;
+    return m_pimpl->looping;
 }
 
 AudioFileMode AudioFile::mode()
 {
-    return _pimpl->mode;
+    return m_pimpl->mode;
 }
 
-AudioFile::pimpl::~pimpl()
+AudioFile::Pimpl::~Pimpl()
 {
     if (sndfile)
         sf_close(sndfile);

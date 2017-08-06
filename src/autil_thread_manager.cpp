@@ -8,71 +8,71 @@
 
 #include "autil_thread_manager.hpp"
 
-void AUtilThreadManager::workerFunction(void *ctx)
+void APUThreadManager::workerFunction(void *ctx)
 {
-    AUtilThreadManager *threadManager = (AUtilThreadManager *)ctx;
+    APUThreadManager *threadManager = (APUThreadManager *)ctx;
     do {
-        threadManager->mtx_.lock();
-        if (!threadManager->threads_.empty()) {
-            std::thread *thread = threadManager->threads_.front();
-            threadManager->threads_.pop_front();
-            threadManager->mtx_.unlock();
+        threadManager->m_mtx.lock();
+        if (!threadManager->m_threads.empty()) {
+            std::thread *thread = threadManager->m_threads.front();
+            threadManager->m_threads.pop_front();
+            threadManager->m_mtx.unlock();
             
             if (thread->joinable())
                 thread->join();
             
             delete thread;
         }
-        threadManager->mtx_.lock();
-        if (threadManager->threads_.empty()) {
-            threadManager->isRunning_ = false;
+        threadManager->m_mtx.lock();
+        if (threadManager->m_threads.empty()) {
+            threadManager->m_isRunning = false;
         } else {
-            threadManager->mtx_.unlock();
+            threadManager->m_mtx.unlock();
         }
-    } while (threadManager->isRunning_);
+    } while (threadManager->m_isRunning);
     
-    threadManager->mtx_.unlock();
+    threadManager->m_mtx.unlock();
 }
 
-AUtilThreadManager::AUtilThreadManager()
-: worker_(NULL)
-, isRunning_(false)
+APUThreadManager::APUThreadManager()
+: m_worker(NULL)
+, m_isRunning(false)
 {
 }
 
-AUtilThreadManager::~AUtilThreadManager()
+APUThreadManager::~APUThreadManager()
 {
-    if (worker_ && isRunning_ && worker_->joinable()) {
-        worker_->join();
-        delete worker_;
+    if (m_worker && m_isRunning && m_worker->joinable()) {
+        m_worker->join();
+        delete m_worker;
     }
 }
 
-void AUtilThreadManager::dispatch(dispatchable_fn func, void *ctx)
+void APUThreadManager::dispatch(dispatchable_fn func, void *ctx)
 {
-    mtx_.lock();
-    threads_.push_back(new std::thread(func, ctx));
-    if (!isRunning_) {
-        if (worker_) {
-            if (worker_->joinable()) {
-                worker_->join();
+    m_mtx.lock();
+    m_threads.push_back(new std::thread(func, ctx));
+    if (!m_isRunning) {
+        if (m_worker) {
+            if (m_worker->joinable()) {
+                m_worker->join();
             }
-            delete worker_;
+            delete m_worker;
         }
-        isRunning_ = true;
-        worker_ = new std::thread(workerFunction, this);
+        m_isRunning = true;
+        m_worker = new std::thread(workerFunction, this);
     }
-    mtx_.unlock();
+    m_mtx.unlock();
 }
 
-AUtilThreadManager * AUtilThreadManager::sharedThreadManager()
+APUThreadManager * APUThreadManager::sharedThreadManager()
 {
-    static AUtilThreadManager singleton;
+    static APUThreadManager singleton;
     
     return &singleton;
 }
 
-void AUtilDispatchThread(dispatchable_fn func, void *ctx)
+void APUDispatchThread(dispatchable_fn func, void *ctx)
 {
-    AUtilThreadManager::sharedThreadManager()->dispatch(func, ctx);
+    APUThreadManager::sharedThreadManager()->dispatch(func, ctx);
 }

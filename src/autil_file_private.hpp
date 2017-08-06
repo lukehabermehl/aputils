@@ -14,10 +14,10 @@
 #include <thread>
 #include <mutex>
 
-class AudioFile::pimpl
+class AudioFile::Pimpl
 {
 public:
-    ~pimpl();
+    ~Pimpl();
     
     SNDFILE *sndfile;
     SF_INFO sfInfo;

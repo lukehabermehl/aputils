@@ -50,9 +50,9 @@ class APUEnumerator
         Item *next;
     };
 
-    Item *current;
-    Item *first;
-    Item *last;
+    Item *m_current;
+    Item *m_first;
+    Item *m_last;
 
     size_t m_size;
 
@@ -60,16 +60,16 @@ public:
     APUOBJ_FWDDECL
 
     APUEnumerator()
-    : current(NULL)
-    , first(NULL)
-    , last(NULL)
+    : m_current(NULL)
+    , m_first(NULL)
+    , m_last(NULL)
     , m_size(0)
     {
     }
 
     ~APUEnumerator()
     {
-        Item *item = first;
+        Item *item = m_first;
         while (item) {
             Item *temp = item;
             item = item->next;
@@ -89,16 +89,16 @@ public:
         item->current = obj;
         item->next = NULL;
 
-        if (last) {
-            last->next = item;
-            last = item;
+        if (m_last) {
+            m_last->next = item;
+            m_last = item;
         } else {
-            first = item;
-            last = item;
+            m_first = item;
+            m_last = item;
         }
 
-        if (!current) {
-            current = first;
+        if (!m_current) {
+            m_current = m_first;
         }
 
         m_size++;
@@ -106,18 +106,18 @@ public:
 
     /** Remove an object from the list (via linear search) */
     void removeObject(T * obj) {
-        if (first->current.ptr() && obj) {
-            if (obj == first->current.ptr()) {
-                Item *temp = first;
-                first = first->next;
-                if (obj == last->current.ptr()) {
-                    last = first;
+        if (m_first->current.ptr() && obj) {
+            if (obj == m_first->current.ptr()) {
+                Item *temp = m_first;
+                m_first = m_first->next;
+                if (obj == m_last->current.ptr()) {
+                    m_last = m_first;
                 }
                 delete temp;
                 m_size--;
             } else {
-                Item *current = first->next;
-                Item *prev = first;
+                Item *current = m_first->next;
+                Item *prev = m_first;
                 while (current) {
                     if (current->current.ptr() == obj) {
                         prev->next = current->next;
@@ -131,16 +131,16 @@ public:
     }
 
     void reset() {
-        current = first;
+        m_current = m_first;
     }
 
     APUObjRet<T> getCurrent() {
-        return current == NULL ? (T*)NULL : (T*)current->current;
+        return m_current == NULL ? (T*)NULL : (T*)m_current->current;
     }
 
     bool moveNext() {
-        current = current->next;
-        return (current != NULL);
+        m_current = m_current->next;
+        return (m_current != NULL);
     }
 
     size_t size() {

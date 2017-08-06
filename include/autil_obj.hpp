@@ -6,8 +6,8 @@
 //  Copyright © 2017 Luke Habermehl. All rights reserved.
 //
 
-#ifndef autil_obj_h
-#define autil_obj_h
+#ifndef autil_m_objh
+#define autil_m_objh
 
 #include <cstdlib>
 
@@ -27,7 +27,7 @@ public:
 };
 
 /// Inheritable implementation of the reference counting methods above
-/// When subclassing, use the APUOBJ_FWDDECL macro
+/// When subclassing, use the APUm_objFWDDECL macro
 class APUObject
 : public APUObjectInterface
 {
@@ -53,47 +53,47 @@ class APUPtr
 {
     friend class APUObjRet<T>;
 
-    T *obj_;
+    T *m_obj;
     void decRef()
     {
-        if (obj_ && obj_->decRef() == 0) {
-            delete obj_;
-            obj_ = NULL;
+        if (m_obj && m_obj->decRef() == 0) {
+            delete m_obj;
+            m_obj = NULL;
         }
     }
 public:
     APUPtr(T *obj=NULL)
-    : obj_(obj)
+    : m_obj(obj)
     {
-        if (obj_) {
-            obj_->addRef();
+        if (m_obj) {
+            m_obj->addRef();
         }
     }
 
     APUPtr(const APUPtr<T> &orig)
     {
-        obj_ = orig.obj_;
-        if (obj_) {
-            obj_->addRef();
+        m_obj = orig.m_obj;
+        if (m_obj) {
+            m_obj->addRef();
         }
     }
 
     APUPtr(const APUObjRet<T>& orig)
     {
-        obj_ = orig.ptr();
-        if (obj_) {
-            obj_->addRef();
+        m_obj = orig.ptr();
+        if (m_obj) {
+            m_obj->addRef();
         }
     }
 
     T *operator->()
     {
-        return obj_;
+        return m_obj;
     }
 
     bool operator==(const APUPtr<T> &rhs)
     {
-        return obj_ == rhs.obj_;
+        return m_obj == rhs.m_obj;
     }
 
     APUPtr<T>& operator=(const APUPtr<T> &rhs)
@@ -102,19 +102,19 @@ public:
             return *this;
         }
 
-        if (rhs.obj_) {
-            rhs.obj_->addRef();
+        if (rhs.m_obj) {
+            rhs.m_obj->addRef();
         }
 
         decRef();
 
-        obj_ = rhs.obj_;
+        m_obj = rhs.m_obj;
         return *this;
     }
 
     APUPtr<T>& operator=(T * rhs)
     {
-        if (obj_ == rhs) {
+        if (m_obj == rhs) {
             return *this;
         }
 
@@ -122,23 +122,23 @@ public:
             rhs->addRef();
         }
 
-        obj_ = rhs;
+        m_obj = rhs;
         return *this;
     }
 
     operator T* ()
     {
-        return obj_;
+        return m_obj;
     }
 
     operator bool() const
     {
-        return obj_ != NULL;
+        return m_obj != NULL;
     }
 
     operator APUObjRet<T>()
     {
-        return APUObjRet<T>(obj_);
+        return APUObjRet<T>(m_obj);
     }
 
     ~APUPtr<T>()
@@ -148,14 +148,14 @@ public:
 
     T * ptr()
     {
-        return obj_;
+        return m_obj;
     }
 
     void clear()
     {
-        if (obj_) {
+        if (m_obj) {
             decRef();
-            obj_ = NULL;
+            m_obj = NULL;
         }
     }
 };
@@ -163,66 +163,66 @@ public:
 template <class T>
 class APUObjRet
 {
-    T * obj_;
-    bool hasRef_;
+    T * m_obj;
+    bool m_hasRef;
 public:
     APUObjRet(T *obj=NULL)
-    : obj_(obj)
-    , hasRef_(false)
+    : m_obj(obj)
+    , m_hasRef(false)
     {
     }
 
     APUObjRet(const APUPtr<T>& rhs)
     {
-        obj_ = rhs.obj_;
-        if (obj_) {
-            obj_->addRef();
-            hasRef_ = true;
+        m_obj = rhs.m_obj;
+        if (m_obj) {
+            m_obj->addRef();
+            m_hasRef = true;
         } else {
-            hasRef_ = false;
+            m_hasRef = false;
         }
     }
 
     ~APUObjRet()
     {
-        if (hasRef_) {
-            obj_->decRef();
+        if (m_hasRef) {
+            m_obj->decRef();
         }
-        if (obj_ && obj_->getRefCount() == 0) {
-            delete obj_;
+        if (m_obj && m_obj->getRefCount() == 0) {
+            delete m_obj;
         }
     }
 
     T *operator->()
     {
-        return obj_;
+        return m_obj;
     }
 
     APUObjRet<T>& operator=(T * rhs)
     {
-        if (obj_ == rhs) {
+        if (m_obj == rhs) {
             return *this;
         }
 
-        obj_ = rhs;
+        m_obj = rhs;
         return *this;
     }
 
     operator T* ()
     {
-        return obj_;
+        return m_obj;
     }
 
     operator bool() const
     {
-        return obj_ != NULL;
+        return m_obj != NULL;
     }
 
     T * ptr() const
     {
-        return obj_;
+        return m_obj;
     }
 };
 
 
-#endif /* autil_obj_h */
+#endif /* autil_m_objh */

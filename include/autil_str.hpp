@@ -66,7 +66,7 @@ protected:
 
 private:
     class Pimpl;
-    Pimpl *pimpl_;
+    Pimpl *m_pimpl;
 };
 
 /** Helper to create a new APUString reference.
