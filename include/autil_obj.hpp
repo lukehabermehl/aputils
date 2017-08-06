@@ -27,7 +27,7 @@ public:
 };
 
 /// Inheritable implementation of the reference counting methods above
-/// When subclassing, use the APUm_objFWDDECL macro
+/// When subclassing, use the APUOBJ_FWDDECL macro
 class APUObject
 : public APUObjectInterface
 {
