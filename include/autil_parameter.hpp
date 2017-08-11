@@ -10,12 +10,9 @@
 #define autil_parameter_hpp
 
 #include "autil_number.hpp"
-#include "autil_uiattrs.h"
 #include "autil_array.hpp"
 #include "autil_str.hpp"
 #include "autil_mod.hpp"
-
-#define BDSP_MAX_UNITS_STRLEN 16
 
 class APUParameter;
 class AudioProcessingUnit;
@@ -30,6 +27,9 @@ public:
     virtual void onParameterChanged(APUParameter *parameter) = 0;
 };
 
+/** Manages a value that can be manipulated during processing.
+  * All getters and setters for internal numeric values are atomic
+  */
 class APUParameter
 : public APUObject
 {
@@ -89,7 +89,10 @@ public:
       * @return false if the value was clamped. Otherwise, true
       */
     virtual bool setTarget(APUNumber target);
-    /** Set whether or not parameters will ramp to the target value over time. Smoothing is only allowed for FLOAT types. */
+
+    /** @return true if the parameter's value can be ramped over time */
+    virtual bool supportsSmoothing();
+    /** Set whether or not parameters will ramp to the target value over time. */
     virtual void setSmoothingEnabled(bool enabled);
     /** Set the interval (in millseconds) over which the parameter value will ramp if smoothing is enabled */
     virtual void setSmoothingInterval(double millisec);
@@ -104,9 +107,6 @@ public:
     /** Set the modulation depth (0.0 -- 1.0) */
     void setModulationDepth(float depth);
 
-    /** Get the description of the UI control for the parameter */
-    virtual APUUIAttribute getUIAttributes();
-
     /** Set the sample rate internally to calculate smoothing time */
     virtual void setSampleRate(size_t sampleRate);
 
@@ -115,8 +115,6 @@ protected:
     virtual void update();
     /** Clamp the value to the min/max if needed */
     bool normalizeValue(APUNumber &value);
-    /** Set the UI attribute flags */
-    virtual void setUIAttributes(APUUIAttribute attr);
 
 private:
     class Pimpl;
@@ -139,6 +137,8 @@ public:
     void setMinValue(APUNumber minVal);
     /** NO-OP: Cannot set max value for enums. Maximum is always numItems - 1 */
     void setMaxValue(APUNumber maxVal);
+
+    bool supportsSmoothing();
 
     /** Get the string representation of the given value */
     APUObjRet<APUString> stringForValue(uint32_t value);

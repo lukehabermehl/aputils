@@ -51,7 +51,7 @@ void APUParameter::setUnits(APUString *units)
 
 APUNumberType APUParameter::type()
 {
-    return m_pimpl->target.getType();
+    return m_pimpl->target.load().getType();
 }
 
 void APUParameter::setCallback(APUParameterCallback *cb)
@@ -67,7 +67,9 @@ APUNumber APUParameter::getTarget()
 APUNumber APUParameter::getCurrentValue()
 {
     m_pimpl->doModulate();
-    normalizeValue(m_pimpl->current);
+    APUNumber currentValue = m_pimpl->current.load();
+    normalizeValue(currentValue);
+    m_pimpl->current.store(currentValue);
     return m_pimpl->current;
 }
 
@@ -94,7 +96,7 @@ bool APUParameter::setTarget(APUNumber target)
     } else {
         m_pimpl->isSmoothing = true;
         m_pimpl->target = target;
-        m_pimpl->diffPerUpdate = (m_pimpl->target.floatValue() - m_pimpl->current.floatValue()) / (float)m_pimpl->smoothingFrames;
+        m_pimpl->diffPerUpdate = (m_pimpl->target.load().floatValue() - m_pimpl->current.load().floatValue()) / (float)m_pimpl->smoothingFrames;
     }
 
     return !ret;
@@ -124,10 +126,15 @@ APUNumber APUParameter::getMaxValue()
     return num;
 }
 
+bool
+APUParameter::supportsSmoothing()
+{
+    return type() == APUNUM_FLOAT;
+}
+
 void APUParameter::setSmoothingEnabled(bool enabled)
 {
-    if (type() == APUNUM_FLOAT)
-        m_pimpl->smoothingEnabled = enabled;
+    m_pimpl->smoothingEnabled = supportsSmoothing() ? enabled : false;
 }
 
 void APUParameter::setSmoothingInterval(double millisec)
@@ -145,20 +152,16 @@ bool APUParameter::isSmoothingEnabled()
     return m_pimpl->smoothingEnabled;
 }
 
-APUUIAttribute APUParameter::getUIAttributes()
-{
-    return m_pimpl->uiAttr;
-}
-
 void APUParameter::update()
 {
     if (m_pimpl->isSmoothing) {
-        float cv = m_pimpl->current.floatValue();
+        float cv = m_pimpl->current.load().floatValue();
         cv += m_pimpl->diffPerUpdate;
-        m_pimpl->current.setFloatValue(cv);
-        m_pimpl->base.setFloatValue(cv);
+        APUNumber currentValue = cv;
+        m_pimpl->current.store(currentValue);
+        m_pimpl->base.store(currentValue);
         
-        if (cv == m_pimpl->target.floatValue()) {
+        if (cv == m_pimpl->target.load().floatValue()) {
             m_pimpl->isSmoothing = false;
         }
 
@@ -182,22 +185,26 @@ bool APUParameter::normalizeValue(APUNumber &value)
     {
         case APUNUM_FLOAT:
         {
-            if (value.floatValue() < m_pimpl->minValue.floatValue()) {
-                value.setFloatValue(m_pimpl->minValue.floatValue());
+            float fMinVal = m_pimpl->minValue.load().floatValue();
+            float fMaxVal = m_pimpl->maxValue.load().floatValue();
+            if (value.floatValue() < fMinVal) {
+                value.setFloatValue(fMinVal);
                 didNormalize = true;
-            } else if (value.floatValue() > m_pimpl->maxValue.floatValue()) {
-                value.setFloatValue(m_pimpl->maxValue.floatValue());
+            } else if (value.floatValue() > fMaxVal) {
+                value.setFloatValue(fMaxVal);
                 didNormalize = true;
             }
             break;
         }
         case APUNUM_INT:
         {
-            if (value.integerValue() < m_pimpl->minValue.integerValue()) {
-                value.setIntegerValue(m_pimpl->minValue.integerValue());
+            int lMinVal = m_pimpl->minValue.load().integerValue();
+            int lMaxVal = m_pimpl->maxValue.load().integerValue();
+            if (value.integerValue() < lMinVal) {
+                value.setIntegerValue(lMinVal);
                 didNormalize = true;
-            } else if (value.integerValue() > m_pimpl->maxValue.integerValue()) {
-                value.setIntegerValue(m_pimpl->maxValue.integerValue());
+            } else if (value.integerValue() > lMaxVal) {
+                value.setIntegerValue(lMaxVal);
                 didNormalize = true;
             }
             break;
@@ -211,17 +218,12 @@ bool APUParameter::normalizeValue(APUNumber &value)
 
 void APUParameter::setModulationDepth(float depth)
 {
-    m_pimpl->modRange = depth * (m_pimpl->maxValue.floatValue() - m_pimpl->minValue.floatValue());
+    m_pimpl->modRange = depth * (m_pimpl->maxValue.load().floatValue() - m_pimpl->minValue.load().floatValue());
 }
 
 void APUParameter::setModulationSource(APUModSource *source)
 {
     m_pimpl->modSource = source;
-}
-
-void APUParameter::setUIAttributes(APUUIAttribute attr)
-{
-    m_pimpl->uiAttr = attr;
 }
 
 //----------------------------------------------------------------------------
@@ -264,6 +266,12 @@ void APUEnumParameter::setMaxValue(APUNumber maxVal)
     //No-op
 }
 
+bool
+APUEnumParameter::supportsSmoothing()
+{
+    return false;
+}
+
 //---------------------------------------------------------
 // APUParameter::Pimpl
 //---------------------------------------------------------
@@ -275,7 +283,8 @@ APUParameter::Pimpl::doModulate()
         return;
     }
 
-    float fCurrent = base.floatValue();
+    float fCurrent = base.load().floatValue();
     float fModValue = modSource->getModulationValue() * (modRange / 2.f);
-    current.setFloatValue(fCurrent + fModValue);
+    APUNumber currentValue = fCurrent + fModValue;
+    current.store(currentValue);
 }
