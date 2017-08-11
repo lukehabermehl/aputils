@@ -17,8 +17,8 @@ protected:
 class SliderParameter : public APUParameter
 {
 public:
-	SliderParameter(APUString *name, APUNumberType type)
-	: APUParameter(name, type, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0)) {}
+	SliderParameter(APUString *name)
+	: APUParameter(name, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0)) {}
 	APUUIAttribute getUIAttributes() {
 		return (APU_UI_TYPE_SLIDER ^ APU_UI_ORIENTATION_HORIZONTAL);
 	}
@@ -27,7 +27,7 @@ public:
 TEST_F(APUParameterTestFixture, test_essentials)
 {
 	APUPtr<APUString> paramName = APUStringMake("param");
-	APUParameter param(paramName, APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0));
+	APUParameter param(paramName, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0));
 	EXPECT_TRUE(param.getName()->equals(paramName));
 	param.setName(APUStringMake("new_name"));
 	EXPECT_TRUE(param.getName()->equals("new_name"));
@@ -44,7 +44,7 @@ TEST_F(APUParameterTestFixture, test_essentials)
 
 TEST_F(APUParameterTestFixture, test_value_clamping)
 {
-	APUParameter *param = new APUParameter(APUStringMake("param"), APUNUM_FLOAT, APUNUM_FLOAT(-5), APUNUM_FLOAT(5), APUNUM_FLOAT(0));
+	APUPtr<APUParameter> param = new APUParameter(APUStringMake("param"), APUNUM_FLOAT(-5), APUNUM_FLOAT(5), APUNUM_FLOAT(0));
 
 	APUNumber val = APUNUM_FLOAT(3.5);
 	param->setValue(val);
@@ -57,27 +57,39 @@ TEST_F(APUParameterTestFixture, test_value_clamping)
 	val.setFloatValue(7.5);
 	param->setValue(val);
 	EXPECT_EQ(5.0, param->getCurrentValue().floatValue());
-
-	delete param;
 }
 
 TEST_F(APUParameterTestFixture, test_ui_attrs)
 {
-	SliderParameter *param = new SliderParameter(APUStringMake("param"), APUNUM_FLOAT);
+	SliderParameter *param = new SliderParameter(APUStringMake("param"));
 	APUUIAttribute uiAttrs = param->getUIAttributes();
 
 	EXPECT_TRUE(((uiAttrs & APU_UI_TYPE_SLIDER) > 0));
 	EXPECT_TRUE(((uiAttrs & APU_UI_ORIENTATION_HORIZONTAL) > 0));
 	EXPECT_TRUE(((uiAttrs & APU_UI_TYPE_SWITCH) == 0));
+
+	delete param;
 }
 
 TEST_F(APUParameterTestFixture, test_units)
 {
-	APUParameter *param = new APUParameter(APUStringMake("param"), APUNUM_FLOAT, -5, 5, 0);
+	APUPtr<APUParameter> param = new APUParameter(APUStringMake("param"), -5, 5, 0);
 	param->setUnits(APUStringMake("Hertz"));
 	EXPECT_TRUE(param->getUnits()->equals("Hertz"));
+}
 
-	delete param;
+TEST_F(APUParameterTestFixture, test_type)
+{
+	APUPtr<APUParameter> param = new APUParameter(APUStringMake("param"), 0, 0, 0);
+	EXPECT_EQ(APUNUM_FLOAT, param->type());
+
+	param = new APUParameter(APUStringMake("param"), APUNUM_INT(0), APUNUM_INT(10), APUNUM_INT(0));
+	EXPECT_EQ(APUNUM_INT, param->type());
+	param->setValue(3.4);
+	EXPECT_EQ(APUNUM_FLOAT, param->type());
+
+	param = new APUParameter(APUStringMake("param"), APUNUM_UINT(0), APUNUM_UINT(0), APUNUM_UINT(0));
+	EXPECT_EQ(APUNUM_UINT, param->type());
 }
 
 TEST_F(APUParameterTestFixture, test_enum_param)
@@ -96,4 +108,6 @@ TEST_F(APUParameterTestFixture, test_enum_param)
 	EXPECT_TRUE(value1Str->equals("ON"));
 
 	EXPECT_EQ(NULL, enumParam.stringForValue(2));
+
+	EXPECT_EQ(APUNUM_UINT, enumParam.type());
 }

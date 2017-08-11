@@ -11,8 +11,7 @@
 
 APUNumber::APUNumber()
 {
-    m_data.intValue = 0;
-    m_numberType = APUNUM_INTEGER;
+    setFloatValue(0);
 }
 
 APUNumber::APUNumber(float f)
@@ -28,7 +27,7 @@ APUNumberType APUNumber::getType() const
 void APUNumber::setIntegerValue(int32_t i)
 {
     m_data.intValue = i;
-    m_numberType = APUNumberType::APUNUM_INTEGER;
+    m_numberType = APUNumberType::APUNUM_INT;
 }
 
 void APUNumber::setUnsignedIntValue(uint32_t u)
@@ -52,7 +51,7 @@ void APUNumber::setBoolValue(bool b)
 int32_t APUNumber::integerValue() const
 {
     switch (m_numberType) {
-        case APUNumberType::APUNUM_INTEGER:
+        case APUNumberType::APUNUM_INT:
             return m_data.intValue;
         case APUNumberType::APUNUM_UINT:
             return m_data.unsignedIntValue;
@@ -78,7 +77,7 @@ uint32_t APUNumber::unsignedIntValue() const
 float APUNumber::floatValue() const
 {
     switch (m_numberType) {
-        case APUNumberType::APUNUM_INTEGER:
+        case APUNumberType::APUNUM_INT:
             return (float)(m_data.intValue);
         case APUNumberType::APUNUM_UINT:
             return (float)(m_data.unsignedIntValue);

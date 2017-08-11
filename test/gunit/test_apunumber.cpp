@@ -47,3 +47,17 @@ TEST_F(TestAPUNumber, test_assignment)
 	num.setFloatValue(3.5);
 	EXPECT_EQ(4.2f, num2.floatValue());
 }
+
+TEST_F(TestAPUNumber, test_implicit_conversion)
+{
+	APUNumber num = 3.2;
+	EXPECT_EQ(3.2f, num.floatValue());
+	EXPECT_EQ(APUNUM_FLOAT, num.getType());
+
+	float f = num;
+	EXPECT_EQ(3.2f, f);
+
+	num.setUnsignedIntValue(100);
+	f = num;
+	EXPECT_EQ(100.f, f);
+}

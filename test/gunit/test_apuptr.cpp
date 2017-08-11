@@ -6,6 +6,7 @@ class TestObj : public APUObject
 public:
 	APUOBJ_FWDDECL
 	TestObj() : pDidDestroy(NULL) {}
+	TestObj(bool *pDidDestroy) : pDidDestroy(pDidDestroy) {}
 	~TestObj() {
 		if (pDidDestroy) {
 			*pDidDestroy = true;
@@ -30,6 +31,16 @@ public:
 class APUPtrTestFixture : public ::testing::Test
 {
 };
+
+APUObjRet<TestObj> get_temp_object(bool *pDidDestroy=NULL)
+{
+	return new TestObj(pDidDestroy);
+}
+
+int get_ref_count(APUObjectInterface *obj)
+{
+	return obj->getRefCount();
+}
 
 TEST_F(APUPtrTestFixture, test_delete)
 {
@@ -72,6 +83,13 @@ TEST_F(APUPtrTestFixture, test_return)
 	EXPECT_EQ(2, obj->getRefCount());
 
 	delete container;
+
+	TestContainer otherContainer;
+	EXPECT_EQ(1, get_ref_count(otherContainer.getObj()));
+
+	bool didDestroy = false;
+	EXPECT_EQ(0, get_ref_count(get_temp_object(&didDestroy)));
+	EXPECT_TRUE(didDestroy);
 }
 
 TEST_F(APUPtrTestFixture, test_pass)
@@ -84,4 +102,20 @@ TEST_F(APUPtrTestFixture, test_pass)
 	EXPECT_EQ(2, obj->getRefCount());
 
 	delete container;
+}
+
+TEST_F(APUPtrTestFixture, test_reassign)
+{
+	bool firstDidDelete = false;
+	APUPtr<TestObj> obj = new TestObj(&firstDidDelete);
+	EXPECT_FALSE(firstDidDelete);
+
+	obj = new TestObj();
+	EXPECT_TRUE(firstDidDelete);
+
+	APUPtr<TestObj> obj2 = obj;
+	EXPECT_EQ(2, obj->getRefCount());
+
+	obj2 = new TestObj();
+	EXPECT_EQ(1, obj->getRefCount());
 }

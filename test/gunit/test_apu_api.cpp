@@ -8,8 +8,8 @@ class APUApiTestAPU : public AudioProcessingUnit
 public:
 	APUApiTestAPU() : AudioProcessingUnit()
 	{
-		APUParameter *param1 = new APUParameter(APUStringMake("param1"), APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
-		APUParameter *param2 = new APUParameter(APUStringMake("param2"), APUNUM_BOOLEAN, APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0));
+		APUParameter *param1 = new APUParameter(APUStringMake("param1"), APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
+		APUParameter *param2 = new APUParameter(APUStringMake("param2"), APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0));
 
 		addParameter(param1);
 		addParameter(param2);

@@ -130,7 +130,7 @@ public:
     virtual void subscribe(APUHostEventSink *eventSink) = 0;
     /** Unsubscribe an event sink.
       * Note: the host will hold a strong reference to the event sink, so unsubscribes
-      * cannot be left until destruction.
+      * MUST occur before the object can be destroyed.
       */
     virtual void unsubscribe(APUHostEventSink *eventSink) = 0;
 

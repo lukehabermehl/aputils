@@ -17,16 +17,13 @@
 
 /** Underlying types for numbers */
 enum APUNumberType {
-    APUNUM_INTEGER,
+    APUNUM_INT,
     APUNUM_UINT,
     APUNUM_FLOAT,
     APUNUM_BOOLEAN
 };
 
-/** An object that represents common numeric types.
-  * Note: APUNumber does not implement APUObjectInterface and is always
-  * passed by copy unless explicitly specified
-  */
+/** An object that represents common numeric types. */
 class APUNumber
 {
 public:
@@ -63,6 +60,11 @@ public:
     void setUnsignedIntValue(uint32_t u);
     /** Set the value to the given bool */
     void setBoolValue(bool b);
+
+    // APUNumbers can be implicitly converted to floats
+    operator float() const {
+        return floatValue();
+    }
 
 private:
     union APUNumberContainer_

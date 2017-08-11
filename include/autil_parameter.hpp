@@ -40,14 +40,12 @@ public:
 
     /** Construct a parameter object
       * @param name the name of the parameter
-      * @param valueType type of the underlying number
       * @param minValue the minimum value allowed for the parameter
       * @param maxValue the maximum value allowed for the parameter
       * @param defaultValue the initial value for the parameter
       * @param cb optional callback object to handle parameter changes
       */
     APUParameter(APUString *name,
-                 APUNumberType valueType,
                  APUNumber minValue,
                  APUNumber maxValue,
                  APUNumber defaultValue,
@@ -61,7 +59,8 @@ public:
     APUNumber getTarget();
     /** Get the current value of the parameter (copy) */
     APUNumber getCurrentValue();
-    /** Get the value type of the parameter */
+
+    /** Get the value type of the parameter. This is determined by the value of the number passed to setTarget() and/or setValue() */
     APUNumberType type();
 
     /** Set the string representing the units of the parameter value */

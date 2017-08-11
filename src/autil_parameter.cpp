@@ -15,9 +15,9 @@
 
 #define MIN2(_a, _b) ((_a <= _b) ? _a : _b)
 
-APUParameter::APUParameter(APUString *name, APUNumberType valueType, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb)
+APUParameter::APUParameter(APUString *name, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb)
 {
-    m_pimpl = new Pimpl(valueType, name, cb);
+    m_pimpl = new Pimpl(name, cb);
     setMinValue(minValue);
     setMaxValue(maxValue);
     m_pimpl->current = defaultValue;
@@ -51,7 +51,7 @@ void APUParameter::setUnits(APUString *units)
 
 APUNumberType APUParameter::type()
 {
-    return m_pimpl->valueType;
+    return m_pimpl->target.getType();
 }
 
 void APUParameter::setCallback(APUParameterCallback *cb)
@@ -191,7 +191,7 @@ bool APUParameter::normalizeValue(APUNumber &value)
             }
             break;
         }
-        case APUNUM_INTEGER:
+        case APUNUM_INT:
         {
             if (value.integerValue() < m_pimpl->minValue.integerValue()) {
                 value.setIntegerValue(m_pimpl->minValue.integerValue());
@@ -229,7 +229,7 @@ void APUParameter::setUIAttributes(APUUIAttribute attr)
 //----------------------------------------------------------------------------
 
 APUEnumParameter::APUEnumParameter(APUString *name, APUArray<APUString> *strings, APUParameterCallback *cb)
-: APUParameter(name, APUNUM_UINT, APUNUM_UINT(0), APUNUM_UINT((uint32_t)strings->size()), APUNUM_UINT(0), cb)
+: APUParameter(name, APUNUM_UINT(0), APUNUM_UINT((uint32_t)strings->size()), APUNUM_UINT(0), cb)
 {
     m_enumParamPimpl = new EnumParamPimpl();
     if (strings) {

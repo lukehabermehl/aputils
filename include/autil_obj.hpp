@@ -98,8 +98,12 @@ public:
 
     APUPtr<T>& operator=(const APUPtr<T> &rhs)
     {
-        if (this == &rhs) {
+        if (this == &rhs || m_obj == rhs.m_obj) {
             return *this;
+        }
+
+        if (m_obj) {
+            decRef();
         }
 
         if (rhs.m_obj) {
@@ -116,6 +120,10 @@ public:
     {
         if (m_obj == rhs) {
             return *this;
+        }
+
+        if (m_obj) {
+            decRef();
         }
 
         if (rhs) {

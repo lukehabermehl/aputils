@@ -8,8 +8,8 @@ protected:
 	void SetUp()
 	{
 		paramMap = new APUParameterMap();
-		paramMap->addParameter(new APUParameter(APUStringMake("param1"), APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0)));
-		paramMap->addParameter(new APUParameter(APUStringMake("param2"), APUNUM_BOOLEAN, APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0)));
+		paramMap->addParameter(new APUParameter(APUStringMake("param1"), APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0)));
+		paramMap->addParameter(new APUParameter(APUStringMake("param2"), APUNUM_BOOL(0), APUNUM_BOOL(1), APUNUM_BOOL(0)));
 	}
 };
 
@@ -62,7 +62,7 @@ TEST_F(APUParameterMapTestFixture, test_api)
 TEST_F(APUParameterMapTestFixture, test_memory)
 {
 	APUParameterMap *memParamMap = new APUParameterMap();
-	APUPtr<APUParameter> param = new APUParameter(APUStringMake("memParam"), APUNUM_FLOAT, APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
+	APUPtr<APUParameter> param = new APUParameter(APUStringMake("memParam"), APUNUM_FLOAT(0), APUNUM_FLOAT(100), APUNUM_FLOAT(0));
 	memParamMap->addParameter(param);
 	EXPECT_EQ(3, param->addRef());
 	EXPECT_EQ(2, param->decRef());

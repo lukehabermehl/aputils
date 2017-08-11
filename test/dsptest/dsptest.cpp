@@ -24,14 +24,13 @@ public:
         m_modOsc = new APUWaveTableOscillator();
         m_modOsc->setFrequency(5);
 
-        m_freqParam = new APUParameter("Frequency",
-                                       APUNUM_FLOAT,
-                                       APUNUM_FLOAT(80),
-                                       APUNUM_FLOAT(10000),
-                                       APUNUM_FLOAT(800),
+        m_freqParam = new APUParameter(APUStringMake("Frequency"),
+                                       80,
+                                       10000,
+                                       800,
                                        NULL);
 
-        m_freqParam->setTarget(APUNUM_FLOAT(800));
+        m_freqParam->setTarget(800);
         m_freqParam->setModulationDepth(0.05);
         m_modSrc = new APUOscModSource(m_modOsc);
         m_freqParam->setModulationSource(m_modSrc);

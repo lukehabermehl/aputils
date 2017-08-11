@@ -15,28 +15,13 @@
 class APUParameter::Pimpl
 {
 public:
-    Pimpl(APUNumberType vtype, APUString *pname, APUParameterCallback *callbck)
+    Pimpl(APUString *pname, APUParameterCallback *callbck)
     :isSmoothing(false), smoothingEnabled(false), smoothingInterval_msec(0), smoothingFrames(0)
-    ,name(pname), modRange(0), uiAttr(0), valueType(vtype)
+    ,name(pname), modRange(0), uiAttr(0)
     ,cb(NULL)
     {
-        switch (valueType) {
-            case APUNUM_FLOAT:
-                target.setFloatValue(0);
-                current.setFloatValue(0);
-                break;
-            case APUNUM_INTEGER:
-                target.setIntegerValue(0);
-                current.setIntegerValue(0);
-                break;
-            case APUNUM_UINT:
-                target.setUnsignedIntValue(0);
-                current.setUnsignedIntValue(0);
-                break;
-            case APUNUM_BOOLEAN:
-                target.setBoolValue(false);
-                current.setBoolValue(false);
-        }
+        target = 0;
+        current = 0;
     }
 
     ~Pimpl()
