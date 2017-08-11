@@ -43,7 +43,6 @@
 		A3E2BA931EB8B3F900FE0280 /* autil_audioprocessingunit_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */; };
 		A3E2BA941EB8B3FB00FE0280 /* autil_file_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */; };
 		A3E2BA951EB8B3FD00FE0280 /* autil_pahost_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD64C1EB16AAF00238AEA /* autil_pahost_private.hpp */; };
-		A3E2BA991EB8B69B00FE0280 /* autil_uiattrs.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA981EB8B69B00FE0280 /* autil_uiattrs.h */; };
 		A3E82B231ED0A1B500E52E8B /* dsptest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E82B171ED0A16600E52E8B /* dsptest.cpp */; };
 /* End PBXBuildFile section */
 
@@ -99,7 +98,6 @@
 		A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parameter.hpp; path = include/autil_parameter.hpp; sourceTree = "<group>"; };
 		A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parametermap.hpp; path = include/autil_parametermap.hpp; sourceTree = "<group>"; };
 		A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_thread_manager.hpp; path = include/autil_thread_manager.hpp; sourceTree = "<group>"; };
-		A3E2BA981EB8B69B00FE0280 /* autil_uiattrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autil_uiattrs.h; path = include/autil_uiattrs.h; sourceTree = "<group>"; };
 		A3E82B171ED0A16600E52E8B /* dsptest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dsptest.cpp; path = test/dsptest/dsptest.cpp; sourceTree = "<group>"; };
 		A3E82B1C1ED0A1A100E52E8B /* dsptest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = dsptest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -171,7 +169,6 @@
 				A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */,
 				A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */,
 				A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */,
-				A3E2BA981EB8B69B00FE0280 /* autil_uiattrs.h */,
 				A35849A71EBA86040007475F /* aputils.h */,
 				A32DC7501EBE163A0090C6D9 /* autil_logger.hpp */,
 				A330D6F21EBF726500281EFB /* autil_obj.hpp */,
@@ -240,7 +237,6 @@
 				A3E2BA931EB8B3F900FE0280 /* autil_audioprocessingunit_private.hpp in Headers */,
 				A393FB751EF00B8000CF758F /* autil_str.hpp in Headers */,
 				A3E2BA8B1EB8B3DF00FE0280 /* portaudio_host.hpp in Headers */,
-				A3E2BA991EB8B69B00FE0280 /* autil_uiattrs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

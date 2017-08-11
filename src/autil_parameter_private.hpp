@@ -10,6 +10,7 @@
 #define autil_parameter_private_h
 
 #include "autil_parameter.hpp"
+#include <atomic>
 #include <string>
 
 class APUParameter::Pimpl
@@ -17,7 +18,7 @@ class APUParameter::Pimpl
 public:
     Pimpl(APUString *pname, APUParameterCallback *callbck)
     :isSmoothing(false), smoothingEnabled(false), smoothingInterval_msec(0), smoothingFrames(0)
-    ,name(pname), modRange(0), uiAttr(0)
+    ,name(pname), modRange(0)
     ,cb(NULL)
     {
         target = 0;
@@ -38,16 +39,14 @@ public:
     APUPtr<APUString> name;
     APUPtr<APUString> units;
 
-    APUNumber target;
-    APUNumber current;
-    APUNumber base;
-    APUNumber minValue;
-    APUNumber maxValue;
+    std::atomic<APUNumber> target;
+    std::atomic<APUNumber> current;
+    std::atomic<APUNumber> base;
+    std::atomic<APUNumber> minValue;
+    std::atomic<APUNumber> maxValue;
     float modRange;
     APUPtr<APUModSource> modSource;
     float diffPerUpdate;
-    APUNumberType valueType;
-    APUUIAttribute uiAttr;
 
     APUParameterCallback *cb;
 };

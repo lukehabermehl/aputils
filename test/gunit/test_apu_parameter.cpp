@@ -14,16 +14,6 @@ protected:
 	}
 };
 
-class SliderParameter : public APUParameter
-{
-public:
-	SliderParameter(APUString *name)
-	: APUParameter(name, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0)) {}
-	APUUIAttribute getUIAttributes() {
-		return (APU_UI_TYPE_SLIDER ^ APU_UI_ORIENTATION_HORIZONTAL);
-	}
-};
-
 TEST_F(APUParameterTestFixture, test_essentials)
 {
 	APUPtr<APUString> paramName = APUStringMake("param");
@@ -57,18 +47,6 @@ TEST_F(APUParameterTestFixture, test_value_clamping)
 	val.setFloatValue(7.5);
 	param->setValue(val);
 	EXPECT_EQ(5.0, param->getCurrentValue().floatValue());
-}
-
-TEST_F(APUParameterTestFixture, test_ui_attrs)
-{
-	SliderParameter *param = new SliderParameter(APUStringMake("param"));
-	APUUIAttribute uiAttrs = param->getUIAttributes();
-
-	EXPECT_TRUE(((uiAttrs & APU_UI_TYPE_SLIDER) > 0));
-	EXPECT_TRUE(((uiAttrs & APU_UI_ORIENTATION_HORIZONTAL) > 0));
-	EXPECT_TRUE(((uiAttrs & APU_UI_TYPE_SWITCH) == 0));
-
-	delete param;
 }
 
 TEST_F(APUParameterTestFixture, test_units)
