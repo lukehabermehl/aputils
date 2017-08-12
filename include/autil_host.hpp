@@ -13,7 +13,6 @@
 #include "autil_obj_enum.hpp"
 
 #define APUHOST_EVENT_STATUSCHANGED "status_changed"
-#define APUHOST_EVENT_DEVICESCHANGED "devices_changed"
 
 /** Indicates where the Audio Manager will pull input from */
 enum AudioInputMode

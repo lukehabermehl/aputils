@@ -146,7 +146,7 @@ bool APUPortAudioHost::stop()
 
 bool APUPortAudioHost::setInputFile(AudioFile *file)
 {
-    if (file == NULL || file->mode() == AudioFileModeWriteOnly)
+    if (file == NULL)
         return false;
     
     m_pimpl->dspKernel->audioFile = file;

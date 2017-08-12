@@ -170,7 +170,7 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     for (unsigned long i=0; i<framesPerBuffer; i++) {
         if (inputMode == INPUT_FILE) {
-            if (audioFile->nextFrame(&in) != AudioFileBufferStatusOK) {
+            if (audioFile->nextFrame(&in) != AudioFile::STATUS_OK) {
                 ret = paComplete;
                 break;
             }

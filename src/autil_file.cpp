@@ -43,25 +43,11 @@ void file_buffer_worker(void *ctx)
     fileImpl->isBuffering = false;
 }
 
-AudioFile::AudioFile(const char *filepath, AudioFileMode mode)
+AudioFile::AudioFile(const char *filepath)
 {
-    int sfmode;
-    switch (mode)
-    {
-        case AudioFileModeReadOnly:
-            sfmode = SFM_READ;
-            break;
-        case AudioFileModeWriteOnly:
-            sfmode = SFM_WRITE;
-            break;
-        case AudioFileModeReadWrite:
-            sfmode = SFM_RDWR;
-            break;
-    }
-    
+    int sfmode = SFM_READ;
     m_pimpl = new Pimpl;
-    
-    m_pimpl->mode = mode;
+
     m_pimpl->sndfile = sf_open(filepath, sfmode, &m_pimpl->sfInfo);
     if (!m_pimpl->sndfile) {
         const char *errormsg = sf_strerror(m_pimpl->sndfile);
@@ -120,10 +106,11 @@ void AudioFile::close()
     }
 }
 
-AudioFileBufferStatus AudioFile::nextFrame(float **frame)
+AudioFile::BufferStatus
+AudioFile::nextFrame(float **frame)
 {
     if (m_pimpl->readIndex >= m_pimpl->bufferSize)
-        return AudioFileBufferStatusOutOfBounds;
+        return OUT_OF_BOUNDS;
     
     *frame = &((m_pimpl->bufs[m_pimpl->currentBufIndex])[m_pimpl->readIndex]);
     m_pimpl->readIndex += m_pimpl->sfInfo.channels;
@@ -157,24 +144,27 @@ AudioFileBufferStatus AudioFile::nextFrame(float **frame)
         else
         {
             //BDLog(kAudioFileLoggerPrefix, "Done reading");
-            return AudioFileBufferStatusDoneReading;
+            return DONE_READING;
         }
     }
 
-    return AudioFileBufferStatusOK;
+    return STATUS_OK;
 }
 
-unsigned long AudioFile::sampleRate()
+size_t
+AudioFile::sampleRate()
 {
     return m_pimpl->sfInfo.samplerate;
 }
 
-unsigned long AudioFile::numFrames()
+size_t
+AudioFile::numFrames()
 {
     return m_pimpl->sfInfo.frames;
 }
 
-int AudioFile::numChannels()
+size_t
+AudioFile::numChannels()
 {
     return m_pimpl->sfInfo.channels;
 }
@@ -195,11 +185,6 @@ void AudioFile::setLooping(bool looping)
 bool AudioFile::isLooping()
 {
     return m_pimpl->looping;
-}
-
-AudioFileMode AudioFile::mode()
-{
-    return m_pimpl->mode;
 }
 
 AudioFile::Pimpl::~Pimpl()

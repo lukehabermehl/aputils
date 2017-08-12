@@ -21,7 +21,6 @@ public:
     
     SNDFILE *sndfile;
     SF_INFO sfInfo;
-    AudioFileMode mode;
     float *bufs[2];
     int currentBufIndex;
     size_t readIndex;
