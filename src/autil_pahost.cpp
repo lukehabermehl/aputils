@@ -73,12 +73,10 @@ APUObjRet<APUEnumerable<AudioDevice> >
 APUPortAudioHost::getDevices() const
 {
     //Scan for audio devices
-    //BDLog(kAPUPortAudioHostLogPrefix, "Scan for audio devices");
     int devCount = Pa_GetDeviceCount();
     APUPtr<APUEnumerator<AudioDevice> > devices = new APUEnumerator<AudioDevice>();
     
-    for (int i=0; i<devCount; i++)
-    {
+    for (int i=0; i<devCount; i++) {
         const PaDeviceInfo *info = Pa_GetDeviceInfo(i);
         APUPtr<AudioDevice> dev = new AudioDevice(i, APUStringMake(info->name));
         devices->addObject(dev);
@@ -196,7 +194,7 @@ void APUPortAudioHost::streamStatusChangeCallback(void *ctx)
     if (audioManager->m_pimpl->eventSinks->size()) {
         audioManager->m_pimpl->eventSinks->reset();
         do {
-            audioManager->m_pimpl->eventSinks->getCurrent()->handleEvent(APUHOST_EVENT_STATUSCHANGED,
+            audioManager->m_pimpl->eventSinks->getCurrent()->handleEvent(APUStringMake(APUHOST_EVENT_STATUSCHANGED),
                                                                         audioManager);
         } while (audioManager->m_pimpl->eventSinks->moveNext());
     }

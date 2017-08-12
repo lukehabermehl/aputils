@@ -87,8 +87,7 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
                             &PortAudioKernel::paCallback,
                             this);
 
-    if (paError != paNoError)
-    {
+    if (paError != paNoError) {
         APUGetLogger()->log(kPortAudioKernelLogPrefix,
                             LOG_LEVEL_ERROR,
                             "Failed to open stream! PAError code: %d",
@@ -97,8 +96,7 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
     }
 
     paError = Pa_SetStreamFinishedCallback(stream, &PortAudioKernel::paStreamFinished);
-    if (paError != paNoError)
-    {
+    if (paError != paNoError) {
         Pa_CloseStream(stream);
         stream = 0;
         return false;
@@ -170,8 +168,7 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     PaStreamCallbackResult ret = paContinue;
 
-    for (unsigned long i=0; i<framesPerBuffer; i++)
-    {
+    for (unsigned long i=0; i<framesPerBuffer; i++) {
         if (inputMode == INPUT_FILE) {
             if (audioFile->nextFrame(&in) != AudioFileBufferStatusOK) {
                 ret = paComplete;
@@ -180,13 +177,9 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
         }
 
         //If no APU, passthrough
-        if (!audioProcessingUnit)
-        {
+        if (!audioProcessingUnit) {
             passthroughUnit->processAudio(in, out, numInputChannels, numOutputChannels);
-        }
-
-        else
-        {
+        } else{
             audioProcessingUnit->processAudio(in, out, numInputChannels, numOutputChannels);
         }
 

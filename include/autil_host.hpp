@@ -13,12 +13,16 @@
 #include "autil_obj_enum.hpp"
 
 #define APUHOST_EVENT_STATUSCHANGED "status_changed"
+#define APUHOST_EVENT_DEVICESCHANGED "devices_changed"
 
 /** Indicates where the Audio Manager will pull input from */
 enum AudioInputMode
 {
+    /** There is no input (synth mode) */
     INPUT_NONE,
+    /** Use a file for input */
     INPUT_FILE,
+    /** Use an audio device for input */
     INPUT_DEVICE
 };
 
@@ -32,6 +36,10 @@ class AudioDevice
 public:
     APUOBJ_FWDDECL
 
+    /** Host implementations can use this constructor to create device descriptions
+      * @param index the unique index of the device
+      * @param deviceName the name of the device
+      */
     AudioDevice(AudioDeviceIndex index, APUString *deviceName)
     : m_name(deviceName)
     , m_index(index)
@@ -40,7 +48,9 @@ public:
     virtual ~AudioDevice()
     {}
 
+    /** Get the device name */
     APUObjRet<APUString> getName() const { return m_name; }
+    /** Get the unique index of the device */
     AudioDeviceIndex getIndex() const { return m_index; }
 
 private:
@@ -50,19 +60,26 @@ private:
 
 class APUHostInterface;
 
+/** Interface for objects subscribing to host events */
 class APUHostEventSink
 : public APUObjectInterface
 {
 public:
     virtual ~APUHostEventSink() {}
-    virtual void handleEvent(const char *eventName, APUHostInterface *sender) = 0;
+    /** Called by the host on it's subscribers when an event occurs
+      * @param eventName the name of the event
+      * @param sender the host that is sending the event
+      */
+    virtual void handleEvent(APUString *eventName, APUHostInterface *sender) = 0;
 };
 
 
+/** Interface that hosts must implement */
 class APUHostInterface
 : public APUObjectInterface
 {
 public:
+    /** Possible error codes for host operations */
     enum ErrorCode {
         OK = 0,
         UNINITIALIZED,
@@ -73,6 +90,7 @@ public:
         UNKNOWN,
     };
 
+    /** Possible host status codes */
     enum Status {
         DONE = 0,
         RUNNING

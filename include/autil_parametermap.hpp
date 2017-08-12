@@ -46,10 +46,17 @@ public:
     APUParameterMap();
     virtual ~APUParameterMap();
 
+    /** Add a parameter to the map. The map holds a strong reference */
     void addParameter(APUParameter *parameter);
+    /** Fetch the parameter with the given name from the map
+      * @return NULL if no parameter matches that name
+      */
     APUObjRet<APUParameter> parameterWithName(const char *name) const;
+
+    /** Get the number of parameters in the map */
     size_t size() const;
 
+    /** Get an iterator pointing to the first key/value pair in the map */
     Iterator begin() const;
 
 private:
