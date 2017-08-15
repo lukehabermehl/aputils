@@ -175,7 +175,7 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
                 ret = paComplete;
                 break;
             }
-        } else {
+        } else if (inputMode == INPUT_DEVICE) {
             in = (float *)inputBuffer + (i * numInputChannels);
         }
 
