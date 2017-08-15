@@ -28,9 +28,9 @@ public:
         
     public:
         /** The name of the parameter */
-        APUObjRet<APUString> first();
+        APUString *first();
         /** The parameter instance */
-        APUObjRet<APUParameter> second();
+        APUParameter *second();
         /** Move the iterator forward to the next key/value pair */
         Iterator& operator++();
         /** @return true if iterator points to a valid key/value pair. Otherwise, false. */

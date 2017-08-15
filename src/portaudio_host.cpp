@@ -19,7 +19,8 @@ PortAudioKernel::PortAudioKernel()
 , streamStatusChangeCallback(NULL)
 , streamStatusChangeCallbackCtx(NULL)
 {
-    passthroughUnit = AudioProcessingUnit::createPassthroughUnit();
+    APUPtr<AudioProcessingUnit> ptUnit = AudioProcessingUnit::createPassthroughUnit();
+    passthroughUnit = ptUnit;
 }
 
 PortAudioKernel::~PortAudioKernel()
@@ -174,7 +175,11 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
                 ret = paComplete;
                 break;
             }
+        } else {
+            in = (float *)inputBuffer + (i * numInputChannels);
         }
+
+        out = (float *)outputBuffer + (i * numOutputChannels);
 
         //If no APU, passthrough
         if (!audioProcessingUnit) {

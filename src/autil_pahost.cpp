@@ -115,7 +115,6 @@ void APUPortAudioHost::setAudioProcessingUnit(AudioProcessingUnit *unit)
                             "APUnit is null!");
         return;
     }
-    unit->setSampleRate(m_pimpl->dspKernel->sampleRate);
 }
 
 bool APUPortAudioHost::initialize()
@@ -135,6 +134,7 @@ bool APUPortAudioHost::destroy()
 
 bool APUPortAudioHost::start()
 {
+    m_pimpl->dspKernel->audioProcessingUnit->setSampleRate(m_pimpl->dspKernel->sampleRate);
     m_pimpl->dspKernel->audioProcessingUnit->setupInitialState();
     return m_pimpl->dspKernel->start();
 }

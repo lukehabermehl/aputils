@@ -73,7 +73,7 @@ public:
     }
 
     void setupInitialState() {
-        m_osc->setSampleRate(getSampleRate());
+        //m_osc->setSampleRate(getSampleRate());
     }
 
     void processAudio(float *inputBuffer, float *outputBuffer,
@@ -83,6 +83,11 @@ public:
         if (numOutputChannels > 1) {
             outputBuffer[1] = outputBuffer[0];
         }
+    }
+
+    void setSampleRate(unsigned long sampleRate) {
+        AudioProcessingUnit::setSampleRate(sampleRate);
+        m_osc->setSampleRate(sampleRate);
     }
 };
 

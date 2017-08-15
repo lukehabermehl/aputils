@@ -67,13 +67,13 @@ APUParameterMap::Iterator APUParameterMap::begin() const
     return it;
 }
 
-APUObjRet<APUString> APUParameterMap::Iterator::first()
+APUString * APUParameterMap::Iterator::first()
 {
     if (!valid()) return NULL;
     return m_pimpl->mapIterator->second->getName();
 }
 
-APUObjRet<APUParameter> APUParameterMap::Iterator::second()
+APUParameter *APUParameterMap::Iterator::second()
 {
     if (!valid()) return NULL;
     return m_pimpl->mapIterator->second;

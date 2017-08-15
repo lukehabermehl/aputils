@@ -38,7 +38,8 @@ void AudioProcessingUnit::processAudio(float *inputBuffer, float *outputBuffer, 
     }
 }
 
-AudioProcessingUnit * AudioProcessingUnit::createPassthroughUnit()
+APUObjRet<AudioProcessingUnit>
+AudioProcessingUnit::createPassthroughUnit()
 {
     return new AudioProcessingUnit;
 }
@@ -51,10 +52,6 @@ void AudioProcessingUnit::setMaxOutputChannels(uint32_t num)
 {
 }
 
-void AudioProcessingUnit::onSampleRateChanged()
-{
-}
-
 void AudioProcessingUnit::setSampleRate(unsigned long sampleRate)
 {
     m_pimpl->sampleRate = sampleRate;
@@ -62,8 +59,6 @@ void AudioProcessingUnit::setSampleRate(unsigned long sampleRate)
     for (APUParameterMap::Iterator it = m_pimpl->parameterMap->begin(); it.valid(); ++it) {
         it.second()->setSampleRate(sampleRate);
     }
-
-    onSampleRateChanged();
 }
 
 unsigned long AudioProcessingUnit::getSampleRate()

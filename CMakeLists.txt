@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 project(libaputils)
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS "-std=c++11")
 
 include_directories(/usr/local/include "include")
