@@ -15,7 +15,7 @@
 #include "autil_host.hpp"
 #include <memory>
 
-/** Provides an interface for loading and processing audio from a file or input device */
+/** Host implementation using PortAudio */
 class APUPortAudioHost
 : public APUHostInterface
 , public APUObject
@@ -25,6 +25,17 @@ public:
 
     APUPortAudioHost();
     virtual ~APUPortAudioHost();
+
+    /** Indicates the type of input source to use */
+    enum AudioInputMode
+    {
+        /** There is no input (synth mode) */
+        INPUT_NONE,
+        /** Use a file for input */
+        INPUT_FILE,
+        /** Use an audio device for input */
+        INPUT_DEVICE
+    };
 
     /** Specify the audio input source */
     virtual void setInputMode(AudioInputMode mode);

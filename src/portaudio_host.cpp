@@ -14,7 +14,7 @@ PortAudioKernel::PortAudioKernel()
 , numInputChannels(1)
 , numOutputChannels(1)
 , stream(NULL)
-, inputMode(INPUT_NONE)
+, inputMode(APUPortAudioHost::INPUT_NONE)
 , status(APUHostInterface::DONE)
 , streamStatusChangeCallback(NULL)
 , streamStatusChangeCallbackCtx(NULL)
@@ -52,17 +52,17 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
     PaStreamParameters inputParameters;
 
     switch (inputMode) {
-        case INPUT_NONE:
+        case APUPortAudioHost::INPUT_NONE:
             if (audioProcessingUnit) {
                 sampleRate = audioProcessingUnit->getPreferredSampleRate();
             } else {
                 sampleRate = 44100;
             }
             break;
-        case INPUT_FILE:
+        case APUPortAudioHost::INPUT_FILE:
             sampleRate = audioFile->sampleRate();
             break;
-        case INPUT_DEVICE:
+        case APUPortAudioHost::INPUT_DEVICE:
             //TODO: use set inputDeviceIndex
             const PaDeviceInfo *inputDevInfo = Pa_GetDeviceInfo(Pa_GetDefaultInputDevice());
             sampleRate = inputDevInfo->defaultSampleRate;
@@ -77,7 +77,7 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
                         "Open stream with sample rate: %lu",
                         sampleRate);
 
-    const PaStreamParameters *pParams = (inputMode != INPUT_DEVICE) ? NULL : &inputParameters;
+    const PaStreamParameters *pParams = (inputMode != APUPortAudioHost::INPUT_DEVICE) ? NULL : &inputParameters;
 
     paError = Pa_OpenStream(&stream,
                             pParams,
@@ -163,19 +163,19 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     float *out = (float *)outputBuffer;
     float *in = 0;
-    if (inputMode != INPUT_DEVICE) {
+    if (inputMode != APUPortAudioHost::INPUT_DEVICE) {
         in = (float *)inputBuffer;
     }
 
     PaStreamCallbackResult ret = paContinue;
 
     for (unsigned long i=0; i<framesPerBuffer; i++) {
-        if (inputMode == INPUT_FILE) {
+        if (inputMode == APUPortAudioHost::INPUT_FILE) {
             if (audioFile->nextFrame(&in) != AudioFile::STATUS_OK) {
                 ret = paComplete;
                 break;
             }
-        } else if (inputMode == INPUT_DEVICE) {
+        } else if (inputMode == APUPortAudioHost::INPUT_DEVICE) {
             in = (float *)inputBuffer + (i * numInputChannels);
         }
 

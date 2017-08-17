@@ -58,7 +58,7 @@ public:
     int numInputChannels;
     unsigned long sampleRate;
     PaStream *stream;
-    AudioInputMode inputMode;
+    APUPortAudioHost::AudioInputMode inputMode;
     APUPtr<AudioFile> audioFile;
     APUPtr<AudioProcessingUnit> audioProcessingUnit;
     APUHostInterface::Status status;

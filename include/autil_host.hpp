@@ -14,17 +14,6 @@
 
 #define APUHOST_EVENT_STATUSCHANGED "status_changed"
 
-/** Indicates where the Audio Manager will pull input from */
-enum AudioInputMode
-{
-    /** There is no input (synth mode) */
-    INPUT_NONE,
-    /** Use a file for input */
-    INPUT_FILE,
-    /** Use an audio device for input */
-    INPUT_DEVICE
-};
-
 /** Use AudioDeviceIndex when referring to the integer index of an audio device */
 typedef int AudioDeviceIndex;
 
@@ -95,8 +84,6 @@ public:
         RUNNING
     };
 
-    /** Set the input mode of the host */
-    virtual void setInputMode(AudioInputMode inputMode) = 0;
     /** Get an enumerable list of all the available audio devices */
     virtual APUObjRet<APUEnumerable<AudioDevice> > getDevices() const = 0;
     /** Set the input audio device by index */
@@ -150,14 +137,6 @@ public:
       * MUST occur before the object can be destroyed.
       */
     virtual void unsubscribe(APUHostEventSink *eventSink) = 0;
-
-    /** Set the file to use for audio input. The input mode must also be set to
-      * AudioInputModeFile.
-      */
-    virtual bool setInputFile(AudioFile *file) = 0;
-
-    /** Get a pointer to the current input file */
-    virtual APUObjRet<AudioFile> getInputFile() const = 0;
 };
 
 #endif /* autil_host_h */
