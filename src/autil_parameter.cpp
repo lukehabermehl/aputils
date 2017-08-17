@@ -15,9 +15,9 @@
 
 #define MIN2(_a, _b) ((_a <= _b) ? _a : _b)
 
-APUParameter::APUParameter(APUString *name, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb)
+APUParameter::APUParameter(APUString *identifier, APUNumber minValue, APUNumber maxValue, APUNumber defaultValue, APUParameterCallback *cb)
 {
-    m_pimpl = new Pimpl(name, cb);
+    m_pimpl = new Pimpl(identifier, cb);
     setMinValue(minValue);
     setMaxValue(maxValue);
     m_pimpl->current = defaultValue;
@@ -29,14 +29,15 @@ APUParameter::~APUParameter()
     delete m_pimpl;
 }
 
+APUObjRet<APUString>
+APUParameter::getIdentifier()
+{
+    return m_pimpl->identifier;
+}
+
 APUObjRet<APUString> APUParameter::getName()
 {
     return m_pimpl->name;
-}
-
-void APUParameter::setName(APUString *name)
-{
-    m_pimpl->name = name;
 }
 
 APUObjRet<APUString> APUParameter::getUnits()

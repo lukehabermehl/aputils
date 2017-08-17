@@ -39,20 +39,24 @@ public:
     APUOBJ_FWDDECL
 
     /** Construct a parameter object
-      * @param name the name of the parameter
+      * @param identifier the unique identifier of the parameter
       * @param minValue the minimum value allowed for the parameter
       * @param maxValue the maximum value allowed for the parameter
       * @param defaultValue the initial value for the parameter
       * @param cb optional callback object to handle parameter changes
       */
-    APUParameter(APUString *name,
+    APUParameter(APUString *identifier,
                  APUNumber minValue,
                  APUNumber maxValue,
                  APUNumber defaultValue,
                  APUParameterCallback *cb=NULL);
 
     virtual ~APUParameter();
-    void setName(APUString *name);
+
+    /** Get the unique identifier for the parameter */
+    APUObjRet<APUString> getIdentifier();
+
+    /** Get the name of the parameter to display in the UI */
     APUObjRet<APUString> getName();
 
     /** Get the target value of the parameter (value after smoothing) (copy) */

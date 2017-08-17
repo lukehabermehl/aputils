@@ -52,10 +52,10 @@ public:
 
     /** Get the number of parameters associated with this APU */
     size_t getNumParameters();
-    /** Get the parameter with the given name.
+    /** Get the parameter with the given ID.
       * @return the parameter or NULL if not found
       */
-    APUObjRet<APUParameter> getParameterWithName(const char *name);
+    APUObjRet<APUParameter> getParameterWithIdentifier(const char *identifier);
     /** Get the parameter map */
     const APUParameterMap * getParameterMap();
     

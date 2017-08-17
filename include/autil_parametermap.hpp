@@ -21,13 +21,13 @@ class APUParameterMap
 {
 public:
 
-    /** A simple iterator object that behaves similarly to std::iterator, but is not a pointer */
+    /** A simple iterator object that behaves similarly to std::iterator */
     class Iterator
     {
         friend class APUParameterMap;
         
     public:
-        /** The name of the parameter */
+        /** The identifier of the parameter */
         APUString *first();
         /** The parameter instance */
         APUParameter *second();
@@ -48,10 +48,10 @@ public:
 
     /** Add a parameter to the map. The map holds a strong reference */
     void addParameter(APUParameter *parameter);
-    /** Fetch the parameter with the given name from the map
+    /** Fetch the parameter with the given identifier from the map
       * @return NULL if no parameter matches that name
       */
-    APUObjRet<APUParameter> parameterWithName(const char *name) const;
+    APUObjRet<APUParameter> parameterWithIdentifier(const char *identifier) const;
 
     /** Get the number of parameters in the map */
     size_t size() const;

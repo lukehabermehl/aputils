@@ -25,19 +25,19 @@ void APUParameterMap::addParameter(APUParameter *parameter)
     if (parameter == NULL)
         return;
 
-    APUPtr<APUParameter> param = parameterWithName(parameter->getName()->str());
+    APUPtr<APUParameter> param = parameterWithIdentifier(parameter->getIdentifier()->str());
     if (param.ptr() == parameter) {
         return;
     } else if (param) {
         param->decRef();
     }
-    m_pimpl->params[parameter->getName()->str()] = parameter;
+    m_pimpl->params[parameter->getIdentifier()->str()] = parameter;
     parameter->addRef();
 }
 
-APUObjRet<APUParameter> APUParameterMap::parameterWithName(const char *name) const
+APUObjRet<APUParameter> APUParameterMap::parameterWithIdentifier(const char *identifier) const
 {
-    auto it = m_pimpl->params.find(std::string(name));
+    auto it = m_pimpl->params.find(std::string(identifier));
     if (it == m_pimpl->params.end())
     {
         return NULL;
@@ -70,7 +70,7 @@ APUParameterMap::Iterator APUParameterMap::begin() const
 APUString * APUParameterMap::Iterator::first()
 {
     if (!valid()) return NULL;
-    return m_pimpl->mapIterator->second->getName();
+    return m_pimpl->mapIterator->second->getIdentifier();
 }
 
 APUParameter *APUParameterMap::Iterator::second()

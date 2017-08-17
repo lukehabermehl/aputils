@@ -143,7 +143,6 @@ AudioFile::nextFrame(float **frame)
         }
         else
         {
-            //BDLog(kAudioFileLoggerPrefix, "Done reading");
             return DONE_READING;
         }
     }

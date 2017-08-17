@@ -139,3 +139,87 @@ APUStringMake(const char *str)
     return APUString::newInstance(str);
 }
 
+APUStringRef::APUStringRef()
+{
+    m_string = (APUString *)APUStringMake("");
+}
+
+APUStringRef::APUStringRef(APUString *str)
+{
+    m_string = str;
+    if (!m_string) {
+        m_string = (APUString *)APUStringMake("");
+    }
+}
+
+APUStringRef::APUStringRef(const char *str)
+{
+    m_string = (APUString *)APUStringMake(str);
+}
+
+APUObjRet<APUString>
+APUStringRef::get() const
+{
+    return m_string;
+}
+
+APUStringRef::operator const char * () const
+{
+    return m_string->str();
+}
+
+APUStringRef::operator APUString *() const
+{
+    return m_string.ptr();
+}
+
+bool
+APUStringRef::operator==(const APUStringRef &rhs)
+{
+    return m_string->equals(rhs.get());
+}
+
+bool
+APUStringRef::operator==(const char *rhs)
+{
+    return 0 == strcmp(m_string->str(), rhs);
+}
+
+bool
+APUStringRef::operator<(const APUStringRef &rhs)
+{
+    return m_string->compare(rhs.get());
+}
+
+APUStringRef&
+APUStringRef::operator=(const char *rhs)
+{
+    m_string = (APUString *)APUStringMake(rhs);
+    return *this;
+}
+
+APUStringRef&
+APUStringRef::operator=(const APUStringRef &rhs)
+{
+    m_string = (APUString *)rhs.get();
+    return *this;
+}
+
+void
+APUStringRef::append(const APUStringRef &appendStr)
+{
+    m_string = (APUString *)m_string->append(appendStr.get());
+}
+
+size_t
+APUStringRef::length() const
+{
+    return m_string->length();
+}
+
+bool
+APUStringRef::isEmpty() const
+{
+    return m_string->length() == 0;
+}
+

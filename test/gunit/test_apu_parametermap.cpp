@@ -48,15 +48,15 @@ TEST_F(APUParameterMapTestFixture, test_iterator)
 
 TEST_F(APUParameterMapTestFixture, test_api)
 {
-	APUParameter * param1 = paramMap->parameterWithName("param1");
+	APUParameter * param1 = paramMap->parameterWithIdentifier("param1");
 	EXPECT_TRUE(param1 != NULL);
 	EXPECT_EQ(APUNUM_FLOAT, param1->type());
 
-	APUParameter * param2 = paramMap->parameterWithName("param2");
+	APUParameter * param2 = paramMap->parameterWithIdentifier("param2");
 	EXPECT_TRUE(param2 != NULL);
 	EXPECT_EQ(APUNUM_BOOLEAN, param2->type());
 
-	EXPECT_EQ(NULL, paramMap->parameterWithName("notaparam"));
+	EXPECT_EQ(NULL, paramMap->parameterWithIdentifier("notaparam"));
 }
 
 TEST_F(APUParameterMapTestFixture, test_memory)

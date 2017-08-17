@@ -102,7 +102,6 @@ APUOscModSource::~APUOscModSource()
 float
 APUOscModSource::getModulationValue()
 {
-    APUGetLogger()->log("mod", LOG_LEVEL_ERROR, "mod value: %f", m_pimpl->currentValue);
     return m_pimpl->currentValue;
 }
 

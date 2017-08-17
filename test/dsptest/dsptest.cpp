@@ -24,7 +24,8 @@ public:
         m_modOsc = new APUWaveTableOscillator();
         m_modOsc->setFrequency(5);
 
-        m_freqParam = new APUParameter(APUStringMake("Frequency"),
+        APUStringRef paramId = "Frequency";
+        m_freqParam = new APUParameter(paramId,
                                        80,
                                        10000,
                                        800,

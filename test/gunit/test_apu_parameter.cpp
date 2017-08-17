@@ -16,11 +16,9 @@ protected:
 
 TEST_F(APUParameterTestFixture, test_essentials)
 {
-	APUPtr<APUString> paramName = APUStringMake("param");
-	APUParameter param(paramName, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0));
-	EXPECT_TRUE(param.getName()->equals(paramName));
-	param.setName(APUStringMake("new_name"));
-	EXPECT_TRUE(param.getName()->equals("new_name"));
+	APUPtr<APUString> paramId = APUStringMake("param");
+	APUParameter param(paramId, APUNUM_FLOAT(0), APUNUM_FLOAT(10), APUNUM_FLOAT(0));
+	EXPECT_TRUE(param.getIdentifier()->equals(paramId));
 
 	EXPECT_EQ(APUNUM_FLOAT, param.type());
 	EXPECT_EQ(0.0, param.getCurrentValue().floatValue());

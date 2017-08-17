@@ -73,8 +73,8 @@ unsigned long AudioProcessingUnit::getPreferredSampleRate()
 
 APUObjRet<APUString> AudioProcessingUnit::getName()
 {
-    static APUPtr<APUString> defaultName = APUStringMake("Unnamed APU");
-    return defaultName;
+    static APUStringRef defaultName = "Unnamed APU";
+    return defaultName.get();
 }
 
 size_t AudioProcessingUnit::getNumParameters()
@@ -82,9 +82,9 @@ size_t AudioProcessingUnit::getNumParameters()
     return m_pimpl->parameterMap->size();
 }
 
-APUObjRet<APUParameter> AudioProcessingUnit::getParameterWithName(const char *name)
+APUObjRet<APUParameter> AudioProcessingUnit::getParameterWithIdentifier(const char *identifier)
 {
-    return m_pimpl->parameterMap->parameterWithName(name);
+    return m_pimpl->parameterMap->parameterWithIdentifier(identifier);
 }
 
 const APUParameterMap * AudioProcessingUnit::getParameterMap()
@@ -94,9 +94,9 @@ const APUParameterMap * AudioProcessingUnit::getParameterMap()
 
 bool AudioProcessingUnit::addParameter(APUParameter *param)
 {
-    APUPtr<APUString> paramName = param->getName();
-    if (paramName) {
-        APUPtr<APUParameter> existing = getParameterWithName(paramName->str());
+    APUPtr<APUString> paramId = param->getIdentifier();
+    if (paramId) {
+        APUPtr<APUParameter> existing = getParameterWithIdentifier(paramId->str());
         if (!existing) {
             m_pimpl->parameterMap->addParameter(param);
             return true;

@@ -74,5 +74,41 @@ private:
   */
 APUObjRet<APUString> APUStringMake(const char *str);
 
+/** An object that wrap APUStringRef so that it can have overridden operators and behave like a normal C++ object. */
+class APUStringRef
+{
+public:
+    /** Get the underlying APUString */
+    APUObjRet<APUString> get() const;
+
+    /** Construct an empty string */
+    APUStringRef();
+    /** Wrap the given APUString instance. Will create a strong reference */
+    APUStringRef(APUString *str);
+    /** Create a new APUString with then input buffer */
+    APUStringRef(const char *str);
+
+    APUStringRef& operator=(const char *rhs);
+    APUStringRef& operator=(const APUStringRef& rhs);
+
+    /** Set the underlying string to be the result of the current string appended with the input string */
+    void append(const APUStringRef& appendStr);
+
+    /** Get the number of bytes in the string */
+    size_t length() const;
+    /** @return true if the string is zero bytes long */
+    bool isEmpty() const;
+
+    operator const char *() const;
+    operator APUString *() const;
+
+    bool operator==(const APUStringRef& rhs);
+    bool operator==(const char *rhs);
+    bool operator<(const APUStringRef& rhs);
+
+private:
+    APUPtr<APUString> m_string;
+};
+
 
 #endif /* autil_str_h */
