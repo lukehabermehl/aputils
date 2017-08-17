@@ -59,3 +59,19 @@ TEST_F(APUStringTestFixture, test_memory)
 	EXPECT_TRUE(helper.str);
 	EXPECT_EQ(1, helper.str->getRefCount());
 }
+
+TEST_F(APUStringTestFixture, test_stringref)
+{
+	APUPtr<APUString> pStr = APUStringMake("Hello");
+	APUStringRef sref(pStr);
+
+	// Test implicit conversion to const char *
+	EXPECT_EQ(0, strcmp(sref, "Hello"));
+
+	EXPECT_EQ(5, sref.length());
+	EXPECT_FALSE(sref.isEmpty());
+
+	// Let's try something fancy
+	sref.append(", world!");
+	EXPECT_TRUE(sref == "Hello, world!");
+}

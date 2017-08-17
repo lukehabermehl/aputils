@@ -34,15 +34,15 @@ protected:
 
 TEST_F(APUApiTestFixture, test_param_lookup)
 {
-	APUPtr<APUParameter> param1 = apu->getParameterWithName("param1");
+	APUPtr<APUParameter> param1 = apu->getParameterWithIdentifier("param1");
 	EXPECT_TRUE(param1);
 	EXPECT_EQ(APUNUM_FLOAT, param1->type());
 
-	APUPtr<APUParameter> param2 = apu->getParameterWithName("param2");
+	APUPtr<APUParameter> param2 = apu->getParameterWithIdentifier("param2");
 	EXPECT_TRUE(param2);
 	EXPECT_EQ(APUNUM_BOOLEAN, param2->type());
 
-	APUPtr<APUParameter> nullParam = apu->getParameterWithName("shouldNotExist");
+	APUPtr<APUParameter> nullParam = apu->getParameterWithIdentifier("shouldNotExist");
 	EXPECT_FALSE(nullParam);
 }
 

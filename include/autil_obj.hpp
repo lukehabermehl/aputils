@@ -86,7 +86,7 @@ public:
         }
     }
 
-    T *operator->()
+    T *operator->() const
     {
         return m_obj;
     }
@@ -154,7 +154,7 @@ public:
         decRef();
     }
 
-    T * ptr()
+    T * ptr() const
     {
         return m_obj;
     }
