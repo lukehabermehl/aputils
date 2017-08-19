@@ -144,17 +144,17 @@
 			isa = PBXGroup;
 			children = (
 				A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */,
+				A38750181EBE197C003F82C6 /* autil_defaultlogger.cpp */,
 				A3AFD64A1EB16AAF00238AEA /* autil_file.cpp */,
 				A3AFD64F1EB16AAF00238AEA /* autil_number.cpp */,
+				A330D6F41EBF74E000281EFB /* autil_obj.cpp */,
+				A331057A1ED0C999002F9026 /* autil_osc.cpp */,
 				A3AFD64D1EB16AAF00238AEA /* autil_pahost.cpp */,
 				A3AFD6521EB16AAF00238AEA /* autil_parameter.cpp */,
 				A3AFD6551EB16AAF00238AEA /* autil_parametermap.cpp */,
-				A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */,
-				A38750181EBE197C003F82C6 /* autil_defaultlogger.cpp */,
-				A330D6F41EBF74E000281EFB /* autil_obj.cpp */,
-				A331057A1ED0C999002F9026 /* autil_osc.cpp */,
-				A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */,
 				A393FB761EF00B9200CF758F /* autil_str.cpp */,
+				A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */,
+				A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -162,23 +162,23 @@
 		A3C839031EB8275A00C50FC4 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				A35849A71EBA86040007475F /* aputils.h */,
+				A3E171151EF0C03100466215 /* autil_array.hpp */,
 				A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */,
 				A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */,
+				A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */,
+				A35BE9581F26F1A6003D278C /* autil_mod.hpp */,
 				A3E2BA851EB8B3DF00FE0280 /* autil_number.hpp */,
 				A3E2BA841EB8B3DF00FE0280 /* autil_pahost.hpp */,
 				A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */,
 				A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */,
-				A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */,
-				A35849A71EBA86040007475F /* aputils.h */,
 				A32DC7501EBE163A0090C6D9 /* autil_logger.hpp */,
 				A330D6F21EBF726500281EFB /* autil_obj.hpp */,
 				A36A7FE11ED2546900C99432 /* autil_obj_enum.hpp */,
 				A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */,
-				A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */,
 				A33105781ED0C987002F9026 /* autil_osc.hpp */,
 				A393FB741EF00B8000CF758F /* autil_str.hpp */,
-				A3E171151EF0C03100466215 /* autil_array.hpp */,
-				A35BE9581F26F1A6003D278C /* autil_mod.hpp */,
+				A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -186,15 +186,15 @@
 		A3C839041EB8277900C50FC4 /* private-headers */ = {
 			isa = PBXGroup;
 			children = (
-				A3E2BA821EB8B3DF00FE0280 /* portaudio_host.hpp */,
 				A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */,
 				A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */,
+				A32DC7531EBE18040090C6D9 /* autil_logger_private.hpp */,
+				A331057C1ED0CBB8002F9026 /* autil_osc_private.hpp */,
 				A3AFD64C1EB16AAF00238AEA /* autil_pahost_private.hpp */,
 				A3AFD6511EB16AAF00238AEA /* autil_parameter_private.hpp */,
 				A3AFD6541EB16AAF00238AEA /* autil_parametermap_private.hpp */,
-				A32DC7531EBE18040090C6D9 /* autil_logger_private.hpp */,
-				A331057C1ED0CBB8002F9026 /* autil_osc_private.hpp */,
 				A393FB781EF00D0300CF758F /* autil_str_private.hpp */,
+				A3E2BA821EB8B3DF00FE0280 /* portaudio_host.hpp */,
 			);
 			name = "private-headers";
 			sourceTree = "<group>";

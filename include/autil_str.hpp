@@ -74,7 +74,7 @@ private:
   */
 APUObjRet<APUString> APUStringMake(const char *str);
 
-/** An object that wrap APUStringRef so that it can have overridden operators and behave like a normal C++ object. */
+/** An object that wraps APUStringRef so that it can have overridden operators and behave like a normal C++ object. */
 class APUStringRef
 {
 public:

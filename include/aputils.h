@@ -12,7 +12,9 @@
 #include <aputils/autil_array.hpp>
 #include <aputils/autil_audioprocessingunit.hpp>
 #include <aputils/autil_file.hpp>
+#include <aputils/autil_host.hpp>
 #include <aputils/autil_logger.hpp>
+#include <aputils/autil_mod.hpp>
 #include <aputils/autil_number.hpp>
 #include <aputils/autil_obj.hpp>
 #include <aputils/autil_obj_enum.hpp>
