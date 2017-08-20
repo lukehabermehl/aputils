@@ -10,21 +10,21 @@ file(GLOB SOURCES "src/*.cpp" "src/*.hpp")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
-set(PUBLIC_HEADERS "include/autil_audioprocessingunit.hpp"
-	"include/autil_array.hpp"
-	"include/autil_file.hpp"
-	"include/autil_host.hpp"
-	"include/autil_logger.hpp"
-	"include/autil_mod.hpp"
-	"include/autil_number.hpp"
-	"include/autil_obj.hpp"
-	"include/autil_obj_enum.hpp"
-	"include/autil_osc.hpp"
-	"include/autil_pahost.hpp"
-	"include/autil_parameter.hpp"
-	"include/autil_parametermap.hpp"
-	"include/autil_str.hpp"
-	"include/autil_thread_manager.hpp"
+set(PUBLIC_HEADERS "include/apu_audioprocessingunit.hpp"
+	"include/apu_array.hpp"
+	"include/apu_file.hpp"
+	"include/apu_host.hpp"
+	"include/apu_logger.hpp"
+	"include/apu_mod.hpp"
+	"include/apu_number.hpp"
+	"include/apu_obj.hpp"
+	"include/apu_obj_enum.hpp"
+	"include/apu_osc.hpp"
+	"include/apu_pahost.hpp"
+	"include/apu_parameter.hpp"
+	"include/apu_parametermap.hpp"
+	"include/apu_str.hpp"
+	"include/apu_thread_manager.hpp"
 	"include/aputils.h")
 
 add_library(aputils STATIC ${SOURCES})

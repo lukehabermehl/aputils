@@ -1,13 +1,13 @@
 //
-//  portaudio_kernel.cpp
-//  libblockdsp
+//  portaudio_host.cpp
+//  libaputils
 //
 //  Created by Luke on 5/23/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
 #include "portaudio_host.hpp"
-#include "autil_logger.hpp"
+#include "apu_logger.hpp"
 
 PortAudioKernel::PortAudioKernel()
 : audioProcessingUnit(NULL)

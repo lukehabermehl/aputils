@@ -7,42 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2642F8351F4A474C00FC65AA /* apu_audioprocessingunit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F82A1F4A474C00FC65AA /* apu_audioprocessingunit.cpp */; };
+		2642F8361F4A474C00FC65AA /* apu_defaultlogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F82B1F4A474C00FC65AA /* apu_defaultlogger.cpp */; };
+		2642F8371F4A474C00FC65AA /* apu_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F82C1F4A474C00FC65AA /* apu_file.cpp */; };
+		2642F8381F4A474C00FC65AA /* apu_number.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F82D1F4A474C00FC65AA /* apu_number.cpp */; };
+		2642F8391F4A474C00FC65AA /* apu_obj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F82E1F4A474C00FC65AA /* apu_obj.cpp */; };
+		2642F83A1F4A474C00FC65AA /* apu_osc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F82F1F4A474C00FC65AA /* apu_osc.cpp */; };
+		2642F83B1F4A474C00FC65AA /* apu_pahost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F8301F4A474C00FC65AA /* apu_pahost.cpp */; };
+		2642F83C1F4A474C00FC65AA /* apu_parameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F8311F4A474C00FC65AA /* apu_parameter.cpp */; };
+		2642F83D1F4A474C00FC65AA /* apu_parametermap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F8321F4A474C00FC65AA /* apu_parametermap.cpp */; };
+		2642F83E1F4A474C00FC65AA /* apu_str.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F8331F4A474C00FC65AA /* apu_str.cpp */; };
+		2642F83F1F4A474C00FC65AA /* apu_thread_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2642F8341F4A474C00FC65AA /* apu_thread_manager.cpp */; };
+		2642F8471F4A477400FC65AA /* apu_audioprocessingunit_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8401F4A477400FC65AA /* apu_audioprocessingunit_private.hpp */; };
+		2642F8481F4A477400FC65AA /* apu_file_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8411F4A477400FC65AA /* apu_file_private.hpp */; };
+		2642F8491F4A477400FC65AA /* apu_logger_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8421F4A477400FC65AA /* apu_logger_private.hpp */; };
+		2642F84A1F4A477400FC65AA /* apu_osc_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8431F4A477400FC65AA /* apu_osc_private.hpp */; };
+		2642F84B1F4A477400FC65AA /* apu_pahost_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8441F4A477400FC65AA /* apu_pahost_private.hpp */; };
+		2642F84C1F4A477400FC65AA /* apu_parameter_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8451F4A477400FC65AA /* apu_parameter_private.hpp */; };
+		2642F84D1F4A477400FC65AA /* apu_str_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8461F4A477400FC65AA /* apu_str_private.hpp */; };
+		2642F85E1F4A478700FC65AA /* apu_array.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F84E1F4A478700FC65AA /* apu_array.hpp */; };
+		2642F85F1F4A478700FC65AA /* apu_audioprocessingunit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F84F1F4A478700FC65AA /* apu_audioprocessingunit.hpp */; };
+		2642F8601F4A478700FC65AA /* apu_file.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8501F4A478700FC65AA /* apu_file.hpp */; };
+		2642F8611F4A478700FC65AA /* apu_host.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8511F4A478700FC65AA /* apu_host.hpp */; };
+		2642F8621F4A478700FC65AA /* apu_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8521F4A478700FC65AA /* apu_logger.hpp */; };
+		2642F8631F4A478700FC65AA /* apu_mod.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8531F4A478700FC65AA /* apu_mod.hpp */; };
+		2642F8641F4A478700FC65AA /* apu_number.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8541F4A478700FC65AA /* apu_number.hpp */; };
+		2642F8651F4A478700FC65AA /* apu_obj_enum.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8551F4A478700FC65AA /* apu_obj_enum.hpp */; };
+		2642F8661F4A478700FC65AA /* apu_obj.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8561F4A478700FC65AA /* apu_obj.hpp */; };
+		2642F8671F4A478700FC65AA /* apu_objmap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8571F4A478700FC65AA /* apu_objmap.hpp */; };
+		2642F8681F4A478700FC65AA /* apu_osc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8581F4A478700FC65AA /* apu_osc.hpp */; };
+		2642F8691F4A478700FC65AA /* apu_pahost.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F8591F4A478700FC65AA /* apu_pahost.hpp */; };
+		2642F86A1F4A478700FC65AA /* apu_parameter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F85A1F4A478700FC65AA /* apu_parameter.hpp */; };
+		2642F86B1F4A478700FC65AA /* apu_parametermap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F85B1F4A478700FC65AA /* apu_parametermap.hpp */; };
+		2642F86C1F4A478700FC65AA /* apu_str.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F85C1F4A478700FC65AA /* apu_str.hpp */; };
+		2642F86D1F4A478700FC65AA /* apu_thread_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F85D1F4A478700FC65AA /* apu_thread_manager.hpp */; };
 		A32DC7511EBE16430090C6D9 /* aputils.h in Headers */ = {isa = PBXBuildFile; fileRef = A35849A71EBA86040007475F /* aputils.h */; };
-		A32DC7521EBE16450090C6D9 /* autil_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A32DC7501EBE163A0090C6D9 /* autil_logger.hpp */; };
-		A32DC7541EBE18FA0090C6D9 /* autil_logger_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A32DC7531EBE18040090C6D9 /* autil_logger_private.hpp */; settings = {ATTRIBUTES = (Private, ); }; };
-		A330D6F31EBF726500281EFB /* autil_obj.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A330D6F21EBF726500281EFB /* autil_obj.hpp */; };
-		A330D6F51EBF74E000281EFB /* autil_obj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A330D6F41EBF74E000281EFB /* autil_obj.cpp */; };
-		A33105791ED0C987002F9026 /* autil_osc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A33105781ED0C987002F9026 /* autil_osc.hpp */; };
-		A331057B1ED0C999002F9026 /* autil_osc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A331057A1ED0C999002F9026 /* autil_osc.cpp */; };
-		A35BE9591F26F1A6003D278C /* autil_mod.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A35BE9581F26F1A6003D278C /* autil_mod.hpp */; };
 		A36A7FE01ED1FA9700C99432 /* portaudio_host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */; };
-		A36A7FE21ED2546900C99432 /* autil_obj_enum.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A36A7FE11ED2546900C99432 /* autil_obj_enum.hpp */; };
-		A36BC7EF1EC8ED640050C2A0 /* autil_host.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */; };
-		A38750191EBE197C003F82C6 /* autil_defaultlogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A38750181EBE197C003F82C6 /* autil_defaultlogger.cpp */; };
-		A393FB751EF00B8000CF758F /* autil_str.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A393FB741EF00B8000CF758F /* autil_str.hpp */; };
-		A393FB771EF00B9200CF758F /* autil_str.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A393FB761EF00B9200CF758F /* autil_str.cpp */; };
-		A3AFD65E1EB16AAF00238AEA /* autil_audioprocessingunit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */; };
 		A3AFD6601EB16AAF00238AEA /* portaudio_host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */; };
-		A3AFD6631EB16AAF00238AEA /* autil_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD64A1EB16AAF00238AEA /* autil_file.cpp */; };
-		A3AFD6661EB16AAF00238AEA /* autil_pahost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD64D1EB16AAF00238AEA /* autil_pahost.cpp */; };
-		A3AFD6681EB16AAF00238AEA /* autil_number.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD64F1EB16AAF00238AEA /* autil_number.cpp */; };
-		A3AFD66A1EB16AAF00238AEA /* autil_parameter_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6511EB16AAF00238AEA /* autil_parameter_private.hpp */; };
-		A3AFD66B1EB16AAF00238AEA /* autil_parameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6521EB16AAF00238AEA /* autil_parameter.cpp */; };
-		A3AFD66D1EB16AAF00238AEA /* autil_parametermap_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6541EB16AAF00238AEA /* autil_parametermap_private.hpp */; };
-		A3AFD66E1EB16AAF00238AEA /* autil_parametermap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6551EB16AAF00238AEA /* autil_parametermap.cpp */; };
-		A3AFD6731EB16AAF00238AEA /* autil_thread_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */; };
-		A3D916BC1EC7BE3300E3FDC4 /* autil_objmap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */; };
-		A3E2BA8A1EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3E2BA8B1EB8B3DF00FE0280 /* portaudio_host.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA821EB8B3DF00FE0280 /* portaudio_host.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3E2BA8C1EB8B3DF00FE0280 /* autil_file.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3E2BA8D1EB8B3DF00FE0280 /* autil_pahost.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA841EB8B3DF00FE0280 /* autil_pahost.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3E2BA8E1EB8B3DF00FE0280 /* autil_number.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA851EB8B3DF00FE0280 /* autil_number.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3E2BA8F1EB8B3DF00FE0280 /* autil_parameter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3E2BA901EB8B3DF00FE0280 /* autil_parametermap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3E2BA921EB8B3DF00FE0280 /* autil_thread_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3E2BA931EB8B3F900FE0280 /* autil_audioprocessingunit_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */; };
-		A3E2BA941EB8B3FB00FE0280 /* autil_file_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */; };
-		A3E2BA951EB8B3FD00FE0280 /* autil_pahost_private.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3AFD64C1EB16AAF00238AEA /* autil_pahost_private.hpp */; };
 		A3E82B231ED0A1B500E52E8B /* dsptest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E82B171ED0A16600E52E8B /* dsptest.cpp */; };
 /* End PBXBuildFile section */
 
@@ -59,45 +61,44 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A32DC7501EBE163A0090C6D9 /* autil_logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = autil_logger.hpp; path = include/autil_logger.hpp; sourceTree = "<group>"; };
-		A32DC7531EBE18040090C6D9 /* autil_logger_private.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = autil_logger_private.hpp; path = src/autil_logger_private.hpp; sourceTree = "<group>"; };
-		A330D6F21EBF726500281EFB /* autil_obj.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_obj.hpp; path = include/autil_obj.hpp; sourceTree = "<group>"; };
-		A330D6F41EBF74E000281EFB /* autil_obj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_obj.cpp; path = src/autil_obj.cpp; sourceTree = "<group>"; };
-		A33105781ED0C987002F9026 /* autil_osc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_osc.hpp; path = include/autil_osc.hpp; sourceTree = "<group>"; };
-		A331057A1ED0C999002F9026 /* autil_osc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_osc.cpp; path = src/autil_osc.cpp; sourceTree = "<group>"; };
-		A331057C1ED0CBB8002F9026 /* autil_osc_private.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = autil_osc_private.hpp; path = src/autil_osc_private.hpp; sourceTree = "<group>"; };
+		2642F82A1F4A474C00FC65AA /* apu_audioprocessingunit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_audioprocessingunit.cpp; path = src/apu_audioprocessingunit.cpp; sourceTree = "<group>"; };
+		2642F82B1F4A474C00FC65AA /* apu_defaultlogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_defaultlogger.cpp; path = src/apu_defaultlogger.cpp; sourceTree = "<group>"; };
+		2642F82C1F4A474C00FC65AA /* apu_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_file.cpp; path = src/apu_file.cpp; sourceTree = "<group>"; };
+		2642F82D1F4A474C00FC65AA /* apu_number.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_number.cpp; path = src/apu_number.cpp; sourceTree = "<group>"; };
+		2642F82E1F4A474C00FC65AA /* apu_obj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_obj.cpp; path = src/apu_obj.cpp; sourceTree = "<group>"; };
+		2642F82F1F4A474C00FC65AA /* apu_osc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_osc.cpp; path = src/apu_osc.cpp; sourceTree = "<group>"; };
+		2642F8301F4A474C00FC65AA /* apu_pahost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_pahost.cpp; path = src/apu_pahost.cpp; sourceTree = "<group>"; };
+		2642F8311F4A474C00FC65AA /* apu_parameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_parameter.cpp; path = src/apu_parameter.cpp; sourceTree = "<group>"; };
+		2642F8321F4A474C00FC65AA /* apu_parametermap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_parametermap.cpp; path = src/apu_parametermap.cpp; sourceTree = "<group>"; };
+		2642F8331F4A474C00FC65AA /* apu_str.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_str.cpp; path = src/apu_str.cpp; sourceTree = "<group>"; };
+		2642F8341F4A474C00FC65AA /* apu_thread_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_thread_manager.cpp; path = src/apu_thread_manager.cpp; sourceTree = "<group>"; };
+		2642F8401F4A477400FC65AA /* apu_audioprocessingunit_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_audioprocessingunit_private.hpp; path = src/apu_audioprocessingunit_private.hpp; sourceTree = "<group>"; };
+		2642F8411F4A477400FC65AA /* apu_file_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_file_private.hpp; path = src/apu_file_private.hpp; sourceTree = "<group>"; };
+		2642F8421F4A477400FC65AA /* apu_logger_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_logger_private.hpp; path = src/apu_logger_private.hpp; sourceTree = "<group>"; };
+		2642F8431F4A477400FC65AA /* apu_osc_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_osc_private.hpp; path = src/apu_osc_private.hpp; sourceTree = "<group>"; };
+		2642F8441F4A477400FC65AA /* apu_pahost_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_pahost_private.hpp; path = src/apu_pahost_private.hpp; sourceTree = "<group>"; };
+		2642F8451F4A477400FC65AA /* apu_parameter_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_parameter_private.hpp; path = src/apu_parameter_private.hpp; sourceTree = "<group>"; };
+		2642F8461F4A477400FC65AA /* apu_str_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_str_private.hpp; path = src/apu_str_private.hpp; sourceTree = "<group>"; };
+		2642F84E1F4A478700FC65AA /* apu_array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_array.hpp; path = include/apu_array.hpp; sourceTree = "<group>"; };
+		2642F84F1F4A478700FC65AA /* apu_audioprocessingunit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_audioprocessingunit.hpp; path = include/apu_audioprocessingunit.hpp; sourceTree = "<group>"; };
+		2642F8501F4A478700FC65AA /* apu_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_file.hpp; path = include/apu_file.hpp; sourceTree = "<group>"; };
+		2642F8511F4A478700FC65AA /* apu_host.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_host.hpp; path = include/apu_host.hpp; sourceTree = "<group>"; };
+		2642F8521F4A478700FC65AA /* apu_logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_logger.hpp; path = include/apu_logger.hpp; sourceTree = "<group>"; };
+		2642F8531F4A478700FC65AA /* apu_mod.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_mod.hpp; path = include/apu_mod.hpp; sourceTree = "<group>"; };
+		2642F8541F4A478700FC65AA /* apu_number.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_number.hpp; path = include/apu_number.hpp; sourceTree = "<group>"; };
+		2642F8551F4A478700FC65AA /* apu_obj_enum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_obj_enum.hpp; path = include/apu_obj_enum.hpp; sourceTree = "<group>"; };
+		2642F8561F4A478700FC65AA /* apu_obj.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_obj.hpp; path = include/apu_obj.hpp; sourceTree = "<group>"; };
+		2642F8571F4A478700FC65AA /* apu_objmap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_objmap.hpp; path = include/apu_objmap.hpp; sourceTree = "<group>"; };
+		2642F8581F4A478700FC65AA /* apu_osc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_osc.hpp; path = include/apu_osc.hpp; sourceTree = "<group>"; };
+		2642F8591F4A478700FC65AA /* apu_pahost.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_pahost.hpp; path = include/apu_pahost.hpp; sourceTree = "<group>"; };
+		2642F85A1F4A478700FC65AA /* apu_parameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_parameter.hpp; path = include/apu_parameter.hpp; sourceTree = "<group>"; };
+		2642F85B1F4A478700FC65AA /* apu_parametermap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_parametermap.hpp; path = include/apu_parametermap.hpp; sourceTree = "<group>"; };
+		2642F85C1F4A478700FC65AA /* apu_str.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_str.hpp; path = include/apu_str.hpp; sourceTree = "<group>"; };
+		2642F85D1F4A478700FC65AA /* apu_thread_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_thread_manager.hpp; path = include/apu_thread_manager.hpp; sourceTree = "<group>"; };
 		A35849A71EBA86040007475F /* aputils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = aputils.h; path = include/aputils.h; sourceTree = "<group>"; };
-		A35BE9581F26F1A6003D278C /* autil_mod.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_mod.hpp; path = include/autil_mod.hpp; sourceTree = "<group>"; };
-		A36A7FE11ED2546900C99432 /* autil_obj_enum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_obj_enum.hpp; path = include/autil_obj_enum.hpp; sourceTree = "<group>"; };
-		A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_host.hpp; path = include/autil_host.hpp; sourceTree = "<group>"; };
-		A38750181EBE197C003F82C6 /* autil_defaultlogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_defaultlogger.cpp; path = src/autil_defaultlogger.cpp; sourceTree = "<group>"; };
-		A393FB741EF00B8000CF758F /* autil_str.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_str.hpp; path = include/autil_str.hpp; sourceTree = "<group>"; };
-		A393FB761EF00B9200CF758F /* autil_str.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_str.cpp; path = src/autil_str.cpp; sourceTree = "<group>"; };
-		A393FB781EF00D0300CF758F /* autil_str_private.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = autil_str_private.hpp; path = src/autil_str_private.hpp; sourceTree = "<group>"; };
 		A3AFD63C1EB16A9000238AEA /* liblibaputils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibaputils.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_audioprocessingunit_private.hpp; path = src/autil_audioprocessingunit_private.hpp; sourceTree = "<group>"; };
-		A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_audioprocessingunit.cpp; path = src/autil_audioprocessingunit.cpp; sourceTree = "<group>"; };
 		A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = portaudio_host.cpp; path = src/portaudio_host.cpp; sourceTree = "<group>"; };
-		A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_file_private.hpp; path = src/autil_file_private.hpp; sourceTree = "<group>"; };
-		A3AFD64A1EB16AAF00238AEA /* autil_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_file.cpp; path = src/autil_file.cpp; sourceTree = "<group>"; };
-		A3AFD64C1EB16AAF00238AEA /* autil_pahost_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_pahost_private.hpp; path = src/autil_pahost_private.hpp; sourceTree = "<group>"; };
-		A3AFD64D1EB16AAF00238AEA /* autil_pahost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_pahost.cpp; path = src/autil_pahost.cpp; sourceTree = "<group>"; };
-		A3AFD64F1EB16AAF00238AEA /* autil_number.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_number.cpp; path = src/autil_number.cpp; sourceTree = "<group>"; };
-		A3AFD6511EB16AAF00238AEA /* autil_parameter_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parameter_private.hpp; path = src/autil_parameter_private.hpp; sourceTree = "<group>"; };
-		A3AFD6521EB16AAF00238AEA /* autil_parameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_parameter.cpp; path = src/autil_parameter.cpp; sourceTree = "<group>"; };
-		A3AFD6541EB16AAF00238AEA /* autil_parametermap_private.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parametermap_private.hpp; path = src/autil_parametermap_private.hpp; sourceTree = "<group>"; };
-		A3AFD6551EB16AAF00238AEA /* autil_parametermap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_parametermap.cpp; path = src/autil_parametermap.cpp; sourceTree = "<group>"; };
-		A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = autil_thread_manager.cpp; path = src/autil_thread_manager.cpp; sourceTree = "<group>"; };
-		A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_objmap.hpp; path = include/autil_objmap.hpp; sourceTree = "<group>"; };
-		A3E171151EF0C03100466215 /* autil_array.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = autil_array.hpp; path = include/autil_array.hpp; sourceTree = "<group>"; };
-		A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_audioprocessingunit.hpp; path = include/autil_audioprocessingunit.hpp; sourceTree = "<group>"; };
 		A3E2BA821EB8B3DF00FE0280 /* portaudio_host.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = portaudio_host.hpp; path = include/portaudio_host.hpp; sourceTree = "<group>"; };
-		A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_file.hpp; path = include/autil_file.hpp; sourceTree = "<group>"; };
-		A3E2BA841EB8B3DF00FE0280 /* autil_pahost.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_pahost.hpp; path = include/autil_pahost.hpp; sourceTree = "<group>"; };
-		A3E2BA851EB8B3DF00FE0280 /* autil_number.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_number.hpp; path = include/autil_number.hpp; sourceTree = "<group>"; };
-		A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parameter.hpp; path = include/autil_parameter.hpp; sourceTree = "<group>"; };
-		A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_parametermap.hpp; path = include/autil_parametermap.hpp; sourceTree = "<group>"; };
-		A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = autil_thread_manager.hpp; path = include/autil_thread_manager.hpp; sourceTree = "<group>"; };
 		A3E82B171ED0A16600E52E8B /* dsptest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = dsptest.cpp; path = test/dsptest/dsptest.cpp; sourceTree = "<group>"; };
 		A3E82B1C1ED0A1A100E52E8B /* dsptest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = dsptest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -143,17 +144,17 @@
 		A3AFD6431EB16AA400238AEA /* src */ = {
 			isa = PBXGroup;
 			children = (
-				A3AFD6451EB16AAF00238AEA /* autil_audioprocessingunit.cpp */,
-				A38750181EBE197C003F82C6 /* autil_defaultlogger.cpp */,
-				A3AFD64A1EB16AAF00238AEA /* autil_file.cpp */,
-				A3AFD64F1EB16AAF00238AEA /* autil_number.cpp */,
-				A330D6F41EBF74E000281EFB /* autil_obj.cpp */,
-				A331057A1ED0C999002F9026 /* autil_osc.cpp */,
-				A3AFD64D1EB16AAF00238AEA /* autil_pahost.cpp */,
-				A3AFD6521EB16AAF00238AEA /* autil_parameter.cpp */,
-				A3AFD6551EB16AAF00238AEA /* autil_parametermap.cpp */,
-				A393FB761EF00B9200CF758F /* autil_str.cpp */,
-				A3AFD65A1EB16AAF00238AEA /* autil_thread_manager.cpp */,
+				2642F82A1F4A474C00FC65AA /* apu_audioprocessingunit.cpp */,
+				2642F82B1F4A474C00FC65AA /* apu_defaultlogger.cpp */,
+				2642F82C1F4A474C00FC65AA /* apu_file.cpp */,
+				2642F82D1F4A474C00FC65AA /* apu_number.cpp */,
+				2642F82E1F4A474C00FC65AA /* apu_obj.cpp */,
+				2642F82F1F4A474C00FC65AA /* apu_osc.cpp */,
+				2642F8301F4A474C00FC65AA /* apu_pahost.cpp */,
+				2642F8311F4A474C00FC65AA /* apu_parameter.cpp */,
+				2642F8321F4A474C00FC65AA /* apu_parametermap.cpp */,
+				2642F8331F4A474C00FC65AA /* apu_str.cpp */,
+				2642F8341F4A474C00FC65AA /* apu_thread_manager.cpp */,
 				A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */,
 			);
 			name = src;
@@ -162,23 +163,23 @@
 		A3C839031EB8275A00C50FC4 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				2642F84E1F4A478700FC65AA /* apu_array.hpp */,
+				2642F84F1F4A478700FC65AA /* apu_audioprocessingunit.hpp */,
+				2642F8501F4A478700FC65AA /* apu_file.hpp */,
+				2642F8511F4A478700FC65AA /* apu_host.hpp */,
+				2642F8521F4A478700FC65AA /* apu_logger.hpp */,
+				2642F8531F4A478700FC65AA /* apu_mod.hpp */,
+				2642F8541F4A478700FC65AA /* apu_number.hpp */,
+				2642F8551F4A478700FC65AA /* apu_obj_enum.hpp */,
+				2642F8561F4A478700FC65AA /* apu_obj.hpp */,
+				2642F8571F4A478700FC65AA /* apu_objmap.hpp */,
+				2642F8581F4A478700FC65AA /* apu_osc.hpp */,
+				2642F8591F4A478700FC65AA /* apu_pahost.hpp */,
+				2642F85A1F4A478700FC65AA /* apu_parameter.hpp */,
+				2642F85B1F4A478700FC65AA /* apu_parametermap.hpp */,
+				2642F85C1F4A478700FC65AA /* apu_str.hpp */,
+				2642F85D1F4A478700FC65AA /* apu_thread_manager.hpp */,
 				A35849A71EBA86040007475F /* aputils.h */,
-				A3E171151EF0C03100466215 /* autil_array.hpp */,
-				A3E2BA811EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp */,
-				A3E2BA831EB8B3DF00FE0280 /* autil_file.hpp */,
-				A36BC7EE1EC8ED640050C2A0 /* autil_host.hpp */,
-				A35BE9581F26F1A6003D278C /* autil_mod.hpp */,
-				A3E2BA851EB8B3DF00FE0280 /* autil_number.hpp */,
-				A3E2BA841EB8B3DF00FE0280 /* autil_pahost.hpp */,
-				A3E2BA861EB8B3DF00FE0280 /* autil_parameter.hpp */,
-				A3E2BA871EB8B3DF00FE0280 /* autil_parametermap.hpp */,
-				A32DC7501EBE163A0090C6D9 /* autil_logger.hpp */,
-				A330D6F21EBF726500281EFB /* autil_obj.hpp */,
-				A36A7FE11ED2546900C99432 /* autil_obj_enum.hpp */,
-				A3D916BB1EC7BE3300E3FDC4 /* autil_objmap.hpp */,
-				A33105781ED0C987002F9026 /* autil_osc.hpp */,
-				A393FB741EF00B8000CF758F /* autil_str.hpp */,
-				A3E2BA891EB8B3DF00FE0280 /* autil_thread_manager.hpp */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -186,14 +187,13 @@
 		A3C839041EB8277900C50FC4 /* private-headers */ = {
 			isa = PBXGroup;
 			children = (
-				A3AFD6441EB16AAF00238AEA /* autil_audioprocessingunit_private.hpp */,
-				A3AFD6491EB16AAF00238AEA /* autil_file_private.hpp */,
-				A32DC7531EBE18040090C6D9 /* autil_logger_private.hpp */,
-				A331057C1ED0CBB8002F9026 /* autil_osc_private.hpp */,
-				A3AFD64C1EB16AAF00238AEA /* autil_pahost_private.hpp */,
-				A3AFD6511EB16AAF00238AEA /* autil_parameter_private.hpp */,
-				A3AFD6541EB16AAF00238AEA /* autil_parametermap_private.hpp */,
-				A393FB781EF00D0300CF758F /* autil_str_private.hpp */,
+				2642F8401F4A477400FC65AA /* apu_audioprocessingunit_private.hpp */,
+				2642F8411F4A477400FC65AA /* apu_file_private.hpp */,
+				2642F8421F4A477400FC65AA /* apu_logger_private.hpp */,
+				2642F8431F4A477400FC65AA /* apu_osc_private.hpp */,
+				2642F8441F4A477400FC65AA /* apu_pahost_private.hpp */,
+				2642F8451F4A477400FC65AA /* apu_parameter_private.hpp */,
+				2642F8461F4A477400FC65AA /* apu_str_private.hpp */,
 				A3E2BA821EB8B3DF00FE0280 /* portaudio_host.hpp */,
 			);
 			name = "private-headers";
@@ -214,29 +214,31 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A32DC7521EBE16450090C6D9 /* autil_logger.hpp in Headers */,
-				A35BE9591F26F1A6003D278C /* autil_mod.hpp in Headers */,
-				A3E2BA8D1EB8B3DF00FE0280 /* autil_pahost.hpp in Headers */,
-				A3E2BA921EB8B3DF00FE0280 /* autil_thread_manager.hpp in Headers */,
 				A32DC7511EBE16430090C6D9 /* aputils.h in Headers */,
-				A3E2BA8A1EB8B3DF00FE0280 /* autil_audioprocessingunit.hpp in Headers */,
-				A3E2BA941EB8B3FB00FE0280 /* autil_file_private.hpp in Headers */,
-				A3E2BA8E1EB8B3DF00FE0280 /* autil_number.hpp in Headers */,
-				A330D6F31EBF726500281EFB /* autil_obj.hpp in Headers */,
-				A3AFD66D1EB16AAF00238AEA /* autil_parametermap_private.hpp in Headers */,
-				A3E2BA901EB8B3DF00FE0280 /* autil_parametermap.hpp in Headers */,
-				A3E2BA8F1EB8B3DF00FE0280 /* autil_parameter.hpp in Headers */,
-				A3AFD66A1EB16AAF00238AEA /* autil_parameter_private.hpp in Headers */,
-				A3E2BA8C1EB8B3DF00FE0280 /* autil_file.hpp in Headers */,
-				A3D916BC1EC7BE3300E3FDC4 /* autil_objmap.hpp in Headers */,
-				A33105791ED0C987002F9026 /* autil_osc.hpp in Headers */,
-				A32DC7541EBE18FA0090C6D9 /* autil_logger_private.hpp in Headers */,
-				A3E2BA951EB8B3FD00FE0280 /* autil_pahost_private.hpp in Headers */,
-				A36A7FE21ED2546900C99432 /* autil_obj_enum.hpp in Headers */,
-				A36BC7EF1EC8ED640050C2A0 /* autil_host.hpp in Headers */,
-				A3E2BA931EB8B3F900FE0280 /* autil_audioprocessingunit_private.hpp in Headers */,
-				A393FB751EF00B8000CF758F /* autil_str.hpp in Headers */,
+				2642F85E1F4A478700FC65AA /* apu_array.hpp in Headers */,
+				2642F8641F4A478700FC65AA /* apu_number.hpp in Headers */,
+				2642F8491F4A477400FC65AA /* apu_logger_private.hpp in Headers */,
+				2642F8671F4A478700FC65AA /* apu_objmap.hpp in Headers */,
+				2642F8621F4A478700FC65AA /* apu_logger.hpp in Headers */,
+				2642F8691F4A478700FC65AA /* apu_pahost.hpp in Headers */,
+				2642F8601F4A478700FC65AA /* apu_file.hpp in Headers */,
+				2642F8481F4A477400FC65AA /* apu_file_private.hpp in Headers */,
+				2642F8631F4A478700FC65AA /* apu_mod.hpp in Headers */,
+				2642F86D1F4A478700FC65AA /* apu_thread_manager.hpp in Headers */,
+				2642F84A1F4A477400FC65AA /* apu_osc_private.hpp in Headers */,
+				2642F84B1F4A477400FC65AA /* apu_pahost_private.hpp in Headers */,
+				2642F8681F4A478700FC65AA /* apu_osc.hpp in Headers */,
+				2642F84D1F4A477400FC65AA /* apu_str_private.hpp in Headers */,
+				2642F85F1F4A478700FC65AA /* apu_audioprocessingunit.hpp in Headers */,
+				2642F86C1F4A478700FC65AA /* apu_str.hpp in Headers */,
+				2642F86A1F4A478700FC65AA /* apu_parameter.hpp in Headers */,
 				A3E2BA8B1EB8B3DF00FE0280 /* portaudio_host.hpp in Headers */,
+				2642F8611F4A478700FC65AA /* apu_host.hpp in Headers */,
+				2642F8471F4A477400FC65AA /* apu_audioprocessingunit_private.hpp in Headers */,
+				2642F8661F4A478700FC65AA /* apu_obj.hpp in Headers */,
+				2642F84C1F4A477400FC65AA /* apu_parameter_private.hpp in Headers */,
+				2642F86B1F4A478700FC65AA /* apu_parametermap.hpp in Headers */,
+				2642F8651F4A478700FC65AA /* apu_obj_enum.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,18 +323,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2642F8391F4A474C00FC65AA /* apu_obj.cpp in Sources */,
+				2642F8351F4A474C00FC65AA /* apu_audioprocessingunit.cpp in Sources */,
+				2642F83F1F4A474C00FC65AA /* apu_thread_manager.cpp in Sources */,
+				2642F8361F4A474C00FC65AA /* apu_defaultlogger.cpp in Sources */,
+				2642F83D1F4A474C00FC65AA /* apu_parametermap.cpp in Sources */,
+				2642F83C1F4A474C00FC65AA /* apu_parameter.cpp in Sources */,
+				2642F83B1F4A474C00FC65AA /* apu_pahost.cpp in Sources */,
+				2642F8371F4A474C00FC65AA /* apu_file.cpp in Sources */,
+				2642F83A1F4A474C00FC65AA /* apu_osc.cpp in Sources */,
 				A3AFD6601EB16AAF00238AEA /* portaudio_host.cpp in Sources */,
-				A331057B1ED0C999002F9026 /* autil_osc.cpp in Sources */,
-				A3AFD6681EB16AAF00238AEA /* autil_number.cpp in Sources */,
-				A3AFD6631EB16AAF00238AEA /* autil_file.cpp in Sources */,
-				A3AFD66B1EB16AAF00238AEA /* autil_parameter.cpp in Sources */,
-				A3AFD6731EB16AAF00238AEA /* autil_thread_manager.cpp in Sources */,
-				A393FB771EF00B9200CF758F /* autil_str.cpp in Sources */,
-				A3AFD66E1EB16AAF00238AEA /* autil_parametermap.cpp in Sources */,
-				A3AFD65E1EB16AAF00238AEA /* autil_audioprocessingunit.cpp in Sources */,
-				A3AFD6661EB16AAF00238AEA /* autil_pahost.cpp in Sources */,
-				A38750191EBE197C003F82C6 /* autil_defaultlogger.cpp in Sources */,
-				A330D6F51EBF74E000281EFB /* autil_obj.cpp in Sources */,
+				2642F8381F4A474C00FC65AA /* apu_number.cpp in Sources */,
+				2642F83E1F4A474C00FC65AA /* apu_str.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

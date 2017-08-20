@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "autil_obj.hpp"
-#include "autil_objmap.hpp"
+#include "apu_obj.hpp"
+#include "apu_objmap.hpp"
 
 class TestObj : public APUObject
 {

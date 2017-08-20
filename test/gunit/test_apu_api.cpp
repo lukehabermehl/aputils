@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "autil_parameter.hpp"
-#include "autil_parametermap.hpp"
-#include "autil_audioprocessingunit.hpp"
+#include "apu_parameter.hpp"
+#include "apu_parametermap.hpp"
+#include "apu_audioprocessingunit.hpp"
 
 class APUApiTestAPU : public AudioProcessingUnit
 {

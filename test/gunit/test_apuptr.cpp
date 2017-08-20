@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "autil_obj.hpp"
+#include "apu_obj.hpp"
 
 class TestObj : public APUObject
 {

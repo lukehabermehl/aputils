@@ -1,5 +1,5 @@
 //
-//  libblockdsp
+//  portaudio_host.hpp
 //
 //  Created by Luke on 5/23/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
@@ -9,14 +9,14 @@
   * Internal interface to PortAudio API
   */
 
-#ifndef PortAudioKernel_hpp
-#define PortAudioKernel_hpp
+#ifndef portaudio_host_hpp
+#define portaudio_host_hpp
 
 #include <portaudio.h>
 
-#include "autil_file.hpp"
-#include "autil_audioprocessingunit.hpp"
-#include "autil_pahost.hpp"
+#include "apu_file.hpp"
+#include "apu_audioprocessingunit.hpp"
+#include "apu_pahost.hpp"
 
 static const char *kPortAudioKernelLogPrefix = "[PortAudioKernel]";
 
@@ -72,4 +72,4 @@ private:
 };
 
 
-#endif /* PortAudioKernel_hpp */
+#endif /* portaudio_host_hpp */

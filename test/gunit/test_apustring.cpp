@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "autil_str.hpp"
+#include "apu_str.hpp"
 
 class APUStringTestFixture : public ::testing::Test
 {

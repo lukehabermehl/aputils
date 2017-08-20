@@ -9,19 +9,19 @@
 #ifndef aputils_h
 #define aputils_h
 
-#include <aputils/autil_array.hpp>
-#include <aputils/autil_audioprocessingunit.hpp>
-#include <aputils/autil_file.hpp>
-#include <aputils/autil_host.hpp>
-#include <aputils/autil_logger.hpp>
-#include <aputils/autil_mod.hpp>
-#include <aputils/autil_number.hpp>
-#include <aputils/autil_obj.hpp>
-#include <aputils/autil_obj_enum.hpp>
-#include <aputils/autil_osc.hpp>
-#include <aputils/autil_pahost.hpp>
-#include <aputils/autil_parameter.hpp>
-#include <aputils/autil_parametermap.hpp>
-#include <aputils/autil_str.hpp>
+#include <aputils/apu_array.hpp>
+#include <aputils/apu_audioprocessingunit.hpp>
+#include <aputils/apu_file.hpp>
+#include <aputils/apu_host.hpp>
+#include <aputils/apu_logger.hpp>
+#include <aputils/apu_mod.hpp>
+#include <aputils/apu_number.hpp>
+#include <aputils/apu_obj.hpp>
+#include <aputils/apu_obj_enum.hpp>
+#include <aputils/apu_osc.hpp>
+#include <aputils/apu_pahost.hpp>
+#include <aputils/apu_parameter.hpp>
+#include <aputils/apu_parametermap.hpp>
+#include <aputils/apu_str.hpp>
 
 #endif /* aputils_h */
