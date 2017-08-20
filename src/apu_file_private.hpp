@@ -1,6 +1,6 @@
 //
 //  apu_file_private.hpp
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 5/30/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
@@ -11,8 +11,6 @@
 
 #include "apu_file.hpp"
 #include <sndfile.h>
-#include <thread>
-#include <mutex>
 
 class AudioFile::Pimpl
 {

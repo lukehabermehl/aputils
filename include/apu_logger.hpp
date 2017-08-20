@@ -14,7 +14,6 @@
 #define LOG_LEVEL_WARNING 2
 #define LOG_LEVEL_DEBUG 3
 
-#include <memory>
 #include "apu_obj.hpp"
 
 /// Interface for logger objects

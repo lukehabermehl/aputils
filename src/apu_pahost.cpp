@@ -1,17 +1,16 @@
 //
 //  APUPortAudioHost.cpp
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 5/23/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
-#include "apu_pahost.hpp"
-#include "apu_pahost_private.hpp"
 #include "apu_file.hpp"
 #include "apu_logger.hpp"
+#include "apu_pahost.hpp"
+#include "apu_pahost_private.hpp"
 
-#include <portaudio.h>
 #include <cassert>
 
 static const char *kAPUPortAudioHostLogPrefix = "[APUPortAudioHost]";

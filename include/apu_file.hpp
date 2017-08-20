@@ -1,5 +1,5 @@
 //
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 5/23/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
@@ -7,10 +7,9 @@
 
 /** @file apu_file.hpp */
 
-#ifndef AudioFile_hpp
-#define AudioFile_hpp
+#ifndef apu_file_hpp
+#define apu_file_hpp
 
-#include <stdlib.h>
 #include "apu_obj.hpp"
 
 /** Allows buffering samples from files and supports a wide variety of audio file formats (Thank you libsndfile) */
@@ -64,4 +63,4 @@ private:
     Pimpl *m_pimpl;
 };
 
-#endif /* AudioFile_hpp */
+#endif /* apu_file_hpp */

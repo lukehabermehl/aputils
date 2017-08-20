@@ -9,11 +9,12 @@
 #ifndef apu_logger_private_h
 #define apu_logger_private_h
 
+#include "apu_logger.hpp"
+
 #include <mutex>
 #include <string>
-#include <thread>
 #include <sstream>
-#include "apu_logger.hpp"
+#include <thread>
 
 class APUDefaultLogger::Pimpl
 {

@@ -1,19 +1,17 @@
 //
-//  APUPortAudioHost_Private.hpp
-//  libblockdsp
+//  apu_pahost_private.hpp
+//  libaputils
 //
 //  Created by Luke on 5/30/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
-#ifndef APUPortAudioHost_Private_h
-#define APUPortAudioHost_Private_h
+#ifndef apu_pahost_private_h
+#define apu_pahost_private_h
 
 #include "apu_pahost.hpp"
-#include "portaudio_host.hpp"
 #include "apu_obj_enum.hpp"
-
-#include <string.h>
+#include "portaudio_host.hpp"
 
 class APUPortAudioHost::Pimpl
 {
@@ -25,4 +23,4 @@ public:
     APUPtr<APUEnumerator<APUHostEventSink> > eventSinks;
 };
 
-#endif /* APUPortAudioHost_Private_h */
+#endif /* apu_pahost_private_h */

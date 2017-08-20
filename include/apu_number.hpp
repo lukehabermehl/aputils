@@ -8,7 +8,7 @@
 #ifndef apu_number_hpp
 #define apu_number_hpp
 
-#include <memory>
+#include <cstdlib>
 
 #define APUNUM_FLOAT(_f) APUNumber::numberForFloat(_f)
 #define APUNUM_INT(_i) APUNumber::numberForInteger(_i)

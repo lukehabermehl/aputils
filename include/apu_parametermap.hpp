@@ -1,6 +1,6 @@
 //
 //  apu_parametermap.hpp
-//  libblockdsp
+//  libaputils
 //
 
 /** @file apu_parametermap.hpp */
@@ -8,9 +8,8 @@
 #ifndef apu_parametermap_hpp
 #define apu_parametermap_hpp
 
-#include "apu_parameter.hpp"
 #include "apu_obj.hpp"
-#include <memory>
+#include "apu_parameter.hpp"
 
 /** @file apu_parametermap.hpp */
 

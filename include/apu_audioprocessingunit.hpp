@@ -1,5 +1,5 @@
 //
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 5/24/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
@@ -7,13 +7,11 @@
 
 /** @file apu_audioprocessingunit.hpp */
 
-#ifndef AudioProcessingUnit_hpp
-#define AudioProcessingUnit_hpp
+#ifndef apu_audioprocessingunit_hpp
+#define apu_audioprocessingunit_hpp
 
 #include "apu_parameter.hpp"
 #include "apu_parametermap.hpp"
-#include <unordered_map>
-#include <string>
 
 /** Base class for APU process units */
 class AudioProcessingUnit
@@ -72,4 +70,4 @@ private:
     Pimpl *m_pimpl;
 };
 
-#endif /* AudioProcessingUnit_hpp */
+#endif /* apu_audioprocessingunit_hpp */

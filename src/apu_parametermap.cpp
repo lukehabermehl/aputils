@@ -1,6 +1,6 @@
 //
 //  apu_parametermap.cpp
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 9/9/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.

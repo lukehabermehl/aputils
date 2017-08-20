@@ -6,10 +6,9 @@
 //  Copyright © 2017 Luke Habermehl. All rights reserved.
 //
 
+#include "apu_logger.hpp"
 #include "apu_osc.hpp"
 #include "apu_osc_private.hpp"
-
-#include "apu_logger.hpp"
 
 APUTrivialOscillator::APUTrivialOscillator()
 {

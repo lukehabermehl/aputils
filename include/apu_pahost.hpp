@@ -1,5 +1,5 @@
 //
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 5/23/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
@@ -13,7 +13,6 @@
 #include "apu_audioprocessingunit.hpp"
 #include "apu_file.hpp"
 #include "apu_host.hpp"
-#include <memory>
 
 /** Host implementation using PortAudio */
 class APUPortAudioHost

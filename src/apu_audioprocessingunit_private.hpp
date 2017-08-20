@@ -11,8 +11,6 @@
 
 #include "apu_audioprocessingunit.hpp"
 #include "apu_parameter.hpp"
-#include <unordered_map>
-#include <string>
 
 class AudioProcessingUnit::Pimpl
 {

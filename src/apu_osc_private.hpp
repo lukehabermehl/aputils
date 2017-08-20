@@ -9,10 +9,10 @@
 #ifndef apu_osc_private_h
 #define apu_osc_private_h
 
-#include <cmath>
-#include <cassert>
-
 #include "apu_osc.hpp"
+
+#include <cassert>
+#include <cmath>
 
 class APUTrivialOscillator::Pimpl
 {

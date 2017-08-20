@@ -1,6 +1,6 @@
 //
 //  apu_parameter.hpp
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 8/26/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
@@ -12,8 +12,8 @@
 #include "apu_number.hpp"
 #include "apu_array.hpp"
 #include "apu_str.hpp"
-#include "apu_mod.hpp"
 
+class APUModSource;
 class APUParameter;
 class AudioProcessingUnit;
 

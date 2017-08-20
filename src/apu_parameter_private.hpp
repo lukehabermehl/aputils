@@ -1,6 +1,6 @@
 //
 //  apu_parameter_private.hpp
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 8/26/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
@@ -11,7 +11,6 @@
 
 #include "apu_parameter.hpp"
 #include <atomic>
-#include <string>
 
 class APUParameter::Pimpl
 {

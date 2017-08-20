@@ -6,8 +6,8 @@
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
-#include "portaudio_host.hpp"
 #include "apu_logger.hpp"
+#include "portaudio_host.hpp"
 
 PortAudioKernel::PortAudioKernel()
 : audioProcessingUnit(NULL)

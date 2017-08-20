@@ -1,17 +1,19 @@
 //
 //  apu_parameter.cpp
-//  libblockdsp
+//  libaputils
 //
 //  Created by Luke on 8/26/16.
 //  Copyright © 2016 Luke Habermehl. All rights reserved.
 //
 
+#include "apu_logger.hpp"
+#include "apu_mod.hpp"
 #include "apu_parameter.hpp"
 #include "apu_parameter_private.hpp"
-#include "apu_logger.hpp"
-#include <cmath>
+
+#include <cassert>
 #include <climits>
-#include <assert.h>
+#include <cmath>
 
 #define MIN2(_a, _b) ((_a <= _b) ? _a : _b)
 

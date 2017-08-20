@@ -6,8 +6,8 @@
 //  Copyright © 2017 Luke Habermehl. All rights reserved.
 //
 
-#include <unistd.h>
 #include "apu_logger_private.hpp"
+#include <unistd.h>
 
 typedef APUDefaultLogger::Pimpl LoggerImpl;
 typedef LoggerImpl::Queue LoggerQueue;
