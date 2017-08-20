@@ -152,6 +152,22 @@ APUStringRef::APUStringRef(APUString *str)
     }
 }
 
+APUStringRef::APUStringRef(const APUPtr<APUString>& str)
+{
+    m_string = str.ptr();
+    if (!m_string) {
+        m_string = (APUString *)APUStringMake("");
+    }
+}
+
+APUStringRef::APUStringRef(const APUObjRet<APUString>& str)
+{
+    m_string = str.ptr();
+    if (!m_string) {
+        m_string = (APUString *)APUStringMake("");
+    }
+}
+
 APUStringRef::APUStringRef(const char *str)
 {
     m_string = (APUString *)APUStringMake(str);
@@ -202,6 +218,13 @@ APUStringRef&
 APUStringRef::operator=(const APUStringRef &rhs)
 {
     m_string = (APUString *)rhs.get();
+    return *this;
+}
+
+APUStringRef&
+APUStringRef::operator=(APUString *rhs)
+{
+    m_string = rhs;
     return *this;
 }
 

@@ -85,11 +85,14 @@ public:
     APUStringRef();
     /** Wrap the given APUString instance. Will create a strong reference */
     APUStringRef(APUString *str);
+    APUStringRef(const APUPtr<APUString>& str);
+    APUStringRef(const APUObjRet<APUString>& str);
     /** Create a new APUString with then input buffer */
     APUStringRef(const char *str);
 
     APUStringRef& operator=(const char *rhs);
     APUStringRef& operator=(const APUStringRef& rhs);
+    APUStringRef& operator=(APUString *rhs);
 
     /** Set the underlying string to be the result of the current string appended with the input string */
     void append(const APUStringRef& appendStr);

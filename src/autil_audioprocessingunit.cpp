@@ -94,9 +94,9 @@ const APUParameterMap * AudioProcessingUnit::getParameterMap()
 
 bool AudioProcessingUnit::addParameter(APUParameter *param)
 {
-    APUPtr<APUString> paramId = param->getIdentifier();
-    if (paramId) {
-        APUPtr<APUParameter> existing = getParameterWithIdentifier(paramId->str());
+    APUStringRef paramId = param->getIdentifier();
+    if (!paramId.isEmpty()) {
+        APUPtr<APUParameter> existing = getParameterWithIdentifier(paramId);
         if (!existing) {
             m_pimpl->parameterMap->addParameter(param);
             return true;

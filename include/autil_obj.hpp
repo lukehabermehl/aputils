@@ -133,8 +133,21 @@ public:
         m_obj = rhs;
         return *this;
     }
+    APUPtr<T>& operator=(const APUObjRet<T>& orig)
+    {
+        if (m_obj) {
+            decRef();
+        }
+        m_obj = orig.ptr();
+        if (m_obj) {
+            m_obj->addRef();
+        }
 
-    operator T* ()
+        return *this;
+    }
+
+
+    operator T* () const
     {
         return m_obj;
     }
@@ -216,7 +229,7 @@ public:
         return *this;
     }
 
-    operator T* ()
+    operator T* () const
     {
         return m_obj;
     }

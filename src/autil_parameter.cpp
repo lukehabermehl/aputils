@@ -32,17 +32,17 @@ APUParameter::~APUParameter()
 APUObjRet<APUString>
 APUParameter::getIdentifier()
 {
-    return m_pimpl->identifier;
+    return m_pimpl->identifier.get();
 }
 
 APUObjRet<APUString> APUParameter::getName()
 {
-    return m_pimpl->name;
+    return m_pimpl->name.get();
 }
 
 APUObjRet<APUString> APUParameter::getUnits()
 {
-    return m_pimpl->units;
+    return m_pimpl->units.get();
 }
 
 void APUParameter::setUnits(APUString *units)

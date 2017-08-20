@@ -74,4 +74,14 @@ TEST_F(APUStringTestFixture, test_stringref)
 	// Let's try something fancy
 	sref.append(", world!");
 	EXPECT_TRUE(sref == "Hello, world!");
+
+	APUStringRef strref = APUStringMake("onetwothree").ptr();
+	EXPECT_TRUE(strref == "onetwothree");
+	pStr = strref.get();
+	EXPECT_TRUE(pStr->equals("onetwothree"));
+	EXPECT_EQ(2, pStr->getRefCount());
+
+	pStr = APUStringRef("fourFiveSix");
+	EXPECT_TRUE(pStr->equals("fourFiveSix"));
+	EXPECT_EQ(1, pStr->getRefCount());
 }

@@ -36,9 +36,9 @@ public:
     double smoothingInterval_msec;
     size_t smoothingFrames;
 
-    APUPtr<APUString> identifier;
-    APUPtr<APUString> name;
-    APUPtr<APUString> units;
+    APUStringRef identifier;
+    APUStringRef name;
+    APUStringRef units;
 
     std::atomic<APUNumber> target;
     std::atomic<APUNumber> current;

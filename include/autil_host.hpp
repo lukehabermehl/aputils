@@ -37,12 +37,12 @@ public:
     {}
 
     /** Get the device name */
-    APUObjRet<APUString> getName() const { return m_name; }
+    APUObjRet<APUString> getName() const { return m_name.get(); }
     /** Get the unique index of the device */
     AudioDeviceIndex getIndex() const { return m_index; }
 
 private:
-    APUPtr<APUString> m_name;
+    APUStringRef m_name;
     AudioDeviceIndex m_index;
 };
 
