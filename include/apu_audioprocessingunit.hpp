@@ -26,8 +26,16 @@ public:
     /** This method is called by the APU host before starting any processing. Configure variables and default values in an override */
     virtual void setupInitialState();
 
-    /** Override this method to do audio processing */
-    virtual void processAudio(float *inputBuffer, float *outputBuffer, int numInputChannels, int numOutputChannels);
+    /** Override this method to do audio processing 
+      * @param inputBuffer pointer to the first sample in the first frame of input
+      * @param outputBuffer pointer to the first sample in the first frame of output
+      * @param numInputChannels number of samples in one input frame
+      * @param numOutputChannels number of samples in one output frame
+      * @param numFrames number of frames to be processed
+      */
+    virtual void processAudio(float *inputBuffer, float *outputBuffer,
+                              int numInputChannels, int numOutputChannels,
+                              uint32_t numFrames);
     
     /** Set the maximum number of input channels usable */
     virtual void setMaxInputChannels(uint32_t num);

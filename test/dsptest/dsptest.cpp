@@ -78,11 +78,17 @@ public:
     }
 
     void processAudio(float *inputBuffer, float *outputBuffer,
-                      int numInputChannels, int numOutputChannels)
+                      int numInputChannels, int numOutputChannels,
+                      uint32_t numFrames)
     {
-        outputBuffer[0] = m_osc->getNextSample();
-        if (numOutputChannels > 1) {
-            outputBuffer[1] = outputBuffer[0];
+        for (uint32_t i = 0; i < numFrames; i++) {
+            // float *pInput = &inputBuffer[i * numInputChannels];
+            float *pOutput = &outputBuffer[i * numOutputChannels];
+
+            pOutput[0] = m_osc->getNextSample();
+            if (numOutputChannels > 1) {
+                outputBuffer[1] = outputBuffer[0];
+            }
         }
     }
 
@@ -96,7 +102,7 @@ public:
 int main()
 {
     APUPtr<APUPortAudioHost> host = new APUPortAudioHost();
-    host->setInputMode(INPUT_NONE);
+    host->setInputMode(APUPortAudioHost::INPUT_NONE);
     host->setOutputDevice(1);
     APUPtr<AudioProcessingUnit> apu = new TestAPU();
     host->setAudioProcessingUnit(apu);

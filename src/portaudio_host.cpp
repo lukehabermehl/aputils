@@ -9,6 +9,8 @@
 #include "apu_logger.hpp"
 #include "portaudio_host.hpp"
 
+#include <memory>
+
 PortAudioKernel::PortAudioKernel()
 : audioProcessingUnit(NULL)
 , numInputChannels(1)
@@ -61,17 +63,20 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
             break;
         case APUPortAudioHost::INPUT_FILE:
             sampleRate = audioFile->sampleRate();
+            numInputChannels = (int)audioFile->numChannels();
             break;
         case APUPortAudioHost::INPUT_DEVICE:
             //TODO: use set inputDeviceIndex
             const PaDeviceInfo *inputDevInfo = Pa_GetDeviceInfo(Pa_GetDefaultInputDevice());
             sampleRate = inputDevInfo->defaultSampleRate;
-            inputParameters.channelCount = inputDevInfo->maxInputChannels;
+            numInputChannels = inputDevInfo->maxInputChannels;
             inputParameters.sampleFormat = paFloat32;
             inputParameters.device = Pa_GetDefaultInputDevice();
             inputParameters.suggestedLatency = inputDevInfo->defaultLowInputLatency;
             break;
     }
+
+    inputParameters.channelCount = numInputChannels;
 
     APUGetLogger()->log(kPortAudioKernelLogPrefix, LOG_LEVEL_DEBUG,
                         "Open stream with sample rate: %lu",
@@ -83,7 +88,7 @@ bool PortAudioKernel::open(PaDeviceIndex outputDevIndex)
                             pParams,
                             &outputParameters,
                             sampleRate,
-                            1,
+                            256,
                             0,
                             &PortAudioKernel::paCallback,
                             this);
@@ -163,32 +168,32 @@ int PortAudioKernel::paCallbackMethod(const void *inputBuffer, void *outputBuffe
 
     float *out = (float *)outputBuffer;
     float *in = 0;
+    uint32_t numFrames = (uint32_t)framesPerBuffer;
     if (inputMode != APUPortAudioHost::INPUT_DEVICE) {
         in = (float *)inputBuffer;
     }
 
     PaStreamCallbackResult ret = paContinue;
 
-    for (unsigned long i=0; i<framesPerBuffer; i++) {
-        if (inputMode == APUPortAudioHost::INPUT_FILE) {
-            if (audioFile->nextFrame(&in) != AudioFile::STATUS_OK) {
-                ret = paComplete;
-                break;
-            }
-        } else if (inputMode == APUPortAudioHost::INPUT_DEVICE) {
-            in = (float *)inputBuffer + (i * numInputChannels);
+    if (inputMode == APUPortAudioHost::INPUT_FILE) {
+        float fileInput[2048];
+        memset(fileInput, 0, 2048 * sizeof(float));
+        size_t samplesRead = 0;
+        AudioFile::BufferStatus fileStatus = audioFile->read(fileInput, 256, samplesRead);
+        in = fileInput;
+        if (fileStatus != AudioFile::STATUS_OK) {
+            ret = paComplete;
         }
-
-        out = (float *)outputBuffer + (i * numOutputChannels);
-
-        //If no APU, passthrough
-        if (!audioProcessingUnit) {
-            passthroughUnit->processAudio(in, out, numInputChannels, numOutputChannels);
-        } else{
-            audioProcessingUnit->processAudio(in, out, numInputChannels, numOutputChannels);
-        }
-
+        numFrames = (uint32_t)samplesRead / numInputChannels;
     }
+    else if (inputMode == APUPortAudioHost::INPUT_DEVICE) {
+        in = (float *)inputBuffer;
+    }
+
+    out = (float *)outputBuffer;
+
+    AudioProcessingUnit *unit = audioProcessingUnit ? audioProcessingUnit : passthroughUnit;
+    unit->processAudio(in, out, numInputChannels, numOutputChannels, numFrames);
 
     return ret;
 }

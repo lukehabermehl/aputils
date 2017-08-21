@@ -9,6 +9,8 @@
 #include "apu_audioprocessingunit.hpp"
 #include "apu_audioprocessingunit_private.hpp"
 
+#include <memory>
+
 AudioProcessingUnit::AudioProcessingUnit()
 {
     m_pimpl = new Pimpl();
@@ -23,18 +25,23 @@ void AudioProcessingUnit::setupInitialState()
 {
 }
 
-void AudioProcessingUnit::processAudio(float *inputBuffer, float *outputBuffer, int numInputChannels, int numOutputChannels)
+void AudioProcessingUnit::processAudio(float *inputBuffer, float *outputBuffer,
+                                       int numInputChannels, int numOutputChannels,
+                                       uint32_t numFrames)
 {
-    outputBuffer[0] = inputBuffer[0];
-    
-    if (numInputChannels == 1 && numOutputChannels == 2)
-    {
-        outputBuffer[1] = outputBuffer[0];
+    if (numInputChannels == numOutputChannels) {
+        memcpy(outputBuffer, inputBuffer, numFrames * numInputChannels * sizeof(float));
     }
-    
-    else if (numInputChannels == 1 && numOutputChannels == 2)
-    {
-        outputBuffer[1] = inputBuffer[1];
+    else if (inputBuffer) {
+        for (uint32_t i = 0; i < numFrames; i++) {
+            float *pInput = &inputBuffer[i * numInputChannels];
+            float *pOutput = &outputBuffer[i * numOutputChannels];
+
+            pOutput[0] = pInput[0];
+            if (numOutputChannels == 2) {
+                pOutput[1] = pInput[0];
+            }
+        }
     }
 }
 

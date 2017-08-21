@@ -150,6 +150,33 @@ AudioFile::nextFrame(float **frame)
     return STATUS_OK;
 }
 
+AudioFile::BufferStatus
+AudioFile::read(float buffer[], size_t numFrames, size_t &samplesRead)
+{
+    samplesRead = 0;
+    float *pFrame = NULL;
+    BufferStatus status = STATUS_OK;
+
+    for (size_t i = 0; i < numFrames; i++) {
+        status = nextFrame(&pFrame);
+        switch (status) {
+            case OUT_OF_BOUNDS:
+                break;
+            case STATUS_OK:
+            case DONE_READING:
+                memcpy(&buffer[samplesRead], pFrame, m_pimpl->sfInfo.channels * sizeof(float));
+                samplesRead += m_pimpl->sfInfo.channels;
+                break;
+        }
+
+        if (status != STATUS_OK) {
+            break;
+        }
+    }
+
+    return status;
+}
+
 size_t
 AudioFile::sampleRate()
 {

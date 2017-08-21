@@ -50,6 +50,12 @@ public:
       * @returns The status of the buffer after reading the frame
      */
     BufferStatus nextFrame(float **frame);
+
+    /** Copy samples from the file to the output buffer
+      * @param buffer output parameter to store read samples
+      * @param numFrames specify the number of frames to read.
+      * @param samplesRead output parameter that will be set to the number of samples successfully read into the buffer */
+    BufferStatus read(float buffer[], size_t numFrames, size_t &samplesRead);
     
     /** Close the file */
     void close();
