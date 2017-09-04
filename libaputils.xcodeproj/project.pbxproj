@@ -43,6 +43,7 @@
 		2642F86D1F4A478700FC65AA /* apu_thread_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F85D1F4A478700FC65AA /* apu_thread_manager.hpp */; };
 		A32DC7511EBE16430090C6D9 /* aputils.h in Headers */ = {isa = PBXBuildFile; fileRef = A35849A71EBA86040007475F /* aputils.h */; };
 		A36A7FE01ED1FA9700C99432 /* portaudio_host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */; };
+		A39E3A111F5CDC930070A45C /* apu_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A39E3A101F5CDC930070A45C /* apu_loader.cpp */; };
 		A3AFD6601EB16AAF00238AEA /* portaudio_host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */; };
 		A3E2BA8B1EB8B3DF00FE0280 /* portaudio_host.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A3E2BA821EB8B3DF00FE0280 /* portaudio_host.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3E82B231ED0A1B500E52E8B /* dsptest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3E82B171ED0A16600E52E8B /* dsptest.cpp */; };
@@ -96,6 +97,8 @@
 		2642F85C1F4A478700FC65AA /* apu_str.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_str.hpp; path = include/apu_str.hpp; sourceTree = "<group>"; };
 		2642F85D1F4A478700FC65AA /* apu_thread_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_thread_manager.hpp; path = include/apu_thread_manager.hpp; sourceTree = "<group>"; };
 		A35849A71EBA86040007475F /* aputils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = aputils.h; path = include/aputils.h; sourceTree = "<group>"; };
+		A39E3A0F1F5CDC630070A45C /* apu_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = apu_loader.hpp; path = include/apu_loader.hpp; sourceTree = "<group>"; };
+		A39E3A101F5CDC930070A45C /* apu_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_loader.cpp; path = src/apu_loader.cpp; sourceTree = "<group>"; };
 		A3AFD63C1EB16A9000238AEA /* liblibaputils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibaputils.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = portaudio_host.cpp; path = src/portaudio_host.cpp; sourceTree = "<group>"; };
 		A3E2BA821EB8B3DF00FE0280 /* portaudio_host.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = portaudio_host.hpp; path = include/portaudio_host.hpp; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 				2642F82A1F4A474C00FC65AA /* apu_audioprocessingunit.cpp */,
 				2642F82B1F4A474C00FC65AA /* apu_defaultlogger.cpp */,
 				2642F82C1F4A474C00FC65AA /* apu_file.cpp */,
+				A39E3A101F5CDC930070A45C /* apu_loader.cpp */,
 				2642F82D1F4A474C00FC65AA /* apu_number.cpp */,
 				2642F82E1F4A474C00FC65AA /* apu_obj.cpp */,
 				2642F82F1F4A474C00FC65AA /* apu_osc.cpp */,
@@ -167,6 +171,7 @@
 				2642F84F1F4A478700FC65AA /* apu_audioprocessingunit.hpp */,
 				2642F8501F4A478700FC65AA /* apu_file.hpp */,
 				2642F8511F4A478700FC65AA /* apu_host.hpp */,
+				A39E3A0F1F5CDC630070A45C /* apu_loader.hpp */,
 				2642F8521F4A478700FC65AA /* apu_logger.hpp */,
 				2642F8531F4A478700FC65AA /* apu_mod.hpp */,
 				2642F8541F4A478700FC65AA /* apu_number.hpp */,
@@ -333,6 +338,7 @@
 				2642F8371F4A474C00FC65AA /* apu_file.cpp in Sources */,
 				2642F83A1F4A474C00FC65AA /* apu_osc.cpp in Sources */,
 				A3AFD6601EB16AAF00238AEA /* portaudio_host.cpp in Sources */,
+				A39E3A111F5CDC930070A45C /* apu_loader.cpp in Sources */,
 				2642F8381F4A474C00FC65AA /* apu_number.cpp in Sources */,
 				2642F83E1F4A474C00FC65AA /* apu_str.cpp in Sources */,
 			);

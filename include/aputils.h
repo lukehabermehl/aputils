@@ -13,6 +13,7 @@
 #include <aputils/apu_audioprocessingunit.hpp>
 #include <aputils/apu_file.hpp>
 #include <aputils/apu_host.hpp>
+#include <aputils/apu_loader.hpp>
 #include <aputils/apu_logger.hpp>
 #include <aputils/apu_mod.hpp>
 #include <aputils/apu_number.hpp>
