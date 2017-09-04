@@ -48,6 +48,12 @@ void APUPortAudioHost::setInputMode(AudioInputMode mode)
     m_pimpl->dspKernel->inputMode = mode;
 }
 
+APUPortAudioHost::AudioInputMode
+APUPortAudioHost::getInputMode()
+{
+    return m_pimpl->dspKernel->inputMode;
+}
+
 AudioDeviceIndex APUPortAudioHost::getInputDevice() const
 {
     return m_pimpl->inputDeviceIndex;

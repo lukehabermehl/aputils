@@ -45,3 +45,10 @@ add_custom_command(TARGET "uninstall"
 					POST_BUILD
 					COMMAND rm -rf /usr/local/lib/libaputils.a
 					COMMAND rm -rf /usr/local/include/aputils*)
+
+add_custom_target("docs")
+add_custom_command(TARGET "docs"
+				   POST_BUILD
+				   COMMAND scripts/docs.sh
+				   COMMAND echo "Index written to docs/doxy/html/index.html"
+				   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

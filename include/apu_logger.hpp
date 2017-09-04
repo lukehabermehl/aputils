@@ -39,7 +39,7 @@ public:
 /** Built-in thread-safe logger. This is the default logger if you do not call APUSetLogger() */
 class APUDefaultLogger
 : public APULoggerInterface
-, public APUObject
+, private APUObject
 {
     typedef APUObject BASE_CLASS;
 public:

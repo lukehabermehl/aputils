@@ -17,7 +17,7 @@
 /** Host implementation using PortAudio */
 class APUPortAudioHost
 : public APUHostInterface
-, public APUObject
+, private APUObject
 {
 public:
     APUOBJ_FWDDECL
@@ -36,8 +36,11 @@ public:
         INPUT_DEVICE
     };
 
-    /** Specify the audio input source */
+    /** Specify the audio input source type */
     virtual void setInputMode(AudioInputMode mode);
+
+    /** @return the current audio input source type */
+    virtual AudioInputMode getInputMode();
 
     /** Get a list of the available audio devices */
     virtual APUObjRet<APUEnumerable<AudioDevice> > getDevices() const;

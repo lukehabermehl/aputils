@@ -31,6 +31,18 @@ APULoader::hasUnit()
     return m_unit;
 }
 
+APUObjRet<AudioProcessingUnit>
+APULoader::getUnit()
+{
+    return m_unit;
+}
+
+APULoader::ErrorCode
+APULoader::getError()
+{
+    return m_error;
+}
+
 bool
 APULoader::loadUnit(APUString *filepath)
 {
