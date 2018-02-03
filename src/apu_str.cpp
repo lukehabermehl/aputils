@@ -106,8 +106,8 @@ APUString::format(const char *fmt, ...)
     va_list args;
     va_start(args, fmt);
 
-    size_t bufSize = 4096;
-    char *buf = new char[4096];
+    size_t bufSize = 64;
+    char *buf = new char[bufSize];
     int n = vsnprintf(buf, bufSize, fmt, args);
     if (n < 0) {
         return NULL;

@@ -114,5 +114,4 @@ private:
     APUPtr<APUString> m_string;
 };
 
-
 #endif /* apu_str_h */
