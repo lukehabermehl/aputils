@@ -33,6 +33,9 @@ public:
     /** Set the urgency level to filter to */
     virtual void setLogLevel(int level) = 0;
 
+    /** Terminate the logger */
+    virtual void shutdown() = 0;
+
     virtual ~APULoggerInterface() {}
 };
 
@@ -51,6 +54,7 @@ public:
     virtual void log(const char *tag, int logLevel, const char *fmt, ...);
     virtual void setOutputFilepath(const char *filepath);
     virtual void setLogLevel(int level);
+    virtual void shutdown();
 
     class Pimpl;
 

@@ -41,3 +41,13 @@ TEST_F(ThreadManagerTestFixture, test_thread_dispatch)
 	sleep(2);
 	EXPECT_EQ(count, GetInt());
 }
+
+TEST_F(ThreadManagerTestFixture, test_shutdown)
+{
+	for (int i = 0; i < 4; i++) {
+		APUDispatchThread(ThreadManagerTestFixture::ThreadWokerFunc, this);
+	}
+
+	APUThreadManager::sharedThreadManager()->shutdown();
+	EXPECT_TRUE(APUThreadManager::sharedThreadManager()->isShutdown());
+}

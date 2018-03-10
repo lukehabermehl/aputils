@@ -42,6 +42,7 @@
 		2642F86C1F4A478700FC65AA /* apu_str.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F85C1F4A478700FC65AA /* apu_str.hpp */; };
 		2642F86D1F4A478700FC65AA /* apu_thread_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2642F85D1F4A478700FC65AA /* apu_thread_manager.hpp */; };
 		A32DC7511EBE16430090C6D9 /* aputils.h in Headers */ = {isa = PBXBuildFile; fileRef = A35849A71EBA86040007475F /* aputils.h */; };
+		A354B55C2054372400203EFA /* aputils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A354B55B2054372400203EFA /* aputils.cpp */; };
 		A36A7FE01ED1FA9700C99432 /* portaudio_host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */; };
 		A39E3A111F5CDC930070A45C /* apu_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A39E3A101F5CDC930070A45C /* apu_loader.cpp */; };
 		A3AFD6601EB16AAF00238AEA /* portaudio_host.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */; };
@@ -96,6 +97,7 @@
 		2642F85B1F4A478700FC65AA /* apu_parametermap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_parametermap.hpp; path = include/apu_parametermap.hpp; sourceTree = "<group>"; };
 		2642F85C1F4A478700FC65AA /* apu_str.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_str.hpp; path = include/apu_str.hpp; sourceTree = "<group>"; };
 		2642F85D1F4A478700FC65AA /* apu_thread_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = apu_thread_manager.hpp; path = include/apu_thread_manager.hpp; sourceTree = "<group>"; };
+		A354B55B2054372400203EFA /* aputils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = aputils.cpp; path = src/aputils.cpp; sourceTree = "<group>"; };
 		A35849A71EBA86040007475F /* aputils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = aputils.h; path = include/aputils.h; sourceTree = "<group>"; };
 		A39E3A0F1F5CDC630070A45C /* apu_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = apu_loader.hpp; path = include/apu_loader.hpp; sourceTree = "<group>"; };
 		A39E3A101F5CDC930070A45C /* apu_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = apu_loader.cpp; path = src/apu_loader.cpp; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				2642F8331F4A474C00FC65AA /* apu_str.cpp */,
 				2642F8341F4A474C00FC65AA /* apu_thread_manager.cpp */,
 				A3AFD6471EB16AAF00238AEA /* portaudio_host.cpp */,
+				A354B55B2054372400203EFA /* aputils.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				2642F8351F4A474C00FC65AA /* apu_audioprocessingunit.cpp in Sources */,
 				2642F83F1F4A474C00FC65AA /* apu_thread_manager.cpp in Sources */,
 				2642F8361F4A474C00FC65AA /* apu_defaultlogger.cpp in Sources */,
+				A354B55C2054372400203EFA /* aputils.cpp in Sources */,
 				2642F83D1F4A474C00FC65AA /* apu_parametermap.cpp in Sources */,
 				2642F83C1F4A474C00FC65AA /* apu_parameter.cpp in Sources */,
 				2642F83B1F4A474C00FC65AA /* apu_pahost.cpp in Sources */,

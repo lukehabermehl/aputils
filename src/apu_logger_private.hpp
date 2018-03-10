@@ -22,13 +22,15 @@ public:
     Pimpl();
     virtual ~Pimpl();
 
+    void shutdown();
+
     class Queue;
 
     Queue *queue;
     std::mutex queueLock;
     std::thread workerThread;
     FILE *outputFile;
-    bool shutdown;
+    bool bShutdown;
     int logLevel;
 
 };

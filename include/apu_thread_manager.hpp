@@ -33,12 +33,20 @@ public:
       * @param ctx context pointer to pass to the function
       */
     void dispatch(dispatchable_fn func, void *ctx);
+
+    /** Join all managed threads and release any allocated memory */
+    void shutdown();
+
+    /** @return true if the thread manager is in a shutdown state. */
+    bool isShutdown();
     
 private:
     std::thread *m_worker;
     std::deque<std::thread *> m_threads;
     std::mutex m_mtx;
+    std::mutex m_workerMtx;
     bool m_isRunning;
+    bool m_isShutdown;
     
     static void workerFunction(void *ctx);
 };

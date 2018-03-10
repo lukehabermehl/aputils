@@ -40,15 +40,23 @@ void logger_append(LoggerImpl *loggerImpl, LoggerQueue::Item *item)
 
 void logger_worker(LoggerImpl *loggerImpl)
 {
-    while (!loggerImpl->shutdown) {
+    static struct timespec sleepTime;
+    sleepTime.tv_nsec = kSleepTime_nsec;
+
+    while (true) {
+        bool bShutdown = false;
+        loggerImpl->queueLock.lock();
+        bShutdown = loggerImpl->bShutdown;
+        if (bShutdown) {
+            loggerImpl->queueLock.unlock();
+            break;
+        }
         if (loggerImpl->queue == NULL) {
-            struct timespec tm1, tm2;
-            tm1.tv_nsec = kSleepTime_nsec;
-            nanosleep(&tm1, &tm2);
+            loggerImpl->queueLock.unlock();
+            nanosleep(&sleepTime, NULL);
             continue;
         }
 
-        loggerImpl->queueLock.lock();
         LoggerQueue *queue = loggerImpl->queue;
         loggerImpl->queue = new LoggerQueue();
         loggerImpl->queueLock.unlock();
@@ -81,13 +89,30 @@ LoggerImpl::Pimpl()
 
 LoggerImpl::~Pimpl()
 {
-    shutdown = true;
-    workerThread.join();
+    bool isShutdown = false;
+    queueLock.lock();
+    isShutdown = bShutdown;
+    queueLock.unlock();
+    if (!isShutdown) {
+        shutdown();
+    }
     if (outputFile) {
         fclose(outputFile);
     }
     if (queue) {
         delete queue;
+    }
+}
+
+void
+LoggerImpl::shutdown()
+{
+    queueLock.lock();
+    bShutdown = true;
+    queueLock.unlock();
+
+    if (workerThread.joinable()) {
+        workerThread.join();
     }
 }
 
@@ -155,4 +180,9 @@ void APUDefaultLogger::setOutputFilepath(const char *filepath)
 void APUDefaultLogger::setLogLevel(int level)
 {
     m_pimpl->logLevel = level;
+}
+
+void APUDefaultLogger::shutdown()
+{
+    m_pimpl->shutdown();
 }

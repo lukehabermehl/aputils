@@ -25,4 +25,7 @@
 #include <aputils/apu_parametermap.hpp>
 #include <aputils/apu_str.hpp>
 
+/** Terminate internal library functions */
+void APULibShutdown();
+
 #endif /* aputils_h */
